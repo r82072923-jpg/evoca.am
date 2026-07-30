@@ -3,6 +3,7 @@ import TopHeader from "./components/topHeader"
 import Slayder1 from "./components/slayder1"
 import Biometrik from "./components/biometrik"
 import Bajinner from "./components/bajinner"
+import Cards from "./components/cards"
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
     <Slayder1></Slayder1>
     <Biometrik></Biometrik>
     <Bajinner></Bajinner>
+    <Cards></Cards>
     </>
   )
 }
