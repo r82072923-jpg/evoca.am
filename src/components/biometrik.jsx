@@ -85,10 +85,10 @@ export default function EvocaBiometricSlider() {
                 <div className="absolute inset-0 w-full h-full pointer-events-none">
                   <div className="biometric-dot top-[38%] left-[43%]"></div>
                   <div className="biometric-dot top-[38%] right-[43%]"></div>
-                  <div className="biometric-dot top-[55%] left-[50%] -translate-x-1/2"></div> {/* Քիթ */}
+                  <div className="biometric-dot top-[55%] left-[50%] -translate-x-1/2"></div>
                   <div className="biometric-dot top-[65%] left-[41%]"></div>
                   <div className="biometric-dot top-[65%] right-[41%]"></div>
-                  <div className="biometric-dot top-[75%] left-[50%] -translate-x-1/2"></div> {/* Կզակ */}
+                  <div className="biometric-dot top-[75%] left-[50%] -translate-x-1/2"></div>
 
                   <svg className="absolute inset-0 w-full h-full opacity-60">
                     <line x1="43%" y1="38%" x2="50%" y2="55%" stroke="white" strokeWidth="0.5" strokeDasharray="2,2" />
