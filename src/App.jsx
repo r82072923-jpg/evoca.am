@@ -4,6 +4,7 @@ import Slayder1 from "./components/slayder1"
 import Biometrik from "./components/biometrik"
 import Bajinner from "./components/bajinner"
 import Cards from "./components/cards"
+import VarkiHashvich from "./components/varkihashvich"
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
     <Biometrik></Biometrik>
     <Bajinner></Bajinner>
     <Cards></Cards>
+    <VarkiHashvich></VarkiHashvich>
     </>
   )
 }
