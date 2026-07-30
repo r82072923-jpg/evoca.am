@@ -5,6 +5,7 @@ import Biometrik from "./components/biometrik"
 import Bajinner from "./components/bajinner"
 import Cards from "./components/cards"
 import VarkiHashvich from "./components/varkihashvich"
+import AvandiHashvich from "./components/avandihashvich"
 function App() {
   return (
     <>
@@ -14,7 +15,7 @@ function App() {
     <Biometrik></Biometrik>
     <Bajinner></Bajinner>
     <Cards></Cards>
-    <VarkiHashvich></VarkiHashvich>
+    <AvandiHashvich></AvandiHashvich>
     </>
   )
 }
