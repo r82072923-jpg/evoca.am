@@ -119,10 +119,8 @@
 //   };
 
 //   return (
-// // Գլխավոր կոնտեյները զբաղեցնում է ամբողջ լայնությունը
 //     <div className="w-full relative overflow-hidden">
       
-//       {/* Անիմացիաների կանոնները */}
 //       <style>{`
 //         @keyframes slideFromLeft {
 //           from { opacity: 0; transform: translateX(-50px); }
@@ -136,13 +134,10 @@
 //         .animate-from-right { animation: slideFromRight 0.6s ease-out forwards; }
 //       `}</style>
 
-//       {/* Ֆոնային կոնտեյներ՝ 100% լայնությամբ և դինամիկ գույնով */}
-//       <div className={`${slides[currentIndex].bgColor} rounded-bl-[200px] w-full min-h-[600px] flex items-center transition-colors duration-500 py-10 px-8 md:px-20`}>
+//       <div className={`${slides[currentIndex].bgColor} rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative`}>
         
-//         {/* Ներսի բովանդակությունը կենտրոնացնող կոնտեյներ */}
-//         <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between">
+//         <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between flex-1">
           
-//           {/* Ձախ հատված (Տեքստ) */}
 //           <div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 mb-8 md:mb-0">
 //             <h2 className={`text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${slides[currentIndex].textColor}`}>
 //               {slides[currentIndex].title}
@@ -151,11 +146,10 @@
 //               {slides[currentIndex].description}
 //             </p>
 //             <button className={`${slides[currentIndex].btnBg} ${slides[currentIndex].btnTextColor} font-medium py-3.5 px-8 rounded-full transition-colors text-lg`}>
-//             {slides[currentIndex].buttonText}
+//               {slides[currentIndex].buttonText}
 //             </button>
 //           </div>
 
-//           {/* Աջ հատված (Նկար) */}
 //           <div key={`img-${currentIndex}`} className="w-full md:w-1/2 flex justify-center items-center animate-from-right z-10">
 //             <img 
 //               src={slides[currentIndex].image} 
@@ -165,49 +159,51 @@
 //           </div>
 
 //         </div>
-//       </div>
 
-//       {/* Ներքևի նավիգացիա (Սլաքներ և Կետեր) */}
-//       <div className="flex justify-center items-center space-x-6 my-6">
-        
-//         {/* Ձախ սլաք */}
-//         <button onClick={prevSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
-//           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-//           </svg>
-//         </button>
+//         <div className="w-full flex justify-center items-center space-x-6 mt-8 z-20">
+          
+//           <button onClick={prevSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
+//             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+//             </svg>
+//           </button>
 
-//         {/* Կետեր */}
-//         <div className="flex space-x-3">
-//           {slides.map((_, slideIndex) => (
-//             <div
-//               key={slideIndex}
-//               onClick={() => goToSlide(slideIndex)}
-//               className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-colors duration-300 ${
-//                 currentIndex === slideIndex ? 'bg-[#6712E0]' : 'bg-gray-300'
-//               }`}
-//             />
-//           ))}
+//           <div className="flex space-x-3">
+//             {slides.map((_, slideIndex) => (
+//               <div
+//                 key={slideIndex}
+//                 onClick={() => goToSlide(slideIndex)}
+//                 className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-colors duration-300 ${
+//                   currentIndex === slideIndex ? 'bg-[#6712E0]' : 'bg-gray-300'
+//                 }`}
+//               />
+//             ))}
+//           </div>
+
+//           <button onClick={nextSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
+//             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+//             </svg>
+//           </button>
+
 //         </div>
 
-//         {/* Աջ սլաք */}
-//         <button onClick={nextSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
-//           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-//           </svg>
-//         </button>
-
 //       </div>
-
 //     </div>
 //   );
 // };
 
 // export default Slayder1;
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { db } from './firebaseConfog';
 const Slayder1 = () => {
-  const slides = [
+  const [slides, setSlides] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // ԺԱՄԱՆԱԿԱՎՈՐ ՏՎՅԱԼՆԵՐ - Միայն Firebase ուղարկելու համար
+  const initialSlidesData = [
     {
       id: 1,
       title: "Evoca Travel Card",
@@ -306,15 +302,54 @@ const Slayder1 = () => {
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // 1. ՖՈՒՆԿՑԻԱ ՏՎՅԱԼՆԵՐԸ FIREBASE ՈՒՂԱՐԿԵԼՈՒ ՀԱՄԱՐ (Օգտագործել 1 անգամ)
+  const uploadDataToFirebase = async () => {
+    try {
+      const slidersCollection = collection(db, "sliders");
+      for (const slide of initialSlidesData) {
+        await addDoc(slidersCollection, slide);
+      }
+      alert("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
+      fetchSlides(); // Թարմացնել էկրանը
+    } catch (error) {
+      console.error("Սխալ տվյալները ուղարկելիս: ", error);
+    }
+  };
+
+  // 2. ՖՈՒՆԿՑԻԱ ՏՎՅԱԼՆԵՐԸ FIREBASE-ԻՑ ՍՏԱՆԱԼՈՒ ՀԱՄԱՐ
+  const fetchSlides = async () => {
+    setLoading(true);
+    try {
+      const querySnapshot = await getDocs(collection(db, "sliders"));
+      const slidesArray = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      // Տեսակավորում ենք ըստ order-ի, եթե ավելացրել ես
+      slidesArray.sort((a, b) => a.order - b.order);
+      
+      setSlides(slidesArray);
+    } catch (error) {
+      console.error("Սխալ տվյալները ստանալիս: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSlides();
+  }, []);
 
   const prevSlide = () => {
+    if (slides.length === 0) return;
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
+    if (slides.length === 0) return;
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
@@ -323,6 +358,25 @@ const Slayder1 = () => {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
+
+  if (loading) {
+    return <div className="w-full min-h-[600px] flex items-center justify-center">Բեռնվում է...</div>;
+  }
+
+  // Եթե բազան դատարկ է, ցույց ենք տալիս upload կոճակը
+  if (slides.length === 0) {
+    return (
+      <div className="w-full min-h-[600px] flex flex-col items-center justify-center space-y-4">
+        <p>Բազայում սլայդեր չկան:</p>
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-purple-600 text-white px-6 py-3 rounded-lg"
+        >
+          Ուղարկել սկզբնական տվյալները Firebase
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full relative overflow-hidden">
@@ -340,48 +394,40 @@ const Slayder1 = () => {
         .animate-from-right { animation: slideFromRight 0.6s ease-out forwards; }
       `}</style>
 
-      {/* 
-        Ավելացվել է flex-col և justify-center, որպեսզի բովանդակությունը և 
-        նավիգացիան իրար տակ ճիշտ դասավորվեն
-      */}
-      <div className={`${slides[currentIndex].bgColor} rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative`}>
+      <div className={`${slides[currentIndex]?.bgColor} rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative`}>
         
-        {/* Բովանդակություն (Տեքստ և Նկար) */}
         <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between flex-1">
           
           <div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 mb-8 md:mb-0">
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${slides[currentIndex].textColor}`}>
-              {slides[currentIndex].title}
+            <h2 className={`text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${slides[currentIndex]?.textColor}`}>
+              {slides[currentIndex]?.title}
             </h2>
-            <p className={`text-base md:text-xl mb-8 max-w-lg leading-relaxed transition-colors duration-300 ${slides[currentIndex].descColor}`}>
-              {slides[currentIndex].description}
+            <p className={`text-base md:text-xl mb-8 max-w-lg leading-relaxed transition-colors duration-300 ${slides[currentIndex]?.descColor}`}>
+              {slides[currentIndex]?.description}
             </p>
-            <button className={`${slides[currentIndex].btnBg} ${slides[currentIndex].btnTextColor} font-medium py-3.5 px-8 rounded-full transition-colors text-lg`}>
-              {slides[currentIndex].buttonText}
+            <button className={`${slides[currentIndex]?.btnBg} ${slides[currentIndex]?.btnTextColor} font-medium py-3.5 px-8 rounded-full transition-colors text-lg`}>
+              {slides[currentIndex]?.buttonText}
             </button>
           </div>
 
           <div key={`img-${currentIndex}`} className="w-full md:w-1/2 flex justify-center items-center animate-from-right z-10">
             <img 
-              src={slides[currentIndex].image} 
-              alt={slides[currentIndex].title}
+              src={slides[currentIndex]?.image} 
+              alt={slides[currentIndex]?.title}
               className="max-h-[380px] object-contain" 
             />
           </div>
 
         </div>
 
-        {/* Նավիգացիա՝ տեղափոխված գունավոր ֆոնի ներս (նկարի ու տեքստի տակ) */}
         <div className="w-full flex justify-center items-center space-x-6 mt-8 z-20">
           
-          {/* Ձախ սլաք */}
           <button onClick={prevSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </button>
 
-          {/* Կետեր */}
           <div className="flex space-x-3">
             {slides.map((_, slideIndex) => (
               <div
@@ -394,7 +440,6 @@ const Slayder1 = () => {
             ))}
           </div>
 
-          {/* Աջ սլաք */}
           <button onClick={nextSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -402,7 +447,6 @@ const Slayder1 = () => {
           </button>
 
         </div>
-
       </div>
     </div>
   );
