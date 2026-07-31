@@ -6,6 +6,7 @@ import Bajinner from "./components/bajinner"
 import Cards from "./components/cards"
 import VarkiHashvich from "./components/varkihashvich"
 import AvandiHashvich from "./components/avandihashvich"
+import OnlineEvMobileBanking from "./components/onlineevmobilebanking"
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
     <Bajinner></Bajinner>
     <Cards></Cards>
     <AvandiHashvich></AvandiHashvich>
+    <OnlineEvMobileBanking></OnlineEvMobileBanking>
     </>
   )
 }

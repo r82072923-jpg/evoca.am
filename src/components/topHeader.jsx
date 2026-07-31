@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
 import { NavLink, Link } from "react-router-dom";
-import logo from "./logo.png";
 function TopHeader() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +33,7 @@ function TopHeader() {
 <div className="flex items-center">
   <Link to="/">
     <img 
-      src={logo} 
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtuLt6RmT3Z93EFVPLA410-P3PmujqfjmEzZOXnPGyEL28BYZT"
       alt="Evoca Logo" 
       className="w-50 h-18 object-contain block" 
     />
