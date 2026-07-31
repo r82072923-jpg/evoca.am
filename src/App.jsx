@@ -16,9 +16,10 @@ import RubluKanxikMutq from "./components/rublukanxikmutq"
 import Kartiqner from "./components/kartiqner"
 import Footer from "./components/footer"
 import FooterBottom from "./components/footerBottom"
+import Business from "./components/business"
+import AkntartayinVjarumner from "./components/akntartayinvjarumner"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
-import Business from "./components/business"
 function Home(){
 const [activeTab, setActiveTab] = useState('Կանխիկ');
     return(
@@ -57,8 +58,9 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route path="/" element={<Home/>}></Route>
       <Route path="/business" element={<Business/>}></Route>
+      <Route path="/payments" element={<AkntartayinVjarumner/>}></Route>
     </Routes>
     </>
   )
