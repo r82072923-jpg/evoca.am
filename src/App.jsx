@@ -8,6 +8,7 @@ import VarkiHashvich from "./components/varkihashvich"
 import AvandiHashvich from "./components/avandihashvich"
 import OnlineEvMobileBanking from "./components/onlineevmobilebanking"
 import Gortynkerner from "./components/gortynkerner"
+import VerjinNorutyunner from "./components/verjinnorutyunner"
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
     <AvandiHashvich></AvandiHashvich>
     <OnlineEvMobileBanking></OnlineEvMobileBanking>
     <Gortynkerner></Gortynkerner>
+    <VerjinNorutyunner></VerjinNorutyunner>
     </>
   )
 }
