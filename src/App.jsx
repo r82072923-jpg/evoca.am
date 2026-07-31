@@ -11,6 +11,7 @@ import Gortynkerner from "./components/gortynkerner"
 import VerjinNorutyunner from "./components/verjinnorutyunner"
 import Kanxik from "./components/kanxik"
 import Ankanxik from "./components/ankanxik"
+import VoskuPoxarjeq from "./components/voskupoxarjeq"
 import { useState } from "react"
 function App() {
 const [activeTab, setActiveTab] = useState('Կանխիկ');
@@ -35,10 +36,7 @@ const [activeTab, setActiveTab] = useState('Կանխիկ');
         <Ankanxik activeTab={activeTab} setActiveTab={setActiveTab} />
       )}
       {activeTab === 'Ոսկու փոխարժեք' && (
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          {/* Այստեղ կարողես ոսկու բաղադրիչը դնել կամ պարզապես տեքստ */}
-          <h2 className="text-2xl font-bold">Ոսկու փոխարժեքի էջ</h2>
-        </div>
+        <VoskuPoxarjeq/>
       )}
       {activeTab === 'Ռուբլու կանխիկ մուտք' && (
         <div className="max-w-7xl mx-auto px-8 py-16">
