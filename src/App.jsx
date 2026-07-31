@@ -14,6 +14,7 @@ import Ankanxik from "./components/ankanxik"
 import VoskuPoxarjeq from "./components/voskupoxarjeq"
 import RubluKanxikMutq from "./components/rublukanxikmutq"
 import Kartiqner from "./components/kartiqner"
+import Footer from "./components/footer"
 import { useState } from "react"
 function App() {
 const [activeTab, setActiveTab] = useState('Կանխիկ');
@@ -45,6 +46,7 @@ const [activeTab, setActiveTab] = useState('Կանխիկ');
       )}
     </div>
     <Kartiqner></Kartiqner>
+    <Footer></Footer>
     </>
   )
 }
