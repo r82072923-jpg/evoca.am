@@ -17,38 +17,49 @@ import Kartiqner from "./components/kartiqner"
 import Footer from "./components/footer"
 import FooterBottom from "./components/footerBottom"
 import { useState } from "react"
-function App() {
+import { Routes, Route } from "react-router-dom";
+import Business from "./components/business"
+function Home(){
 const [activeTab, setActiveTab] = useState('Կանխիկ');
+    return(
+      <>
+      <Header></Header>
+      <TopHeader></TopHeader>
+      <Slayder1></Slayder1>
+      <Biometrik></Biometrik>
+      <Bajinner></Bajinner>
+      <Cards></Cards>
+      <AvandiHashvich></AvandiHashvich>
+      <OnlineEvMobileBanking></OnlineEvMobileBanking>
+      <Gortynkerner></Gortynkerner>
+      <VerjinNorutyunner></VerjinNorutyunner>
+      <div>
+        {activeTab === 'Կանխիկ' && (
+          <Kanxik activeTab={activeTab} setActiveTab={setActiveTab} />
+        )}
+        {activeTab === 'Անկանխիկ' && (
+          <Ankanxik activeTab={activeTab} setActiveTab={setActiveTab} />
+        )}
+        {activeTab === 'Ոսկու փոխարժեք' && (
+          <VoskuPoxarjeq activeTab={activeTab} setActiveTab={setActiveTab}/>
+        )}
+        {activeTab === 'Ռուբլու կանխիկ մուտք' && (
+          <RubluKanxikMutq activeTab={activeTab} setActiveTab={setActiveTab}/>
+        )}
+      </div>
+      <Kartiqner></Kartiqner>
+      <Footer></Footer>
+      <FooterBottom></FooterBottom>
+      </>
+    )
+}
+function App() {
   return (
     <>
-    <Header></Header>
-    <TopHeader></TopHeader>
-    <Slayder1></Slayder1>
-    <Biometrik></Biometrik>
-    <Bajinner></Bajinner>
-    <Cards></Cards>
-    <AvandiHashvich></AvandiHashvich>
-    <OnlineEvMobileBanking></OnlineEvMobileBanking>
-    <Gortynkerner></Gortynkerner>
-    <VerjinNorutyunner></VerjinNorutyunner>
-    <div>
-      {/* Ընտրում ենք, թե որ բաղադրիչը ցույց տանք՝ կախված activeTab-ից */}
-      {activeTab === 'Կանխիկ' && (
-        <Kanxik activeTab={activeTab} setActiveTab={setActiveTab} />
-      )}
-      {activeTab === 'Անկանխիկ' && (
-        <Ankanxik activeTab={activeTab} setActiveTab={setActiveTab} />
-      )}
-      {activeTab === 'Ոսկու փոխարժեք' && (
-        <VoskuPoxarjeq activeTab={activeTab} setActiveTab={setActiveTab}/>
-      )}
-      {activeTab === 'Ռուբլու կանխիկ մուտք' && (
-        <RubluKanxikMutq activeTab={activeTab} setActiveTab={setActiveTab}/>
-      )}
-    </div>
-    <Kartiqner></Kartiqner>
-    <Footer></Footer>
-    <FooterBottom></FooterBottom>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/business" element={<Business/>}></Route>
+    </Routes>
     </>
   )
 }
