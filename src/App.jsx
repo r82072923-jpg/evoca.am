@@ -10,7 +10,10 @@ import OnlineEvMobileBanking from "./components/onlineevmobilebanking"
 import Gortynkerner from "./components/gortynkerner"
 import VerjinNorutyunner from "./components/verjinnorutyunner"
 import Kanxik from "./components/kanxik"
+import Ankanxik from "./components/ankanxik"
+import { useState } from "react"
 function App() {
+const [activeTab, setActiveTab] = useState('Կանխիկ');
   return (
     <>
     <Header></Header>
@@ -23,7 +26,26 @@ function App() {
     <OnlineEvMobileBanking></OnlineEvMobileBanking>
     <Gortynkerner></Gortynkerner>
     <VerjinNorutyunner></VerjinNorutyunner>
-    <Kanxik></Kanxik>
+    <div>
+      {/* Ընտրում ենք, թե որ բաղադրիչը ցույց տանք՝ կախված activeTab-ից */}
+      {activeTab === 'Կանխիկ' && (
+        <Kanxik activeTab={activeTab} setActiveTab={setActiveTab} />
+      )}
+      {activeTab === 'Անկանխիկ' && (
+        <Ankanxik activeTab={activeTab} setActiveTab={setActiveTab} />
+      )}
+      {activeTab === 'Ոսկու փոխարժեք' && (
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          {/* Այստեղ կարողես ոսկու բաղադրիչը դնել կամ պարզապես տեքստ */}
+          <h2 className="text-2xl font-bold">Ոսկու փոխարժեքի էջ</h2>
+        </div>
+      )}
+      {activeTab === 'Ռուբլու կանխիկ մուտք' && (
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          <h2 className="text-2xl font-bold">Ռուբլու կանխիկ մուտքի էջ</h2>
+        </div>
+      )}
+    </div>
     </>
   )
 }
