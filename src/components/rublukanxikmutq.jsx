@@ -4,23 +4,23 @@ import { db } from './firebaseConfog';
 
 const tabs = ['Կանխիկ', 'Անկանխիկ', 'Ոսկու փոխարժեք', 'Ռուբլու կանխիկ մուտք'];
 
-function VoskuPoxarjeq({ activeTab = 'Ոսկու փոխարժեք', setActiveTab }) {
-  const [goldData, setGoldData] = useState([]);
+function RubluKanxikMutq({ activeTab = 'Ռուբլու կանխիկ մուտք', setActiveTab }) {
+  const [rubleData, setRubleData] = useState([]);
 
   useEffect(() => {
     const fetchRatesFromFirebase = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'voskupoxarjeq'));
+        const querySnapshot = await getDocs(collection(db, 'rublukanxikmutq'));
         
         if (!querySnapshot.empty) {
           const ratesArray = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           }));
-          setGoldData(ratesArray);
+          setRubleData(ratesArray);
         }
       } catch (error) {
-        console.error('Error fetching rates:', error);
+        console.error('Error fetching ruble rates:', error);
       }
     };
 
@@ -52,15 +52,15 @@ function VoskuPoxarjeq({ activeTab = 'Ոսկու փոխարժեք', setActiveTab
 
             <div className="p-6">
               <div className="grid grid-cols-2 pb-4 mb-2 border-b border-gray-100 text-xs font-bold text-[#b3b3b3] px-2">
-                <div>Հարգ</div>
-                <div className="text-right">Սակագին (Արժեքը ՀՀ Դրամով 1 գրամի համար)</div>
+                <div>Արժույթ</div>
+                <div className="text-right">Սակագին</div>
               </div>
 
               <div className="flex flex-col gap-4">
-                {goldData.map((item, index) => (
+                {rubleData.map((item, index) => (
                   <div key={item.id || index} className="grid grid-cols-2 items-center px-2 py-2 border-b border-gray-50 last:border-none">
                     <div className="font-extrabold text-lg text-[#2a2a2a]">
-                      {item.purity}
+                      {item.currency}
                     </div>
                     <div className="text-right font-bold text-base text-[#2a2a2a]">
                       {item.rate}
@@ -72,7 +72,7 @@ function VoskuPoxarjeq({ activeTab = 'Ոսկու փոխարժեք', setActiveTab
 
             <div className="px-6 py-3 border-t border-gray-100 bg-white">
               <p className="text-[11px] font-semibold text-[#b3b3b3]">
-                Թարմացվել է՝ 31.07.26
+                Թարմացվել է՝ 10.07.26
               </p>
             </div>
           </div>
@@ -83,4 +83,4 @@ function VoskuPoxarjeq({ activeTab = 'Ոսկու փոխարժեք', setActiveTab
   );
 }
 
-export default VoskuPoxarjeq;
+export default RubluKanxikMutq;
