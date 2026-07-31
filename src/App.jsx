@@ -9,6 +9,7 @@ import AvandiHashvich from "./components/avandihashvich"
 import OnlineEvMobileBanking from "./components/onlineevmobilebanking"
 import Gortynkerner from "./components/gortynkerner"
 import VerjinNorutyunner from "./components/verjinnorutyunner"
+import Kanxik from "./components/kanxik"
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
     <OnlineEvMobileBanking></OnlineEvMobileBanking>
     <Gortynkerner></Gortynkerner>
     <VerjinNorutyunner></VerjinNorutyunner>
+    <Kanxik></Kanxik>
     </>
   )
 }
