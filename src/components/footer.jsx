@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebaseConfog'; // Քո ֆայլի ճանապարհը
-
+import { db } from './firebaseConfog';
 function Footer() {
   const [sections, setSections] = useState([]);
   const [socialLinks, setSocialLinks] = useState([]);
@@ -16,7 +15,6 @@ function Footer() {
         const sectionsSnapshot = await getDocs(collection(db, 'footerSections'));
         let sectionsList = sectionsSnapshot.docs.map(doc => doc.data());
         
-        // Փոխում ենք սյունակների հերթականությունը, որպեսզի առաջինը լինի վերջինը, վերջինն էլ՝ առաջինը
         if (sectionsList.length >= 3) {
           sectionsList = [sectionsList[2], sectionsList[1], sectionsList[0]];
         }
@@ -53,7 +51,6 @@ function Footer() {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
-          {/* Սյունակ 1: Լոգո և Հիմնական Ինֆորմացիա */}
           <div className="flex flex-col space-y-6">
             <Link to="/" className="text-2xl font-bold text-gray-800 flex items-center">
               <span className="text-gray-500">evoca</span>BANK
@@ -76,7 +73,6 @@ function Footer() {
             </div>
           </div>
 
-          {/* Տեղափոխված բաժիններ (Այլ հղումներ -> Օգտակար -> Բանկի մասին) */}
           {sections.map((section, sIndex) => (
             <div key={sIndex}>
               <h3 className="font-bold text-gray-900 text-[15px] mb-6">{section.title}</h3>
@@ -92,7 +88,6 @@ function Footer() {
             </div>
           ))}
 
-          {/* Սյունակ 5: Սոց. ցանցեր, Հավելվածներ և Կոնտակտներ */}
           <div className="flex flex-col space-y-8">
             
             <div className="flex gap-4 text-gray-400 text-lg font-bold">
