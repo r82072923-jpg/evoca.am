@@ -18,6 +18,7 @@ import Footer from "./components/footer"
 import FooterBottom from "./components/footerBottom"
 import Business from "./components/business"
 import AkntartayinVjarumner from "./components/akntartayinvjarumner"
+import MerMasin from "./components/mermasin"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -61,6 +62,7 @@ function App() {
       <Route path="/" element={<Home/>}></Route>
       <Route path="/business" element={<Business/>}></Route>
       <Route path="/payments" element={<AkntartayinVjarumner/>}></Route>
+      <Route path="/about" element={<MerMasin/>}></Route>
     </Routes>
     </>
   )

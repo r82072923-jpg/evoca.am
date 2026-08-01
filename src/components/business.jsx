@@ -1,5 +1,5 @@
 import Header from "./header"
-import TopHeader from "./topHeader"
+import TopHeader2 from "./topHeader2"
 import BusinessVarker from "./businessvarker"
 import Footer from "./footer"
 import FooterBottom from "./footerBottom"
@@ -7,7 +7,7 @@ function Business(){
     return(
         <>
         <Header></Header>
-        <TopHeader></TopHeader>
+        <TopHeader2></TopHeader2>
         <BusinessVarker></BusinessVarker>
         <Footer></Footer>
         <FooterBottom></FooterBottom>
