@@ -6,6 +6,7 @@ import EvocaiMasin3 from "./evoca-imasin3"
 import EvocaiMasin4 from "./evoca-imasin4"
 import EvocaiMasin5 from "./evoca-imasin5"
 import EvocaiMasin6 from "./evoca-imasin6"
+import EvocaiMasin7 from "./evoca-imasin7"
 import Slayder2 from "./slayder2"
 function MerMasin(){
     return(
@@ -19,6 +20,7 @@ function MerMasin(){
         <EvocaiMasin4></EvocaiMasin4>
         <EvocaiMasin5></EvocaiMasin5>
         <EvocaiMasin6></EvocaiMasin6>
+        <EvocaiMasin7></EvocaiMasin7>
         </>
     )
 }
