@@ -34,9 +34,10 @@ const Vjarumner = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true); 
 
+
   const fetchDataFromFirebase = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'servicesCategories'));
+      const querySnapshot = await getDocs(collection(db, 'vjarumner'));
       const fetchedData = querySnapshot.docs.map(doc => doc.data());
       
       setCategories(fetchedData);
