@@ -38,17 +38,14 @@ const EvocaiMasin8 = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 font-sans">
       
-      {/* Վերնագիր */}
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
         {sectionData.title}
       </h2>
 
-      {/* Նկարագրություն */}
       <p className="text-gray-600 text-base md:text-lg mb-8">
         {sectionData.description}
       </p>
 
-      {/* Գույների ցանկ */}
       <div className="space-y-6 mb-12">
         {sectionData.colors.map((item) => (
           <div key={item.id} className="flex items-center gap-4">
