@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import News1 from "./news1"
 import News2 from "./news2"
 import News3 from "./news3"
+import VerjinNorutyunner2 from "./verjinnorutyunner2"
 function News(){
     return(
         <>
@@ -13,6 +14,7 @@ function News(){
             <News1></News1>
             <News2></News2>
             <News3></News3>
+            <VerjinNorutyunner2 ></VerjinNorutyunner2 >
         </>
     )
 }
