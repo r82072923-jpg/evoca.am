@@ -2,6 +2,7 @@ import Header from "./components/header"
 import TopHeader4 from "./components/topHeader4"
 import BlogiBajinner from "./components/blog-iBajinner"
 import Blogs1 from "./components/blogs1"
+import Blogs2 from "./components/blogs2"
 function Blog(){
     return(
         <>
@@ -9,6 +10,7 @@ function Blog(){
         <TopHeader4></TopHeader4>
         <BlogiBajinner></BlogiBajinner>
         <Blogs1></Blogs1>
+        <Blogs2></Blogs2>
         </>
     )
 }
