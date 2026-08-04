@@ -6,6 +6,7 @@ import Blogs2 from "./components/blogs2"
 import Blogs3 from "./components/blogs3"
 import Blogs4 from "./components/blogs4"
 import VerjinNorutyunner3 from "./components/verjinnorutyunner3"
+import Footer from "./components/footer"
 function Blog(){
     return(
         <>
@@ -17,6 +18,7 @@ function Blog(){
         <Blogs3></Blogs3>
         <VerjinNorutyunner3></VerjinNorutyunner3>
         <Blogs4></Blogs4>
+        <Footer></Footer>
         </>
     )
 }
