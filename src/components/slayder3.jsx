@@ -14,7 +14,6 @@ function Slayder3() {
         const querySnapshot = await getDocs(collection(db, "slayder3"));
         
         if (!querySnapshot.empty) {
-          // Վերցնում ենք առաջին փաստաթղթի տվյալները
           const docData = querySnapshot.docs[0].data();
           setFirebaseData(docData);
         } else {
