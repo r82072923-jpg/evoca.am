@@ -20,6 +20,7 @@ import Business from "./components/business"
 import AkntartayinVjarumner from "./components/akntartayinvjarumner"
 import MerMasin from "./components/mermasin"
 import News from "./components/news"
+import Blog from "./blog"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -65,6 +66,7 @@ function App() {
       <Route path="/payments" element={<AkntartayinVjarumner/>}></Route>
       <Route path="/about" element={<MerMasin/>}></Route>
       <Route path="/news" element={<News/>}></Route>
+      <Route path="/blog" element={<Blog/>}></Route>
     </Routes>
     </>
   )
