@@ -1,19 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './firebaseConfog';
 
 function Blogs4() {
-  const mainArticle = {
-    image: 'https://www.evoca.am/images-cache/blogs/1/16336923273854/1440x650.png',
-    category: 'Կենսակերպ',
-    categoryColor: 'bg-[#311158]',
-    title: 'Evoca-գույնի հոգեբանական նկարագիրը',
-    description: 'Գույնը մարքեթինգային գործիք է: Այն ազդում է մարդու հոգեբանության վրա:',
-    link: '/blog/evoca-color'
-  };
+  const [mainArticle, setMainArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArticleFromFirebase = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'blogs4'));
+        const articlesArray = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        if (articlesArray.length > 0) {
+          setMainArticle(articlesArray[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching data from Firebase:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticleFromFirebase();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-24 font-sans text-gray-500">Բեռնվում է...</div>;
+  }
+
+  if (!mainArticle) {
+    return null;
+  }
 
   return (
     <section className="relative w-full max-w-7xl mx-auto px-6 py-16 md:py-24 font-sans bg-white">
-      <div className="absolute top-0 left-6 md:left-12 z-0">
+      <div className="absolute top-0 left-6 md:left-12 z-0 mt-24 md:mt-0">
         <span className="text-[70px] md:text-[120px] lg:text-[160px] font-extrabold text-[#f4f5f6] leading-none select-none tracking-wide">
           Գլխավոր
         </span>
@@ -36,7 +62,7 @@ function Blogs4() {
             </span>
           </div>
           
-          <Link to={mainArticle.link} className="block group mb-4">
+          <Link to={mainArticle.link || '#'} className="block group mb-4">
             <h2 className="text-2xl md:text-3xl lg:text-[32px] font-extrabold text-[#1a1a1a] group-hover:text-[#5b00c9] transition-colors leading-tight">
               {mainArticle.title}
             </h2>

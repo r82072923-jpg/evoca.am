@@ -6,26 +6,6 @@ function TopHeader4() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-//   const fetchHeaderData = async () => {
-//     try {
-//       setLoading(true);
-//       const querySnapshot = await getDocs(collection(db, "topHeader"));
-//       const items = [];
-//       querySnapshot.forEach((doc) => {
-//         items.push({ id: doc.id, ...doc.data() });
-//       });
-//       setNavItems(items);
-//     } catch (error) {
-//       console.error("Սխալ տվյալները ստանալիս:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchHeaderData();
-//   }, []);
-
   return (
     <header className="w-full bg-white shadow-sm border-b border-gray-100 z-50">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">

@@ -31,7 +31,6 @@ function TopHeader3() {
     <header className="w-full bg-white shadow-sm border-b border-gray-100 z-40 relative">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]">
         
-        {/* Լոգո */}
         <div className="flex items-center flex-shrink-0">
           <Link to="/">
             <img 

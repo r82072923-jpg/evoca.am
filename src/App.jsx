@@ -21,6 +21,7 @@ import AkntartayinVjarumner from "./components/akntartayinvjarumner"
 import MerMasin from "./components/mermasin"
 import News from "./components/news"
 import Blog from "./blog"
+import Career from "./components/career"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -67,6 +68,7 @@ function App() {
       <Route path="/about" element={<MerMasin/>}></Route>
       <Route path="/news" element={<News/>}></Route>
       <Route path="/blog" element={<Blog/>}></Route>
+      <Route path="/career" element={<Career/>}></Route>
     </Routes>
     </>
   )
