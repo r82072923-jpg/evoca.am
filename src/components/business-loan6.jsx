@@ -4,6 +4,7 @@ import TopHeader2 from "./topHeader2"
 import BusinessLoan6iMasin from "./business-loan6-imasin"
 import BusinessLoan6iMasin2 from "./business-loan6-imasin2"
 import BusinessLoan6iMasin3 from "./business-loan6-imasin3"
+import BusinessLoan6iMasin4 from "./business-loan6-imasin4"
 function BusinessLoan6(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     const [loanData, setLoanData] = useState(null);
@@ -22,7 +23,7 @@ function BusinessLoan6(){
           )}
 
           {activeTab === 'ՓՄՁ վարկի օնլայն հայտ' && (
-            <div className="py-10 text-center text-gray-500">Հայտի ձևը շուտով հասանելի կլինի...</div>
+            <BusinessLoan6iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
 
           {activeTab === 'Պահանջվող փաստաթղթեր' && (
