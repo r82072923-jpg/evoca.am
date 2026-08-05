@@ -5,6 +5,8 @@ import Careers2 from "./careers2"
 import Careers3 from "./careers3"
 import Careers4 from "./careers4"
 import Slayder3 from "./slayder3"
+import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Career(){
     return(
         <>
@@ -15,6 +17,8 @@ function Career(){
         <Slayder3></Slayder3>
         <Careers3></Careers3> 
         <Careers4></Careers4>
+        <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
