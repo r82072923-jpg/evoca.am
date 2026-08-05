@@ -20,9 +20,9 @@ import Business from "./components/business"
 import AkntartayinVjarumner from "./components/akntartayinvjarumner"
 import MerMasin from "./components/mermasin"
 import News from "./components/news"
-import Blog from "./blog"
+import Blog from "./components/blog"
 import Career from "./components/career"
-import BusinessLoan6 from "./business-loan6"
+import BusinessLoan6 from "./components/business-loan6"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
