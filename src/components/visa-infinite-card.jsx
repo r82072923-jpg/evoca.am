@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaInfiniteCardiMasin from "./visa-infinite-card-imasin"
 import VisaInfiniteCardiMasin2 from "./visa-infinite-card-imasin2";
+import VisaInfiniteCardiMasin3 from "./visa-infinite-card-imasin3";
 function VisaInfiniteCard(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -15,8 +16,8 @@ function VisaInfiniteCard(){
             <VisaInfiniteCardiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
-          {activeTab === 'Պայմաններ և սակագներ' && (
-            <BusinessLoan6iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          {activeTab === 'Սահմանաչափի տրամադրման պայմանները' && (
+            <VisaInfiniteCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
 
           {activeTab === 'ՓՄՁ վարկի օնլայն հայտ' && (
