@@ -178,9 +178,6 @@ function Kanxik({ activeTab = 'Կանխիկ', setActiveTab }) {
               src="https://www.evoca.am/images/map-bg.png" 
               alt="Map Background"
               className="w-full h-auto opacity-70 object-cover"
-              onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/280x150/f4f4f4/cccccc?text=Map+Image';
-              }}
             />
             <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
               <div className="w-12 h-14 bg-[#6d28d9] rounded-t-full rounded-bl-full rounded-br-md rotate-45 flex items-center justify-center shadow-lg">
