@@ -6,6 +6,7 @@ import VisaInfiniteCardiMasin2 from "./visa-infinite-card-imasin2";
 import VisaInfiniteCardiMasin3 from "./visa-infinite-card-imasin3";
 import VisaInfiniteCardiMasin4 from "./visa-infinite-card-imasin4";
 import VisaInfiniteCardiMasin5 from "./visa-infinite-card-imasin5";
+import Slayder5 from "./slayder5";
 function VisaInfiniteCard(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -27,6 +28,7 @@ function VisaInfiniteCard(){
           )}
         </div>
         <VisaInfiniteCardiMasin5></VisaInfiniteCardiMasin5>
+        <Slayder5></Slayder5>
         </>
     )
 }
