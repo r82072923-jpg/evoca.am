@@ -1,41 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { db } from './firebaseConfog';
+import { collection, getDocs } from 'firebase/firestore';
 
-function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
-  const [loading, setLoading] = useState(false);
+function VisaGoldiMasin2({ activeTab, setActiveTab }) {
+  const [tariffs, setTariffs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const tabs = [
     'Քարտի մասին',
     'Սակագներ և դրույթներ'
   ];
 
-  // Ձեր տվյալների օբյեկտային զանգվածը
-  const tariffs = [
-    {
-      id: "1",
-      value: "0",
-      subtitle: "ՀՀ դրամ",
-      description: "Քարտի տրամադրում"
-    },
-    {
-      id: "2",
-      value: "15,000",
-      subtitle: "ՀՀ դրամ",
-      description: "Քարտի տարեկան սպասարկում"
-    },
-    {
-      id: "3",
-      value: "1,500",
-      subtitle: "ՀՀ դրամ",
-      description: "Քարտի ամսական սպասարկում"
-    },
-    {
-      id: "4",
-      value: "0.2%",
-      subtitle: "",
-      description: "Կանխիկացում բանկոմատներից և POS տերմինալներից սահմանաչափը գերազանցելիս"
-    }
-  ];
+  useEffect(() => {
+    const fetchTariffs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "visaGoldiMasin"));
+        const tariffsData = querySnapshot.docs.map(doc => ({
+          ...doc.data()
+        }));
+    
+        tariffsData.sort((a, b) => Number(a.id) - Number(b.id));
+        setTariffs(tariffsData);
+      } catch (error) {
+        console.error("Սխալ տվյալների բեռնման ժամանակ:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTariffs();
+  }, []);
 
   return (
     <section className="w-full bg-white py-10 font-sans">
@@ -79,18 +74,10 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
           <div className="lg:col-span-5 bg-white border border-gray-100 rounded-[32px] p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.05)] space-y-6">
               
             <div className="flex gap-3 pb-2">
-              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
-                ֏
-              </div>
-              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
-                $
-              </div>
-              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
-                €
-              </div>
-              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
-                ₽
-              </div>
+              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">֏</div>
+              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">$</div>
+              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">€</div>
+              <div className="w-11 h-11 bg-[#6b11cb] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">₽</div>
             </div>
 
             <div className="divide-y divide-gray-100">
@@ -131,4 +118,4 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
   );
 }
 
-export default MasterCardGoldiMasin2;
+export default VisaGoldiMasin2;
