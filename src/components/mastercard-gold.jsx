@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import MasterCardGoldiMasin from "./mastercard-gold-imasin"
 import MasterCardGoldiMasin2 from "./mastercard-gold-imasin2"
 import MasterCardGoldiMasin3 from "./mastercard-gold-imasin3"
+import Slayder5 from "./slayder5"
 function MasterCardGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -20,6 +21,7 @@ function MasterCardGold(){
             <MasterCardGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
