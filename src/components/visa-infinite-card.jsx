@@ -8,6 +8,7 @@ import VisaInfiniteCardiMasin4 from "./visa-infinite-card-imasin4";
 import VisaInfiniteCardiMasin5 from "./visa-infinite-card-imasin5";
 import Slayder5 from "./slayder5";
 import OnlineEvMobileBanking from "./onlineevmobilebanking";
+import Footer from "./footer";
 function VisaInfiniteCard(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -31,6 +32,7 @@ function VisaInfiniteCard(){
         <VisaInfiniteCardiMasin5></VisaInfiniteCardiMasin5>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
