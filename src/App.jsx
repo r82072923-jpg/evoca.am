@@ -25,6 +25,7 @@ import Career from "./components/career"
 import BusinessLoan6 from "./components/business-loan6"
 import VisaInfiniteCard from "./components/visa-infinite-card"
 import MasterCardGold from "./components/mastercard-gold"
+import VisaGold from "./components/visa-gold"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -75,6 +76,7 @@ function App() {
       <Route path="/business-loan6" element={<BusinessLoan6/>}></Route>
       <Route path="/visa-infinite" element={<VisaInfiniteCard/>}></Route>
       <Route path="/mastercard-gold" element={<MasterCardGold/>}></Route>
+      <Route path="/visa-gold" element={<VisaGold/>}></Route>
     </Routes>
     </>
   )
