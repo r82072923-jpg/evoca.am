@@ -1,40 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { db } from './firebaseConfog'; // Ճշգրտե՛ք Ձեր firebase ֆայլի ճանապարհը, եթե այն այլ է
+import { collection, getDocs } from 'firebase/firestore';
 
 function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
-  // Սակագների և պայմանների տվյալները լոկալ զանգվածով
-  const tariffs = [
-    {
-      id: "1",
-      value: "0%",
-      description: "Կանխիկացում բանկի կանխիկացման կետերում մինչև 2 մլն ֏"
-    },
-    {
-      id: "2",
-      value: "0.8%",
-      description: "Կանխիկացում ԱրՔա անդամ բանկերի կանխիկացման կետերում"
-    },
-    {
-      id: "3",
-      value: "1%",
-      description: "Կանխիկացում ԱրՔա անդամ չհանդիսացող բանկերի կանխիկացման կետերում"
-    },
-    {
-      id: "4",
-      value: "15 000 ֏",
-      description: "Տարեկան սպասարկում"
-    },
-    {
-      id: "5",
-      value: "45,000 ֏",
-      description: "Տարեկան սպասարկում օտարերկրյա քաղաքացիների համար"
-    },
-  ];
+  const [tariffs, setTariffs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const tabs = [
     'Քարտի մասին',
     'Սակագներ և դրույթներ'
   ];
+
+  useEffect(() => {
+    const fetchTariffs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "masterCardGoldiMasin"));
+        const tariffsData = querySnapshot.docs.map(doc => ({
+          ...doc.data()
+        }));
+    
+        tariffsData.sort((a, b) => Number(a.id) - Number(b.id));
+        
+        setTariffs(tariffsData);
+      } catch (error) {
+        console.error("Սխալ տվյալների բեռնման ժամանակ:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTariffs();
+  }, []);
 
   return (
     <section className="w-full bg-white py-10 font-sans">
@@ -63,7 +60,6 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Ձախ կողմի տեքստային բլոկ */}
           <div className="lg:col-span-7 space-y-7 text-[#1a1a1a] text-lg sm:text-xl leading-relaxed">
             <p>
               <strong className="text-[#6b11cb]">Mastercard Gold քարտը</strong> Mastercard միջազգային վճարահաշվարկային համակարգի պրեմիում դասի չիպային քարտ է, որն ունի դրամական միջոցների անվտանգության ապահովման բարձր մակարդակ և օժտված է ժամանակակից տեխնոլոգիաներով:
@@ -79,7 +75,6 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
             </p>
           </div>
 
-          {/* Աջ կողմի սակագների բլոկ */}
           <div className="lg:col-span-5 bg-white border border-gray-100 rounded-[32px] p-6 sm:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.05)] space-y-6">
               
             <div className="flex gap-3 pb-2">
@@ -98,27 +93,33 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
             </div>
 
             <div className="divide-y divide-gray-100">
-              {tariffs.map((item, index) => (
-                <div 
-                  key={item.id || index} 
-                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-5 gap-3"
-                >
-                  <div className="flex items-baseline gap-2 sm:w-1/3 shrink-0">
-                    {item.subtitle && (
-                      <span className="text-[11px] text-gray-400 font-medium leading-none">
-                        {item.subtitle}
+              {loading ? (
+                <div className="py-8 text-center text-gray-500 font-medium">Բեռնվում է...</div>
+              ) : tariffs.length === 0 ? (
+                <div className="py-8 text-center text-gray-500 font-medium">Տվյալներ չեն գտնվել</div>
+              ) : (
+                tariffs.map((item, index) => (
+                  <div 
+                    key={item.id || index} 
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-5 gap-3"
+                  >
+                    <div className="flex items-baseline gap-2 sm:w-1/3 shrink-0">
+                      {item.subtitle && (
+                        <span className="text-[11px] text-gray-400 font-medium leading-none">
+                          {item.subtitle}
+                        </span>
+                      )}
+                      <span className="text-3xl sm:text-4xl font-extrabold text-[#6b11cb] tracking-tight">
+                        {item.value}
                       </span>
-                    )}
-                    <span className="text-3xl sm:text-4xl font-extrabold text-[#6b11cb] tracking-tight">
-                      {item.value}
-                    </span>
-                  </div>
+                    </div>
 
-                  <div className="sm:w-2/3 text-gray-800 text-sm sm:text-base font-medium leading-snug">
-                    {item.description}
+                    <div className="sm:w-2/3 text-gray-800 text-sm sm:text-base font-medium leading-snug">
+                      {item.description}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
 
           </div>

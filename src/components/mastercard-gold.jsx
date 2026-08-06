@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import MasterCardGoldiMasin from "./mastercard-gold-imasin"
 import MasterCardGoldiMasin2 from "./mastercard-gold-imasin2"
+import MasterCardGoldiMasin3 from "./mastercard-gold-imasin3"
 function MasterCardGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -16,7 +17,7 @@ function MasterCardGold(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <VisaInfiniteCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <MasterCardGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
