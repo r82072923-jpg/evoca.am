@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import TravelGoldiMasin from "./travelgold-imasin"
 import TravelGoldiMasin2 from "./travelgold-imasin2"
 import TravelGoldiMasin3 from "./travelgold-imasin3"
+import Slayder5 from "./slayder5";
 function TravelGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -20,6 +21,7 @@ function TravelGold(){
             <TravelGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
