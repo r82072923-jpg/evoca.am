@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import VisaGoldiMasin from "./visa-gold-imasin"
 import VisaGoldiMasin2 from "./visa-gold-imasin2"
 import VisaGoldiMasin3 from "./visa-gold-imasin3"
+import VisaGoldiMasin4 from "./visa-gold-imasin4"
 function VisaGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -20,6 +21,7 @@ function VisaGold(){
             <VisaGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <VisaGoldiMasin4></VisaGoldiMasin4>
         </>
     )
 }
