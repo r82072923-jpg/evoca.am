@@ -7,6 +7,7 @@ import VisaGoldiMasin3 from "./visa-gold-imasin3"
 import VisaGoldiMasin4 from "./visa-gold-imasin4"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function VisaGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -26,6 +27,7 @@ function VisaGold(){
         <VisaGoldiMasin4></VisaGoldiMasin4>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
