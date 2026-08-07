@@ -24,7 +24,7 @@ import Blog from "./components/blog"
 import Career from "./components/career"
 import BusinessLoan6 from "./components/business-loan6"
 import VisaInfiniteCard from "./components/visa-infinite-card"
-import MasterCardGold from "./components/mastercard-gold"
+import MasterCardGold from "./components/mastercard-gold."
 import VisaGold from "./components/visa-gold"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
