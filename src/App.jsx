@@ -27,7 +27,7 @@ import VisaInfiniteCard from "./components/visa-infinite-card"
 import MasterCardGold from "./components/mastercard-gold."
 import Salary from "./components/salary"
 import VisaGold from "./components/visa-gold"
-import TravelGold from "./components/travel-gold"
+import TravelGold from "./components/travelgold"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
