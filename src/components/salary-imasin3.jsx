@@ -1,41 +1,27 @@
-import React, { useState } from 'react';
-import SalaryiMasin2 from './salary-imasin2';
-
-const faqData = [
-  {
-    id: 1,
-    question: "Ո՞վ կարող է միանալ Evoca աշխատավարձային նախագծին։",
-    answer: "Evoca աշխատավարձային նախագծին կարող է միանալ յուրաքանչյուր ֆիզիկական անձ, ով ցանկանում է իր աշխատավարձը ստանալ Evocabank-ի քարտով՝ անկախ գործունեության ոլորտից կամ զբաղվածությունից:"
-  },
-  {
-    id: 2,
-    question: "Կարո՞ղ եմ օգտվել միայն նոր գործատու ունենալու դեպքում։",
-    answer: "Ո՛չ։ Բավական է ձեր գործատուին ներկայացնել Evoca քարտի տվյալները, և աշխատավարձը կփոխանցվի արդեն Evoca-ում բացված հաշվին։"
-  },
-  {
-    id: 3,
-    question: "Կարո՞ղ եմ դիմել, եթե դեռ Evoca-ի հաճախորդ չեմ։",
-    answer: "Իհարկե՛։ Եթե դեռ Evoca-ի հաճախորդ չես, դու նույնպես կարող ես միանալ Evoca աշխատավարձային նախագծին:"
-  },
-  {
-    id: 4,
-    question: "Ե՞րբ կսկսեմ օգտվել արտոնություններից։",
-    answer: "Արտոնություններից կարող ես օգտվել այն պահից, երբ առաջին աշխատավարձդ փոխանցվի Evocabank-ի քարտին։Քարտերի առավելությունները գործում են անմիջապես, իսկ վարկային առավելություններից կարող ես օգտվել աշխատավարձդ Բանկի քարտին մեկ անգամ ստանալուց հետո։"
-  },
-  {
-    id: 5,
-    question: "Կարող եմ ունենալ մի քանի քարտ աշխատավարձային նախագծի շրջանակում",
-    answer: "Այո՛, կարող ես ունենալ Բանկի կողմից թողարկված մի քանի գործող քարտ, սակայն աշխատավարձային նախագծի շրջանակում կարող ես ընտրել նշված քարտերից մեկը, որի վրա էլ կստանաս աշխատավարձդ, իսկ Evoca Travel Card-ը կարող ես ձեռք բերել 50% զեղչով։"
-  },
-  {
-    id: 6,
-    question: "Ինչպե՞ս կարող եմ դիմել աշխատավարձային նախագծին միանալու համար",
-    answer: "Միանալու համար կարող ես զանգահարել +37410605555 | 8444 հեռախոսահամարներով կամ այցելել Evocabank-ի ցանկացած մասնաճյուղ և ստանալ խորհրդատվություն"
-  }
-];
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './firebaseConfog';
 
 function SalaryiMasin3() {
   const [openId, setOpenId] = useState(1);
+  const [faqData, setFaqData] = useState([]);
+
+  useEffect(() => {
+    const getFaqData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "salaryiMasin2"));
+        const dataList = querySnapshot.docs.map(doc => doc.data());
+        
+        dataList.sort((a, b) => a.id - b.id);
+        
+        setFaqData(dataList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getFaqData();
+  }, []);
 
   const toggleAccordion = (id) => {
     setOpenId(openId === id ? null : id);
