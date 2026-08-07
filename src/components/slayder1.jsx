@@ -2,23 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from './firebaseConfog';
+
 const Slayder1 = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const uploadDataToFirebase = async () => {
-    try {
-      const slidersCollection = collection(db, "sliders");
-      for (const slide of initialSlidesData) {
-        await addDoc(slidersCollection, slide);
-      }
-      alert("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
-      fetchSlides();
-    } catch (error) {
-      console.error("Սխալ տվյալները ուղարկելիս: ", error);
-    }
-  };
 
   const fetchSlides = async () => {
     setLoading(true);
@@ -30,7 +18,6 @@ const Slayder1 = () => {
       }));
       
       slidesArray.sort((a, b) => a.order - b.order);
-      
       setSlides(slidesArray);
     } catch (error) {
       console.error("Սխալ տվյալները ստանալիս: ", error);
@@ -69,15 +56,11 @@ const Slayder1 = () => {
     return (
       <div className="w-full min-h-[600px] flex flex-col items-center justify-center space-y-4">
         <p>Բազայում սլայդեր չկան:</p>
-        <button 
-          onClick={uploadDataToFirebase}
-          className="bg-purple-600 text-white px-6 py-3 rounded-lg"
-        >
-          Ուղարկել սկզբնական տվյալները Firebase
-        </button>
       </div>
     );
   }
+
+  const currentSlide = slides[currentIndex];
 
   return (
     <div className="w-full relative overflow-hidden">
@@ -95,28 +78,41 @@ const Slayder1 = () => {
         .animate-from-right { animation: slideFromRight 0.6s ease-out forwards; }
       `}</style>
 
-      <div className={`${slides[currentIndex]?.bgColor} rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative`}>
+      {/* Ֆոնի և մնացած դասերը կցված են ուղղակիորեն որպես Tailwind-ի կլասներ */}
+      <div 
+  style={{ backgroundColor: slides[currentIndex]?.bgColor?.replace(/bg-\[|\]/g, '') }} 
+  className="rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative"
+>
         
         <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between flex-1">
           
-          <div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 mb-8 md:mb-0">
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${slides[currentIndex]?.textColor}`}>
-              {slides[currentIndex]?.title}
+<div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 mb-8 md:mb-0">
+            <h2 
+              style={{ color: currentSlide?.textColor?.includes('white') ? '#ffffff' : '#000000' }} 
+              className="text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300"
+            >
+              {currentSlide?.title}
             </h2>
-            <p className={`text-base md:text-xl mb-8 max-w-lg leading-relaxed transition-colors duration-300 ${slides[currentIndex]?.descColor}`}>
-              {slides[currentIndex]?.description}
+            <p 
+              style={{ color: '#d1d5db' }} 
+              className="text-base md:text-xl mb-8 max-w-lg leading-relaxed transition-colors duration-300"
+            >
+              {currentSlide?.description}
             </p>
-            <Link to={slides[currentIndex]?.link}>
-            <button className={`${slides[currentIndex]?.btnBg} ${slides[currentIndex]?.btnTextColor} font-medium py-3.5 px-8 rounded-full transition-colors text-lg`}>
-              {slides[currentIndex]?.buttonText}
-            </button>
+            <Link to={currentSlide?.link}>
+              <button 
+                style={{ backgroundColor: '#ffffff', color: '#7c3aed' }} 
+                className="font-medium py-3.5 px-8 rounded-full transition-colors text-lg"
+              >
+                {currentSlide?.buttonText}
+              </button>
             </Link>
           </div>
 
           <div key={`img-${currentIndex}`} className="w-full md:w-1/2 flex justify-center items-center animate-from-right z-10">
             <img 
-              src={slides[currentIndex]?.image} 
-              alt={slides[currentIndex]?.title}
+              src={currentSlide?.image} 
+              alt={currentSlide?.title}
               className="max-h-[380px] object-contain" 
             />
           </div>

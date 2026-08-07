@@ -29,14 +29,17 @@ function TravelGoldiMasin2({ activeTab, setActiveTab }) {
 
   if (loading) return <div>Բեռնվում է...</div>;
   if (!data) return <div>Տվյալներ չկան։</div>;
-
+const tabs=[
+    "Քարտի մասին",
+    "Սակագներ և դրույթներ"
+]
   return (
     <section className="w-full bg-white py-10 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
           <nav className="flex space-x-10 min-w-max">
-            {data.tabs.map((tab, index) => (
+            {tabs.map((tab, index) => (
               <button
                 key={index}
                 onClick={() => setActiveTab(tab)}
