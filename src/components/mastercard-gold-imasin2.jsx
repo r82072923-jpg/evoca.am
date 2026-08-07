@@ -8,8 +8,6 @@ function MasterCardGoldiMasin2({ activeTab, setActiveTab }) {
     'Քարտի մասին',
     'Սակագներ և դրույթներ'
   ];
-
-  // Ձեր տվյալների օբյեկտային զանգվածը
   const tariffs = [
     {
       id: "1",
