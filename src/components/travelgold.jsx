@@ -6,6 +6,7 @@ import TravelGoldiMasin2 from "./travelgold-imasin2"
 import TravelGoldiMasin3 from "./travelgold-imasin3"
 import Slayder5 from "./slayder5";
 import OnlineEvMobileBanking from "./onlineevmobilebanking";
+import Footer from "./footer";
 function TravelGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -24,6 +25,7 @@ function TravelGold(){
         </div>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
