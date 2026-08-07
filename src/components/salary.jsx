@@ -5,6 +5,7 @@ import SalaryiMasin2 from "./salary-imasin2"
 import SalaryiMasin3 from "./salary-imasin3"
 import VerjinNorutyunner from "./verjinnorutyunner"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Salary(){
     return(
         <>
@@ -15,6 +16,7 @@ function Salary(){
         <VerjinNorutyunner></VerjinNorutyunner>
         <SalaryiMasin3></SalaryiMasin3>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
