@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaGoldiMasin from "./visa-gold-imasin"
 import VisaGoldiMasin2 from "./visa-gold-imasin2"
+import VisaGoldiMasin3 from "./visa-gold-imasin3"
 function VisaGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -16,7 +17,7 @@ function VisaGold(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <MasterCardGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
