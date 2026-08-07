@@ -27,6 +27,7 @@ import VisaInfiniteCard from "./components/visa-infinite-card"
 import MasterCardGold from "./components/mastercard-gold."
 import Salary from "./components/salary"
 import VisaGold from "./components/visa-gold"
+import TravelGold from "./components/travel-gold"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -79,6 +80,7 @@ function App() {
       <Route path="/mastercard-gold" element={<MasterCardGold/>}></Route>
       <Route path="/visa-gold" element={<VisaGold/>}></Route>
       <Route path="/salary" element={<Salary/>}></Route>
+      <Route path="/travel-gold" element={<TravelGold/>}></Route>
     </Routes>
     </>
   )
