@@ -7,6 +7,7 @@ import VisaVisioniMasin3 from "./visavision-imasin3"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking";
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function VisaVision(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -26,6 +27,7 @@ function VisaVision(){
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
