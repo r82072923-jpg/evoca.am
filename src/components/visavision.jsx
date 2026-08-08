@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import VisaVisioniMasin from "./visavision-imasin"
 import VisaVisioniMasin2 from "./visavision-imasin2"
 import VisaVisioniMasin3 from "./visavision-imasin3"
+import Slayder5 from "./slayder5"
 function VisaVision(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -20,6 +21,7 @@ function VisaVision(){
             <VisaVisioniMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
