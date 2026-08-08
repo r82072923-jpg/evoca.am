@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaVisioniMasin from "./visavision-imasin"
 import VisaVisioniMasin2 from "./visavision-imasin2"
+import VisaVisioniMasin3 from "./visavision-imasin3"
 function VisaVision(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -16,7 +17,7 @@ function VisaVision(){
           )}
           
           {activeTab === 'Visa Vision քարտի սակագներ' && (
-            <VisaInfiniteCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaVisioniMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
