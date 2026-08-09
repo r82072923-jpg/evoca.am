@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import UnionPayGoldiMasin from "./unionpay-gold-imasin"
 import UnionPayGoldiMasin2 from "./unionpay-gold-imasin2"
 import UnionPayGoldiMasin3 from "./unionpay-gold-iamsin3"
+import Slayder5 from "./slayder5";
 function UnionPayGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -11,7 +12,6 @@ function UnionPayGold(){
         <Header></Header>
         <TopHeader></TopHeader>
         <UnionPayGoldiMasin></UnionPayGoldiMasin>
-        <div>
         <div>
           {activeTab === 'Քարտի մասին' && (
             <UnionPayGoldiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -21,7 +21,7 @@ function UnionPayGold(){
             <UnionPayGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
-        </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
