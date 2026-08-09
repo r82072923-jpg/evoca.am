@@ -33,6 +33,7 @@ import UnionPayGold from "./components/unionpay-gold"
 import BiometricNuynakanacum from "./components/biometrik-nuynakanacum"
 import VisaPlatinum from "./components/visaplatinum"
 import FourUamGiftCard from "./components/4u.am-giftcard"
+import GiftCard from "./components/giftcard"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -90,7 +91,8 @@ function App() {
       <Route path="/unionpay-gold" element={<UnionPayGold/>}></Route>
       <Route path="/biometrik-nuynakanacum" element={<BiometricNuynakanacum/>}></Route>
       <Route path="/visa-platinum" element={<VisaPlatinum/>}></Route>
-      <Route path="/4u.am-gift-card" element={<FourUamGiftCard/>}></Route>/
+      <Route path="/4u.am-gift-card" element={<FourUamGiftCard/>}></Route>
+      <Route path="/gift-card" element={<GiftCard/>}></Route>
     </Routes>
     </>
   )
