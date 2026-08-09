@@ -6,6 +6,7 @@ import FourUamGiftCardiMasin2 from "./4u.am-giftcard-imasin2"
 import FourUamGiftCardiMasin3 from "./4u.am-giftcard-imasin3"
 import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
 import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking";
 function FourUamGiftCard(){
         const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -27,6 +28,7 @@ function FourUamGiftCard(){
           )}
         </div>
         <Slayder5></Slayder5>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
