@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import GiftCardiMasin from "./giftcard-imasin"
 import GiftCardiMasin2 from "./giftcard-imasin2"
+import FourUamGiftCardiMasin3 from "./4u.am-giftcard-imasin3"
 function GiftCard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
