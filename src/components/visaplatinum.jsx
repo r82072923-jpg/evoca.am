@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import VisaPlatinumiMasin from "./visaplatinum-imasin"
 import VisaPlatinumiMasin2 from "./visaplatinum-imasin2"
 import VisaPlatinumiMasin3 from "./visaplatinum-imasin3"
+import Slayder5 from "./slayder5"
 function VisaPlatinum(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -11,7 +12,6 @@ function VisaPlatinum(){
         <Header></Header>
         <TopHeader></TopHeader>
         <VisaPlatinumiMasin></VisaPlatinumiMasin>
-        <div>
         <div>
           {activeTab === 'Քարտի մասին' && (
             <VisaPlatinumiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -21,7 +21,7 @@ function VisaPlatinum(){
             <VisaPlatinumiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
-        </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
