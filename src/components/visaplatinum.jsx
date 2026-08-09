@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaPlatinumiMasin from "./visaplatinum-imasin"
 import VisaPlatinumiMasin2 from "./visaplatinum-imasin2"
+import VisaPlatinumiMasin3 from "./visaplatinum-imasin3"
 function VisaPlatinum(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -17,7 +18,7 @@ function VisaPlatinum(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <VisaInfiniteCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaPlatinumiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </div>
