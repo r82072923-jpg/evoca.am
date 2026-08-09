@@ -29,6 +29,9 @@ import Salary from "./components/salary"
 import VisaGold from "./components/visa-gold"
 import TravelGold from "./components/travelgold"
 import VisaVision from "./components/visavision"
+import UnionPayGold from "./components/unionpay-gold"
+import BiometricNuynakanacum from "./components/biometrik-nuynakanacum"
+import VisaPlatinum from "./components/visaplatinum"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -83,6 +86,9 @@ function App() {
       <Route path="/salary" element={<Salary/>}></Route>
       <Route path="/travel-gold" element={<TravelGold/>}></Route>
       <Route path="/visa-vision" element={<VisaVision/>}></Route>
+      <Route path="/unionpay-gold" element={<UnionPayGold/>}></Route>
+      <Route path="/biometrik-nuynakanacum" element={<BiometricNuynakanacum/>}></Route>
+      <Route path="/visa-platinum" element={<VisaPlatinum/>}></Route>
     </Routes>
     </>
   )
