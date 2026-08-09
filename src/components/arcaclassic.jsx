@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import ArcaClassiciMasin from "./arcaclassic-imasin"
 import ArcaClassiciMasin2 from "./arcaclassic-imasin2"
+import ArcaClassiciMasin3 from "./arcaclassic-imasin3"
 import { useState } from "react"
 function ArcaClassic(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
@@ -16,7 +17,7 @@ function ArcaClassic(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <FourUamGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <ArcaClassiciMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
