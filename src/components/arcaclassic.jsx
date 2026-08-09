@@ -6,6 +6,7 @@ import ArcaClassiciMasin2 from "./arcaclassic-imasin2"
 import ArcaClassiciMasin3 from "./arcaclassic-imasin3"
 import ArcaClassiciMasin4 from "./arcaclassic-imasin4"
 import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function ArcaClassic(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -24,6 +25,7 @@ function ArcaClassic(){
         </div>
         <ArcaClassiciMasin4></ArcaClassiciMasin4>
         <Slayder5></Slayder5>
+        <OnlineEvMobileBanking>g</OnlineEvMobileBanking>
         </>
     )
 }
