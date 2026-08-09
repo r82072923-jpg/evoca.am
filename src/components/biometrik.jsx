@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 const faces = [
   "https://www.evoca.am/img/temp/biometric/face3.png",
   "https://www.evoca.am/img/temp/biometric/face1.png",
@@ -124,12 +124,9 @@ export default function EvocaBiometricSlider() {
               className="w-full h-full object-contain"
             />
           </div>
-          <a
-            href="#learn-more"
-            className="px-8 py-3 bg-[#5200cc] hover:bg-[#4100a3] text-white text-base font-semibold rounded-full transition-all duration-200 shadow-sm"
-          >
+          <Link to="/biometrik-nuynakanacum" className="px-8 py-3 bg-[#5200cc] hover:bg-[#4100a3] text-white text-base font-semibold rounded-full transition-all duration-200 shadow-sm">
             Իմանալ ավելին
-          </a>
+          </Link>
         </div>
       </div>
 
