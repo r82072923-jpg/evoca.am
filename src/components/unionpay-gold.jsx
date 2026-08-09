@@ -6,6 +6,7 @@ import UnionPayGoldiMasin2 from "./unionpay-gold-imasin2"
 import UnionPayGoldiMasin3 from "./unionpay-gold-iamsin3"
 import Slayder5 from "./slayder5";
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 
 function UnionPayGold(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
@@ -25,6 +26,7 @@ function UnionPayGold(){
         </div>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
