@@ -34,6 +34,7 @@ import BiometricNuynakanacum from "./components/biometrik-nuynakanacum"
 import VisaPlatinum from "./components/visaplatinum"
 import FourUamGiftCard from "./components/4u.am-giftcard"
 import GiftCard from "./components/giftcard"
+import ArcaClassic from "./components/arcaclassic"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -93,6 +94,7 @@ function App() {
       <Route path="/visa-platinum" element={<VisaPlatinum/>}></Route>
       <Route path="/4u.am-gift-card" element={<FourUamGiftCard/>}></Route>
       <Route path="/gift-card" element={<GiftCard/>}></Route>
+      <Route path="/arca-classic" element={<ArcaClassic/>}></Route>-
     </Routes>
     </>
   )
