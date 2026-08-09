@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import FourUamGiftCardiMasin from "./4u.am-giftcard-imasin"
 import FourUamGiftCardiMasin2 from "./4u.am-giftcard-imasin2"
 import FourUamGiftCardiMasin3 from "./4u.am-giftcard-imasin3"
+import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
 function FourUamGiftCard(){
         const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -20,8 +21,8 @@ function FourUamGiftCard(){
             <FourUamGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
-          {activeTab === 'Սպասարկման պայմանները' && (
-            <MasterCardGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          {activeTab === 'Սպասարկման պայմանները' && (            
+            <FourUamGiftCardiMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
