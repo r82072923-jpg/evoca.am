@@ -5,6 +5,7 @@ import GiftCardiMasin from "./giftcard-imasin"
 import GiftCardiMasin2 from "./giftcard-imasin2"
 import FourUamGiftCardiMasin3 from "./4u.am-giftcard-imasin3"
 import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
+import Slayder5 from "./slayder5"
 function GiftCard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -12,7 +13,6 @@ function GiftCard(){
         <Header></Header>
         <TopHeader></TopHeader>
         <GiftCardiMasin></GiftCardiMasin>
-        <div>
         <div>
           {activeTab === 'Քարտի մասին' && (
             <GiftCardiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -26,7 +26,7 @@ function GiftCard(){
             <FourUamGiftCardiMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
-        </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
