@@ -8,6 +8,7 @@ import DalmaGiftCardiMasin4 from "./dalma-giftcard-imasin4"
 import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function DalmaGiftCard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -31,6 +32,7 @@ function DalmaGiftCard(){
         <DalmaGiftCardiMasin4></DalmaGiftCardiMasin4>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
