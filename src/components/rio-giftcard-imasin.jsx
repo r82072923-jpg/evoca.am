@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DalmaGiftCardiMasin() {
+function RioGiftCardiMasin() {
   return (
     <section className="relative w-full bg-[#f8f9fb] pt-20 pb-20 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,15 +8,12 @@ function DalmaGiftCardiMasin() {
           
           <div className="lg:w-1/2 space-y-5 z-10 pl-0 lg:pl-4">
             <h1 className="text-[32px] sm:text-[40px] lg:text-[44px] font-black text-[#1a1a1a] leading-[1.2] tracking-tight">
-            Dalma Gift Card
+            Rio Gift Card
             </h1>
             
             <p className="text-[#595959] text-[15px] sm:text-base leading-[1.6] max-w-[500px]">
-            Նվեր ընտրելն այլևս դժվար չէ:
+            Ամեն ինչ մեկ նվեր քարտում
             </p>
-            <button className="bg-[#6c00ff] text-white font-bold py-3 px-8 rounded-full hover:bg-[#5b00d6] transition-colors duration-300">
-              Պատվիրել օնլայն
-            </button>
           </div>
 
           <div className="lg:w-1/2 relative flex justify-center lg:justify-end w-full pr-0 lg:pr-4">
@@ -24,7 +21,7 @@ function DalmaGiftCardiMasin() {
             
             <div className="relative z-10 w-full max-w-[560px]">
               <img
-                src="https://www.evoca.am/images-cache/cards/1/17404717113297/415x261.png"
+                src="https://www.evoca.am/images-cache/cards/1/17404717289057/415x261.png"
                 alt="Փոքր և միջին բիզնեսի վարկավորում"
                 className="w-full h-auto object-contain drop-shadow-sm"
               />
@@ -37,4 +34,4 @@ function DalmaGiftCardiMasin() {
   );
 }
 
-export default DalmaGiftCardiMasin;
+export default RioGiftCardiMasin;
