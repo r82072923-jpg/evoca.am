@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import MyLeriMasin from "./myler-imasin"
 import MyLeriMasin2 from "./myler-imasin2"
+import MyLeriMasin3 from "./myler-imasin3"
 function MyLer(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -16,7 +17,7 @@ function MyLer(){
           )}
           
           {activeTab === 'Տրամադրման պայմանները' && (
-            <FourUamGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <MyLeriMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
           {activeTab === 'Սպասարկման պայմանները' && (            
