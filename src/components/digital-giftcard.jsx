@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import DigitalGiftCardiMasin from "./digital-giftcard-imasin"
 import DigitalGiftCardiMasin2 from "./digital-giftcard-imasin2"
+import DigitalGiftCardiMasin3 from "./digital-giftcard-imasin3"
 import { useState } from "react"
 function DigitalGiftCard(){
 const [activeTab,setActiveTab]=useState("Քարտի մասին")
@@ -16,7 +17,7 @@ const [activeTab,setActiveTab]=useState("Քարտի մասին")
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <WorldDigitaliMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <DigitalGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
