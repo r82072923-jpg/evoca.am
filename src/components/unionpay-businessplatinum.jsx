@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import UnionPayBusinessPlatinumiMasin from "./unionpay-businessplatinum-imasin"
 import UnionPayBusinessPlatinumiMasin2 from "./unionpay-businessplatinum-imasin2"
+import UnionPayBusinessPlatinumiMasin3 from "./unionpay-businessplatinum-imasin3"
 function UnionPayBusinessPlatinum(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -16,7 +17,7 @@ function UnionPayBusinessPlatinum(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <DigitalGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <UnionPayBusinessPlatinumiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
