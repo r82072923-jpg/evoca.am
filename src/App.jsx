@@ -38,6 +38,7 @@ import ArcaClassic from "./components/arcaclassic"
 import DalmaGiftCard from "./components/dalma-giftcard"
 import RioGiftCard from "./components/rio-giftcard"
 import WorldDigital from "./components/world-digital"
+import DigitalGiftCard from "./components/digital-giftcard"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -101,6 +102,7 @@ function App() {
       <Route path="/dalma-gift-card" element={<DalmaGiftCard/>}></Route>
       <Route path="/rio-gift-card" element={<RioGiftCard/>}></Route>
       <Route path="/world-digital" element={<WorldDigital/>}></Route>
+      <Route path="/digital-gift-card" element={<DigitalGiftCard/>}></Route>
     </Routes>
     </>
   )
