@@ -40,6 +40,7 @@ import RioGiftCard from "./components/rio-giftcard"
 import WorldDigital from "./components/world-digital"
 import DigitalGiftCard from "./components/digital-giftcard"
 import UnionPayBusinessPlatinum from "./components/unionpay-businessplatinum"
+import MyLer from "./components/myler"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -105,6 +106,7 @@ function App() {
       <Route path="/world-digital" element={<WorldDigital/>}></Route>
       <Route path="/digital-gift-card" element={<DigitalGiftCard/>}></Route>
       <Route path="/business-platinum" element={<UnionPayBusinessPlatinum/>}></Route>
+      <Route path="/myler-gift-card" element={<MyLer/>}></Route>
     </Routes>
     </>
   )
