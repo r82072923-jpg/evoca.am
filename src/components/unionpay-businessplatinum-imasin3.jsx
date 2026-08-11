@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from './firebaseConfo`g';
+import { db } from './firebaseConfog';
 import { collection, getDocs } from 'firebase/firestore';
 
 const tabs = ['Քարտի մասին', 'Սակագներ և դրույթներ'];
