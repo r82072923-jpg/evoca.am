@@ -6,6 +6,7 @@ import RioGiftCardiMasin2 from "./rio-giftcard-masin2"
 import RioGiftCardiMasin3 from "./rio-giftcard-imasin3"
 import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
 import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from"./onlineevmobilebanking"
 function RioGiftCard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -27,6 +28,7 @@ function RioGiftCard(){
           )}
         </div>
         <Slayder5></Slayder5>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
