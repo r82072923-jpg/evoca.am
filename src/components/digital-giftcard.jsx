@@ -1,9 +1,10 @@
+import { useState } from "react"
 import Header from "./header"
 import TopHeader from "./topHeader"
 import DigitalGiftCardiMasin from "./digital-giftcard-imasin"
 import DigitalGiftCardiMasin2 from "./digital-giftcard-imasin2"
 import DigitalGiftCardiMasin3 from "./digital-giftcard-imasin3"
-import { useState } from "react"
+import Slayder5 from "./slayder5"
 function DigitalGiftCard(){
 const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -20,6 +21,7 @@ const [activeTab,setActiveTab]=useState("Քարտի մասին")
             <DigitalGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
