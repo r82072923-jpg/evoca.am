@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import WorldDigitaliMasin from "./world-digital-imasin"
 import WorldDigitaliMasin2 from "./world-digital-imasin2"
+import WorldDigitaliMasin3 from "./world-digital-imasin3"
 function WorldDigital(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -16,10 +17,9 @@ function WorldDigital(){
           )}
           
           {activeTab === 'Mastercard World քարտի մասին' && (
-            <FourUamGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <WorldDigitaliMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
-        <WorldDigitaliMasin2></WorldDigitaliMasin2>
         </>
     )
 }

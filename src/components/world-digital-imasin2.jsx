@@ -76,7 +76,6 @@ function WorldDigitaliMasin2({ activeTab, setActiveTab }) {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
