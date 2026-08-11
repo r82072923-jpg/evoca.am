@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import WorldDigitaliMasin from "./world-digital-imasin"
 import WorldDigitaliMasin2 from "./world-digital-imasin2"
 import WorldDigitaliMasin3 from "./world-digital-imasin3"
+import Slayder5 from "./slayder5"
 function WorldDigital(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -20,6 +21,7 @@ function WorldDigital(){
             <WorldDigitaliMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }

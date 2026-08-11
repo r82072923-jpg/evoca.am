@@ -47,7 +47,7 @@ function WorldDigitaliMasin3({ activeTab, setActiveTab }) {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-10 font-sans">Բեռնվում է տվյալները Firebase-ից...</div>;
+    return <div className="text-center py-10 font-sans">Բեռնվում է ...</div>;
   }
 
   return (
