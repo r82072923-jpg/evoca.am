@@ -6,6 +6,7 @@ import MyLeriMasin2 from "./myler-imasin2"
 import MyLeriMasin3 from "./myler-imasin3"
 import FourUamGiftCardiMasin4 from "./4u.am-giftcard-imasin4"
 import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function MyLer(){
     const [activeTab, setActiveTab] = useState('Քարտի մասին');
     return(
@@ -27,6 +28,7 @@ function MyLer(){
           )}
         </div>
         <Slayder5></Slayder5>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
