@@ -7,6 +7,7 @@ import DigitalGiftCardiMasin3 from "./digital-giftcard-imasin3"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function DigitalGiftCard(){
 const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -26,6 +27,7 @@ const [activeTab,setActiveTab]=useState("Քարտի մասին")
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
