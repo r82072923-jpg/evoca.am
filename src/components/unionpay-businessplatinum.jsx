@@ -7,6 +7,7 @@ import UnionPayBusinessPlatinumiMasin3 from "./unionpay-businessplatinum-imasin3
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function UnionPayBusinessPlatinum(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -26,6 +27,7 @@ function UnionPayBusinessPlatinum(){
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
