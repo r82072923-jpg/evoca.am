@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaClassiciMasin from "./visaclassic-imasin"
 import VisaClassiciMasin2 from "./visaclassic-imasin2"
+import VisaClassiciMasin3 from "./visaclassic-imasin3"
 function VisaClassic(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -16,7 +17,7 @@ function VisaClassic(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <VisaDigitaliMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaClassiciMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
