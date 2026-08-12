@@ -5,6 +5,7 @@ import VisaBusinessiMasin from "./visabusiness-imasin"
 import VisaBusinessiMasin2 from "./visabusiness-imasin2"
 import VisaBusinessiMasin3 from "./visabusiness-imasin3"
 import VisaBusinessiMasin4 from "./visabusiness-imasin4"
+import VisaBusinessiMasin5 from "./visabusiness-imasin5"
 function VisaBusiness(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -24,7 +25,7 @@ function VisaBusiness(){
             <VisaBusinessiMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Զգուշացում' && (
-            <WilcoVisaInfiniteiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaBusinessiMasin5 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
