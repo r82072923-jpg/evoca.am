@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import VisaBusinessiMasin from "./visabusiness-imasin"
 import VisaBusinessiMasin2 from "./visabusiness-imasin2"
 import VisaBusinessiMasin3 from "./visabusiness-imasin3"
+import VisaBusinessiMasin4 from "./visabusiness-imasin4"
 function VisaBusiness(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -19,8 +20,8 @@ function VisaBusiness(){
           {activeTab === 'Սակագներ և դրույթներ' && (
             <VisaBusinessiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
-          {activeTab === 'Օգտակար խորհուդներ' && (
-            <WilcoVisaInfiniteiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          {activeTab === 'Օգտակար խորհուրդներ' && (
+            <VisaBusinessiMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Զգուշացում' && (
             <WilcoVisaInfiniteiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
