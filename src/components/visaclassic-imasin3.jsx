@@ -56,7 +56,7 @@ function VisaClassiciMasin3({ activeTab, setActiveTab }) {
   }
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto overflow-x-auto font-sans p-6">
+    <div className="w-full max-w-[1200px] mx-auto overflow-x-auto font-sans p-6"> 
       <table className="w-full min-w-[800px] border-collapse bg-white text-left border border-[#ebdff2]">
         <tbody className="text-[14px] text-[#444444]">
           {visaData.sections && visaData.sections.map((item, index) => {
