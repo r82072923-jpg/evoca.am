@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import VisaDigitaliMasin from "./visadigital-imasin"
 import VisaDigitaliMasin2 from "./visadigital-imasin2"
+import VisaDigitaliMasin3 from "./visadigital-imasin3"
 function VisaDigital(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -16,7 +17,7 @@ function VisaDigital(){
           )}
           
           {activeTab === 'Visa Digital քարտի սակագներ' && (
-            <VisaBusinessiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaDigitaliMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>

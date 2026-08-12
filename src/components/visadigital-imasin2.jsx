@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebaseConfog';
 import { doc, getDoc } from 'firebase/firestore';
-
-function VisaDigitaliMasin2() {
+const tabs = [
+  'Քարտի մասին',
+  'Visa Digital քարտի սակագներ'
+];
+function VisaDigitaliMasin2({activeTab,setActiveTab}) {
   const [data, setData] = useState(null);
   const [activeCurrency, setActiveCurrency] = useState('AMD');
   const [loading, setLoading] = useState(true);
@@ -37,9 +40,28 @@ function VisaDigitaliMasin2() {
   }
 
   if (!data) return null;
-
   return (
     <div className="max-w-6xl mx-auto p-6 font-sans space-y-12">
+      <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-2 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-[-18px] left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       <div className="flex flex-col md:flex-row gap-12">
         <div className="w-full md:w-1/2 space-y-6 text-[#333333] text-base leading-relaxed">
           {data.heroSection?.introParagraphs?.map((paragraph, index) => (
