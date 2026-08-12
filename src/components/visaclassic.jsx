@@ -8,6 +8,7 @@ import VisaClassiciMasin4 from "./visaclassic-imasin4"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function VisaClassic(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -28,6 +29,7 @@ function VisaClassic(){
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
