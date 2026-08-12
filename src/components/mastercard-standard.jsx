@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import MasterCardStandardiMasin from "./mastercard-standard-imasin"
 import MasterCardStandardiMasin2 from "./mastercard-standard-imasin2"
+import VisaClassiciMasin3 from "./visaclassic-imasin3"
 function MasterCardStandard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -16,7 +17,7 @@ function MasterCardStandard(){
           )}
           
           {activeTab === 'Սակագներ և դրույթներ' && (
-            <VisaGoldiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <VisaClassiciMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
