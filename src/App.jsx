@@ -44,6 +44,7 @@ import MyLer from "./components/myler"
 import WilcoVisaInfinite from "./components/wilco-visainfinite"
 import VisaBusiness from "./components/visabusiness"
 import VisaDigital from "./components/visadigital"
+import VisaClassic from "./components/visaclassic"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -113,6 +114,7 @@ function App() {
       <Route path="/wilco-visa-infinite" element={<WilcoVisaInfinite/>}></Route>
       <Route path="/visa-business" element={<VisaBusiness/>}></Route>
       <Route path="/visa-digital" element={<VisaDigital/>}></Route>
+      <Route path="/visa-classic" element={<VisaClassic/>}></Route>
     </Routes>
     </>
   )
