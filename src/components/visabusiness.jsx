@@ -9,6 +9,7 @@ import VisaBusinessiMasin5 from "./visabusiness-imasin5"
 import VisaBusinessiMasin6 from "./visabusiness-imasin6"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function VisaBusiness(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -34,6 +35,7 @@ function VisaBusiness(){
         <VisaBusinessiMasin6></VisaBusinessiMasin6>
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
