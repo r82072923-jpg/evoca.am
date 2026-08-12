@@ -6,6 +6,7 @@ import VisaBusinessiMasin2 from "./visabusiness-imasin2"
 import VisaBusinessiMasin3 from "./visabusiness-imasin3"
 import VisaBusinessiMasin4 from "./visabusiness-imasin4"
 import VisaBusinessiMasin5 from "./visabusiness-imasin5"
+import VisaBusinessiMasin6 from "./visabusiness-imasin6"
 function VisaBusiness(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -28,6 +29,7 @@ function VisaBusiness(){
             <VisaBusinessiMasin5 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <VisaBusinessiMasin6></VisaBusinessiMasin6>
         </>
     )
 }
