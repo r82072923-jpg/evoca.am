@@ -59,7 +59,7 @@ const Slayder5 = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto my-12 px-4 font-sans">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Այլ վարկեր</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Այլ քարտեր</h2>
       
       <div className="flex items-center justify-between gap-2 md:gap-6 relative group">
         <button

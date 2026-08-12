@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import WilcoVisaInfiniteiMasin from "./wilco-visainfinite-imasin"
 import WilcoVisaInfiniteiMasin2 from "./wilco-visainfinite-imasin2"
 import WilcoVisaInfiniteiMasin3 from "./wilco-visainfinite-imasin3"
+import Slayder5 from "./slayder5"
 function WilcoVisaInfinite(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -20,6 +21,7 @@ function WilcoVisaInfinite(){
             <WilcoVisaInfiniteiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder5></Slayder5>
         </>
     )
 }
