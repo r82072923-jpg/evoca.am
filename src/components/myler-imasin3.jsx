@@ -1,119 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from './firebaseConfog';
+import { collection, getDocs } from 'firebase/firestore';
 
-const tableData = [
-  {
-    service: 'Քարտի տեսակ',
-    value: 'ArCa Gift card'
-  },
-  {
-    service: 'Քարտի արժույթ',
-    value: 'ՀՀ դրամ'
-  },
-  {
-    service: 'Նվեր քարտի համալրման գումար',
-    value: 'Նվազագույնը՝ 30 000 ՀՀ դրամ\nԱռավելագույնը՝ 2 000 000 ՀՀ դրամ'
-  },
-  {
-    service: 'Քարտի գործողության ժամկետ',
-    value: 'Քարտի թողարկման պահից 1 տարի'
-  },
-  {
-    service: 'MyLer gift քարտով կատարվող գործարքներ',
-    value: 'Myler-ի տարածքում գործող առևտրային կետեր'
-  },
-  {
-    service: 'Կանխիկացում',
-    value: 'Չի թույլատրվում'
-  },
-  {
-    service: 'Քարտային հաշվի չնվազող մնացորդ',
-    value: 'Չի սահմանվում'
-  },
-  {
-    service: 'Քարտային հաշվի դրական մնացորդի նկատմամբ հաշվարկվող տարեկան տոկոսադրույք',
-    value: '0%'
-  },
-  {
-    service: 'Ապրանքների և ծառայությունների դիմաց անկանխիկ վճարման միջնորդավճար',
-    value: 'Անվճար'
-  },
-  {
-    service: 'Քարտի գործողության կասեցում',
-    value: 'Անվճար'
-  },
-  {
-    service: 'Քարտի վերաթողարկում',
-    value: 'Չի վերաթողարկվում'
-  },
-  {
-    service: 'Մնացորդի տեղափոխության միջնորդավճար[1]',
-    value: '4 900 ՀՀ դրամ'
-  },
-  {
-    service: 'PIN ծածկագրի գեներացման հայտ',
-    value: '1 000 ՀՀ դրամ'
-  },
-  {
-    service: 'Քարտի վերաթողարկման վճար',
-    value: '1 000 ՀՀ դրամ'
-  },
-  {
-    service: 'Քարտային հաշվի ամսական քաղվածքի տրամադրում',
-    value: 'Անվճար'
-  },
-  {
-    service: 'Քարտային հաշվի քաղվածքի տրամադրում 1 ամսից ավել ժամանակահատվածի համար',
-    value: 'Անվճար'
-  },
-  {
-    service: 'Գործարքների վերաբերյալ SMS հաղորդագրությունների ստացում',
-    value: 'Անվճար'
-  },
-  {
-    service: 'Գերաճախի գծով տույժեր',
-    value: '20% տարեկան'
-  },
-  {
-    service: 'Ակտիվացված քարտի գործողության ժամկետի ավարտից հետո ամսական սպասարկման վճար',
-    value: '10% ժամկետի ավարտի օրվա դրությամբ քարտային հաշվի մնացորդի նկատմամբ'
-  },
-  {
-    service: 'Կից քարտի պատվիրում առաքման եղանակով դեպի հաճախորդի նշած հասցե',
-    value: '1 000 ՀՀ դրամ'
-  },
-  {
-    service: 'Կից քարտի պատվիրում դեպի Բանկի մասնաճյուղ',
-    value: 'Անվճար'
-  }
+const tabs = [
+  'Քարտի մասին',
+  'Տրամադրման պայմանները',
+  'Սպասարկման պայմանները'
 ];
-  const tabs = [
-    'Քարտի մասին',
-    'Տրամադրման պայմանները',
-    'Սպասարկման պայմանները'
-  ];
-function MyLeriMasin3({activeTab,setActiveTab}) {
+
+function MyLeriMasin3({ activeTab, setActiveTab }) {
+  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'myLeriMasin'));
+        const data = querySnapshot.docs.map(doc => doc.data());
+        setTableData(data);
+      } catch (error) {
+        console.error('Սխալ տվյալների բեռնման ժամանակ:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-10 font-medium">Բեռնվում է...</div>;
+  }
+
   return (
     <div className="w-full max-w-6xl mx-auto font-sans text-[#333333] p-4">
-        <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
-          <nav className="flex space-x-10 min-w-max">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-2 px-1 text-base sm:text-lg font-bold transition-colors relative ${
-                  activeTab === tab
-                    ? 'text-[#6b11cb]'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                {tab}
-                {activeTab === tab && (
-                  <span className="absolute bottom-[-18px] left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
-                )}
-              </button>
-            ))}
-          </nav>
-        </div>
+      <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-2 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-[-18px] left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="w-full min-w-[700px] border-collapse text-base">
           <tbody>
