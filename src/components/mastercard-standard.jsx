@@ -8,6 +8,7 @@ import VisaClassiciMasin3 from "./visaclassic-imasin3"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function MasterCardStandard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -28,6 +29,7 @@ function MasterCardStandard(){
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
