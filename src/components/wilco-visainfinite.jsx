@@ -7,6 +7,7 @@ import WilcoVisaInfiniteiMasin3 from "./wilco-visainfinite-imasin3"
 import Slayder5 from "./slayder5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function WilcoVisaInfinite(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -26,6 +27,7 @@ function WilcoVisaInfinite(){
         <Slayder5></Slayder5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
