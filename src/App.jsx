@@ -45,6 +45,7 @@ import WilcoVisaInfinite from "./components/wilco-visainfinite"
 import VisaBusiness from "./components/visabusiness"
 import VisaDigital from "./components/visadigital"
 import VisaClassic from "./components/visaclassic"
+import MasterCardStandard from "./components/mastercard-standard"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -115,6 +116,7 @@ function App() {
       <Route path="/visa-business" element={<VisaBusiness/>}></Route>
       <Route path="/visa-digital" element={<VisaDigital/>}></Route>
       <Route path="/visa-classic" element={<VisaClassic/>}></Route>
+      <Route path="/mastercard-standard" element={<MasterCardStandard/>}></Route>
     </Routes>
     </>
   )

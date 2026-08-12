@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebaseConfog";
-
+const tabs = [
+  'Քարտի մասին',
+  'Սակագներ և դրույթներ'
+];
 const initialVisaClassicData = {
-  tabs: ["Քարտի մասին", "Սակագներ և դրույթներ"],
   columns: [
     "MasterCard Standard / Visa Classic",
     "MasterCard Gold / Visa Gold",
@@ -57,6 +59,26 @@ function VisaClassiciMasin3({ activeTab, setActiveTab }) {
 
   return (
     <div className="w-full max-w-[1200px] mx-auto overflow-x-auto font-sans p-6"> 
+      <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-2 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-[-18px] left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       <table className="w-full min-w-[800px] border-collapse bg-white text-left border border-[#ebdff2]">
         <tbody className="text-[14px] text-[#444444]">
           {visaData.sections && visaData.sections.map((item, index) => {
