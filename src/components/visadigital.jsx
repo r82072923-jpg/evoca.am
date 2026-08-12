@@ -5,6 +5,7 @@ import VisaDigitaliMasin from "./visadigital-imasin"
 import VisaDigitaliMasin2 from "./visadigital-imasin2"
 import VisaDigitaliMasin3 from "./visadigital-imasin3"
 import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function VisaDigital(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -22,6 +23,7 @@ function VisaDigital(){
           )}
         </div>
         <Slayder5></Slayder5>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
