@@ -5,6 +5,7 @@ import MasterCardStandardiMasin from "./mastercard-standard-imasin"
 import MasterCardStandardiMasin2 from "./mastercard-standard-imasin2"
 import MasterCardStandardiMasin3 from "./mastercard-standard-imasin3"
 import VisaClassiciMasin3 from "./visaclassic-imasin3"
+import Slayder5 from "./slayder5"
 function MasterCardStandard(){
     const [activeTab,setActiveTab]=useState("Քարտի մասին")
     return(
@@ -22,6 +23,7 @@ function MasterCardStandard(){
           )}
         </div>
         <MasterCardStandardiMasin3></MasterCardStandardiMasin3>
+        <Slayder5></Slayder5>
         </>
     )
 }
