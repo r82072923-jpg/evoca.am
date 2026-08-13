@@ -46,6 +46,8 @@ import VisaBusiness from "./components/visabusiness"
 import VisaDigital from "./components/visadigital"
 import VisaClassic from "./components/visaclassic"
 import MasterCardStandard from "./components/mastercard-standard"
+import Customer from "./components/customer"
+import Loans from "./components/loans"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -117,6 +119,8 @@ function App() {
       <Route path="/visa-digital" element={<VisaDigital/>}></Route>
       <Route path="/visa-classic" element={<VisaClassic/>}></Route>
       <Route path="/mastercard-standard" element={<MasterCardStandard/>}></Route>
+      <Route path="/customer" element={<Customer/>}></Route>
+      <Route path="/loans" element={<Loans/>}></Route>
     </Routes>
     </>
   )
