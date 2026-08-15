@@ -6,6 +6,7 @@ import Loan2iMasin from "./loan2-imasin"
 import Loan2iMasin2 from "./loan2-imasin2"
 import Loan2iMasin3 from "./loan2-imasin3"
 import Loan2iMasin4 from "./loan2-imasin4"
+import Loan2iMasin5 from "./loan2-imasin5"
 function Loan2(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -26,7 +27,7 @@ function Loan2(){
             <Loan2iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պահանջվող փաստաթղթերի ցանկ' && (            
-            <Loan1iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Loan2iMasin5 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
