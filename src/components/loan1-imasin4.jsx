@@ -8,7 +8,6 @@ const Loan1iMasin4 = ({ activeTab, setActiveTab }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Տվյալների բեռնումը Firestore-ից
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
@@ -16,7 +15,6 @@ const Loan1iMasin4 = ({ activeTab, setActiveTab }) => {
         const querySnapshot = await getDocs(collection(db, 'loans1iMasin3'));
         
         if (!querySnapshot.empty) {
-          // Վերցնում ենք վերջին ավելացված կամ առաջին փաստաթուղթը
           const docData = querySnapshot.docs[0].data();
           if (docData.tabs) setTabs(docData.tabs);
           if (docData.requiredDocuments) setRequiredDocuments(docData.requiredDocuments);
@@ -39,7 +37,6 @@ const Loan1iMasin4 = ({ activeTab, setActiveTab }) => {
 
   return (
     <div className="max-w-4xl mx-auto my-8 p-6 font-sans text-xs sm:text-sm text-gray-800 bg-white">
-      {/* Տաբերի նավիգացիա */}
       <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
@@ -61,7 +58,6 @@ const Loan1iMasin4 = ({ activeTab, setActiveTab }) => {
         </nav>
       </div>
 
-      {/* Փաստաթղթերի ցուցադրում */}
       <ol className="list-none space-y-4">
         {requiredDocuments.map((doc) => (
           <li key={doc.id} className="flex items-start">
