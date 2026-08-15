@@ -4,6 +4,8 @@ import TopHeader from "./topHeader"
 import LoansiTopHeader from "./loans-itopHeader"
 import Loan1iMasin from "./loan1-imasin"
 import Loan1iMasin2 from "./loan1-imasin2"
+import Loan1iMasin3 from "./loan1-imasin3"
+import FourUamGiftCardiMasin3 from "./4u.am-giftcard-imasin3"
 function Loan1(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
 
@@ -18,11 +20,11 @@ function Loan1(){
             <Loan1iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
-          {activeTab === 'Տրամադրման պայմանները' && (
-            <FourUamGiftCardiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          {activeTab === 'Պայմաններ' && (
+            <Loan1iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
-          {activeTab === 'Սպասարկման պայմանները' && (            
+          {activeTab === 'Պահանջվող փաստաթղթերի ցանկ' && (            
             <FourUamGiftCardiMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
