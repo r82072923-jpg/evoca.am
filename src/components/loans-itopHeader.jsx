@@ -1,31 +1,43 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-
+import { Link, useLocation } from 'react-router-dom';
 const LoansiTopHeader = () => {
+  const location = useLocation();
+
+  const getLinkClassName = (path) => {
+    const isActive = location.pathname === path;
+    return `${isActive ? 'bg-[#4D0BA6]' : 'hover:bg-[#4D0BA6]'} text-white px-6 sm:px-10 py-4 font-bold text-sm sm:text-base whitespace-nowrap transition-colors`;
+  };
+
+  let currentPageName = "Վարկեր";
+  if (location.pathname === "/credit-history") {
+    currentPageName = "Վարկային պատմություն և սքոր";
+  } else if (location.pathname === "/important-information") {
+    currentPageName = "Կարևոր տեղեկատվություն";
+  }
+
   return (
     <div className="w-full flex flex-col font-sans">
-
+      
       <div className="w-full bg-[#6C12E7] shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center overflow-x-auto hide-scrollbar">
           
           <Link 
             to="/loans" 
-            className="bg-[#4D0BA6] text-white px-6 sm:px-10 py-4 font-bold text-sm sm:text-base whitespace-nowrap transition-colors"
+            className={getLinkClassName('/loans')}
           >
             Վարկեր
           </Link>
           
           <Link 
             to="/credit-history" 
-            className="text-white hover:bg-[#4D0BA6] px-6 sm:px-10 py-4 font-bold text-sm sm:text-base whitespace-nowrap transition-colors"
+            className={getLinkClassName('/credit-history')}
           >
             Վարկային պատմություն և սքոր
           </Link>
           
           <Link 
             to="/important-information" 
-            className="text-white hover:bg-[#4D0BA6] px-6 sm:px-10 py-4 font-bold text-sm sm:text-base whitespace-nowrap transition-colors"
+            className={getLinkClassName('/important-information')}
           >
             Կարևոր տեղեկատվություն
           </Link>
@@ -47,7 +59,7 @@ const LoansiTopHeader = () => {
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"></path></svg>
             </span>
             
-            <Link to="/" className="hover:text-[#6C12E7] transition-colors">
+            <Link to="/individual" className="hover:text-[#6C12E7] transition-colors">
               Անհատ
             </Link>
             
@@ -55,7 +67,7 @@ const LoansiTopHeader = () => {
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"></path></svg>
             </span>
             
-            <Link to="/individual/loans" className="hover:text-[#6C12E7] transition-colors">
+            <Link to="/loans" className="hover:text-[#6C12E7] transition-colors">
               Վարկեր
             </Link>
 
@@ -64,7 +76,7 @@ const LoansiTopHeader = () => {
             </span>
             
             <span className="text-gray-900 font-semibold cursor-default">
-              Վարկեր
+              {currentPageName}
             </span>
             
           </nav>

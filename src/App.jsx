@@ -48,6 +48,7 @@ import VisaClassic from "./components/visaclassic"
 import MasterCardStandard from "./components/mastercard-standard"
 import Customer from "./components/customer"
 import Loans from "./components/loans.jsx"
+import VarkayinPatmutyun from "./components/varkayinpatmutyun.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -121,6 +122,7 @@ function App() {
       <Route path="/mastercard-standard" element={<MasterCardStandard/>}></Route>
       <Route path="/customer" element={<Customer/>}></Route>
       <Route path="/loans" element={<Loans/>}></Route>
+      <Route path="/credit-history" element={<VarkayinPatmutyun/>}></Route>
     </Routes>
     </>
   )
