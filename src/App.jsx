@@ -50,6 +50,7 @@ import Customer from "./components/customer"
 import Loans from "./components/loans.jsx"
 import VarkayinPatmutyun from "./components/varkayinpatmutyun.jsx"
 import KarevorTexakatvutyun from "./components/karevortexekatvutyun.jsx"
+import Loan1 from "./components/loan1.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -124,7 +125,8 @@ function App() {
       <Route path="/customer" element={<Customer/>}></Route>
       <Route path="/loans" element={<Loans/>}></Route>
       <Route path="/credit-history" element={<VarkayinPatmutyun/>}></Route>
-      <Route path="/important-information" element={<KarevorTexakatvutyun/>}></Route>
+      <Route path="/important-information" element={<KarevorTexakatvutyun />}></Route>
+      <Route path="/loan1" element={<Loan1/>}></Route>
     </Routes>
     </>
   )
