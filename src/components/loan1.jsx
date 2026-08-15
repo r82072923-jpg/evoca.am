@@ -8,6 +8,7 @@ import Loan1iMasin3 from "./loan1-imasin3"
 import Loan1iMasin4 from "./loan1-imasin4"
 import Loan1iMasin5 from "./loan1-imasin5"
 import Slayder6 from "./slayder6"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function Loan1(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
 
@@ -32,6 +33,7 @@ function Loan1(){
         </div>
         <Loan1iMasin5></Loan1iMasin5>
         <Slayder6></Slayder6>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
