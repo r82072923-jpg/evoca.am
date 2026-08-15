@@ -4,6 +4,7 @@ import TopHeader from './topHeader';
 import KarevorTexakatvutyuniMasin from './karevortexekatvutyun-imasin';
 import LoansiTopHeader from './loans-itopHeader';
 import Footer from './footer';
+import FooterBottom from './footerBottom';
 function KarevorTexakatvutyun() {
   return (
     <>
@@ -12,6 +13,7 @@ function KarevorTexakatvutyun() {
     <LoansiTopHeader></LoansiTopHeader>
     <KarevorTexakatvutyuniMasin></KarevorTexakatvutyuniMasin>
     <Footer></Footer>
+    <FooterBottom></FooterBottom>
     </>
   );
 }
