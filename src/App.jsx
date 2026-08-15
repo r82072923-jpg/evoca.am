@@ -47,7 +47,7 @@ import VisaDigital from "./components/visadigital"
 import VisaClassic from "./components/visaclassic"
 import MasterCardStandard from "./components/mastercard-standard"
 import Customer from "./components/customer"
-import Loans from "./components/loans"
+import Loans from "./components/loans.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
