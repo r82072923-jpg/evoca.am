@@ -1,15 +1,28 @@
+import { useState } from "react"
 import Header from "./header"
 import TopHeader from "./topHeader"
 import LoansiTopHeader from "./loans-itopHeader"
 import Loan5iMasin from "./loan5-imasin"
+import Loan5iMasin2 from "./loan5-imasin2"
 function Loan5(){
+    const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
         <>
         <Header></Header>
         <TopHeader></TopHeader>
         <LoansiTopHeader></LoansiTopHeader>
         <Loan5iMasin></Loan5iMasin>
-
+        <div>
+          {activeTab === 'Վարկի մասին' && (
+            <Loan5iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+          {activeTab === 'Պայմաններ' && (
+            <Loan4iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+          {activeTab === 'Պահանջող փաստաթղթերի ցանկ' && (
+            <Loan4iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+        </div>
         </>
     )
 }
