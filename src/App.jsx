@@ -52,6 +52,7 @@ import VarkayinPatmutyun from "./components/varkayinpatmutyun.jsx"
 import KarevorTexakatvutyun from "./components/karevortexekatvutyun.jsx"
 import Loan1 from "./components/loan1.jsx"
 import Loan2 from "./components/loan2.jsx"
+import Loan3 from "./components/loan3.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -129,6 +130,7 @@ function App() {
       <Route path="/important-information" element={<KarevorTexakatvutyun />}></Route>
       <Route path="/loan1" element={<Loan1/>}></Route>
       <Route path="/loan2" element={<Loan2/>}></Route>
+      <Route path="/loan3" element={<Loan3/>}></Route>
     </Routes>
     </>
   )
