@@ -6,6 +6,7 @@ import Loan3iMasin from "./loan3-imasin"
 import Loan3iMasin2 from "./loan3-imasin2"
 import Loan3iMasin3 from "./loan3-imasin3"
 import Loan3iMasin4 from "./loan3-imasin4"
+import Loan3iMasin5 from "./loan3-imasin5"
 function Loan3(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -26,6 +27,7 @@ function Loan3(){
             <Loan3iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Loan3iMasin5></Loan3iMasin5>
         </>
     )
 }
