@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebaseConfog';
 import { collection, onSnapshot } from 'firebase/firestore';
-import Loan3iMasin from './loan3-imasin';
-
 const tabs = [
     'Վարկի մասին',
     'Պայմաններ',
