@@ -1,0 +1,34 @@
+import { useState } from "react"
+import Header from "./header"
+import TopHeader from "./topHeader"
+import WilcoVisaInfiniteiMasin from "./wilco-visainfinite-imasin"
+import WilcoVisaInfiniteiMasin2 from "./wilco-visainfinite-imasin2"
+import WilcoVisaInfiniteiMasin3 from "./wilco-visainfinite-imasin3"
+import Slayder5 from "./slayder5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
+import FooterBottom from "./footerBottom"
+function WilcoVisaInfinite(){
+    const [activeTab,setActiveTab]=useState("Քարտի մասին")
+    return(
+        <>
+        <Header></Header>
+        <TopHeader></TopHeader>
+        <WilcoVisaInfiniteiMasin></WilcoVisaInfiniteiMasin>
+        <div>
+          {activeTab === 'Քարտի մասին' && (
+            <WilcoVisaInfiniteiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+          
+          {activeTab === 'Սակագներ և դրույթներ' && (
+            <WilcoVisaInfiniteiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+        </div>
+        <Slayder5></Slayder5>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
+        <FooterBottom></FooterBottom>
+        </>
+    )
+}
+export default WilcoVisaInfinite
