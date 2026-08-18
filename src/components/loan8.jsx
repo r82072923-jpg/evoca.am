@@ -7,6 +7,7 @@ import Loan8iMasin2 from "./loan8-imasin2"
 import Loan8iMasin3 from "./loan8-imasin3"
 import Loan8iMasin4 from "./loan8-imasin4"
 import Loan8iMasin5 from "./loan8-imasin5"
+import Slayder6 from "./slayder6"
 function Loan8(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -27,6 +28,7 @@ function Loan8(){
           )}
         </div>
         <Loan8iMasin5></Loan8iMasin5>
+        <Slayder6></Slayder6>
         </>
     )
 }
