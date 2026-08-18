@@ -48,12 +48,6 @@ const Loan8iMasin3 = ({ activeTab, setActiveTab }) => {
 
   return (
     <div className="w-full max-w-6xl mx-auto overflow-x-auto p-4">
-      <button 
-        onClick={saveLoanDataToFirebase}
-        className="mt-6 bg-[#6b11cb] text-white px-6 py-2 rounded-lg font-bold hover:bg-[#5a0eb0]"
-      >
-        Ուղարկել տվյալները Firebase
-      </button>
       
       <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
