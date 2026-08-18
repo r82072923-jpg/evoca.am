@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import LoansiTopHeader from "./loans-itopHeader"
 import Loan7iMasin from "./loan7-imasin"
 import Loan7iMasin2 from "./loan7-imasin2"
+import Loan7iMasin3 from "./loan7-imasin3"
 function Loan7(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -17,7 +18,7 @@ function Loan7(){
             <Loan7iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պայմաններ' && (
-            <Loan6iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Loan7iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
