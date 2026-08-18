@@ -1,456 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import React, { useEffect, useState } from 'react';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfog';
 
-const initialFormTexts = {
-  title: "Ապառիկ համագործակցության դիմում / հայտ",
-  appType: {
-    label: "Ապառիկի հայտի տեսակ",
-    online: "Օնլայն ապառիկ",
-    onSite: "Ապառիկ տեղում"
-  },
-  companyName: "Ընկերության անվանում",
-  brandName: "Վաճառակետի / Ֆիրմային անվանումը",
-  contactPerson: "Ընկերության կոնտակտային անձի Անուն, Ազգանուն",
-  phoneNumber: "Հեռախոսահամար",
-  email: "Էլ. փոստ",
-  website: "Կայքի հասցե",
-  businessField: "Ընկերության գործունեության ոլորտը (Վաճառվող ապրանքների կամ մատուցվող ծառայությունների տեսակը)",
-  marketExperience: "Որքա՞ն ժամանակ է ընկերությունը գործում շուկայում",
-  evocabankClient: {
-    label: "Ընկերությունը հանդիսանում է Evocabank-ի հաճախորդ",
-    yes: "Այո",
-    no: "Ոչ"
-  },
-  annualTurnover: "Ընկերության վերջին 1 տարվա շրջանառությունը հարկային հաշվետվություններով",
-  storesCount: "Ընկերության վաճառակետերի քանակը",
-  storeAddresses: "Ընկերության վաճառակետերի հասցեները",
-  otherBankPartnerships: {
-    label: "Կազմակերպությունը ունի՞ ապառիկ համագործակցություն այլ բանկերի հետ",
-    yes: "Այո",
-    no: "Ոչ"
-  },
-  disclaimer: "Հարգելի հաճախորդ, Բանկը երաշխավորում է, որ Ձեր կողմից տրամադրված տեղեկությունը համարվում է գաղտնի տեղեկատվություն և օգտագործվելու է միմիայն ապառիկ հայտի վերաբերյալ որոշում կայացնելու նպատակով:",
-  photos: {
-    label: "Ընկերության վաճառակետի լուսանկարներ (առկայության դեպքում)",
-    placeholder: "Կցել ֆայլը / ֆայլերը"
-  },
-  date: "Ամսաթիվ",
-  submitButton: "Ուղարկել"
+const tabs = [
+    'Վարկի մասին',
+    'Պայմաններ',
+    'Ապառիկ համագործակցության հայտ',
+    'Գործընկերների ցանկ',
+];
+
+const Loan6iMasin3 = ({ activeTab, setActiveTab }) => {
+    const [conditionsData, setConditionsData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const syncDataToFirebase = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "loans6iMasin2"));
+                
+                if (querySnapshot.empty) {
+                    await addDoc(collection(db, "loans6iMasin2"), { items: initialConditionsData });
+                    setConditionsData(initialConditionsData);
+                } else {
+                    const docData = querySnapshot.docs[0].data();
+                    setConditionsData(docData.items || []);
+                }
+            } catch (error) {
+                console.error("Սխալ Firebase-ի հետ աշխատելիս:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        syncDataToFirebase();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center py-12 text-[#6b11cb] font-bold">Բեռնվում է պայմանները բազայից...</div>;
+    }
+
+    return (
+        <div className="w-full max-w-6xl mx-auto px-4 py-8">
+            <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
+                <nav className="flex space-x-10 min-w-max">
+                    {tabs.map((tab, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setActiveTab(tab)}
+                            className={`pb-2 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                                activeTab === tab
+                                    ? 'text-[#6b11cb]'
+                                    : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        >
+                            {tab}
+                            {activeTab === tab && (
+                                <span className="absolute bottom-[-18px] left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+                            )}
+                        </button>
+                    ))}
+                </nav>
+            </div> 
+                <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <tbody>
+                                {conditionsData.map((item, index) => (
+                                    <tr 
+                                        key={item.id || index} 
+                                        className={`border-b border-gray-100 transition-colors hover:bg-gray-50/50 ${
+                                            index % 2 === 0 ? 'bg-white' : 'bg-[#faf8fd]/40'
+                                        }`}
+                                    >
+                                        <td className="py-4 px-6 w-1/12 text-gray-500 font-medium text-sm sm:text-base align-top">
+                                            {item.id}.
+                                        </td>
+                                        <td className="py-4 px-4 w-5/12 text-gray-800 font-medium text-sm sm:text-base align-top">
+                                            {item.title}
+                                        </td>
+                                        
+                                        <td className="py-4 px-6 w-6/12 text-gray-700 text-sm sm:text-base align-top whitespace-pre-line leading-relaxed">
+                                            {item.desc}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    );
 };
 
-function Loan6iMasin4() {
-  const [formTexts, setFormTexts] = useState(null);
-  const [loadingTexts, setLoadingTexts] = useState(true);
-
-  const [formData, setFormData] = useState({
-    loanTypeOnline: false,
-    loanTypeOnSite: false,
-    companyName: "",
-    brandName: "",
-    contactPerson: "",
-    phoneNumber: "",
-    email: "",
-    website: "",
-    businessField: "",
-    marketExperience: "",
-    isEvocabankClient: "",
-    annualTurnover: "",
-    storesCount: "",
-    storeAddresses: "",
-    hasOtherBankPartnerships: "",
-    applicationDate: "17-Aug-2026"
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submittedLoans, setSubmittedLoans] = useState([]);
-  const [isLoadingList, setIsLoadingList] = useState(false);
-
-  useEffect(() => {
-    const syncFormTextsToFirebase = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "loanFormTexts"));
-        
-        if (querySnapshot.empty) {
-          await addDoc(collection(db, "loanFormTexts"), initialFormTexts);
-          setFormTexts(initialFormTexts);
-        } else {
-          setFormTexts(querySnapshot.docs[0].data());
-        }
-      } catch (error) {
-        console.error("Սխալ տեքստերը Firebase-ից բեռնելիս:", error);
-      } finally {
-        setLoadingTexts(false);
-      }
-    };
-
-    syncFormTextsToFirebase();
-    fetchLoans();
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const fetchLoans = async () => {
-    setIsLoadingList(true);
-    try {
-      const querySnapshot = await getDocs(collection(db, "loans6iMasin3"));
-      const loans = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setSubmittedLoans(loans);
-    } catch (error) {
-      console.error("Սխալ հայտերի ստացման ժամանակ:", error);
-    } finally {
-      setIsLoadingList(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await addDoc(collection(db, "loans6iMasin3"), {
-        ...formData,
-        createdAt: new Date()
-      });
-      alert("Հայտը հաջողությամբ ուղարկվեց։");
-      
-      setFormData({
-        loanTypeOnline: false,
-        loanTypeOnSite: false,
-        companyName: "",
-        brandName: "",
-        contactPerson: "",
-        phoneNumber: "",
-        email: "",
-        website: "",
-        businessField: "",
-        marketExperience: "",
-        isEvocabankClient: "",
-        annualTurnover: "",
-        storesCount: "",
-        storeAddresses: "",
-        hasOtherBankPartnerships: "",
-        applicationDate: "17-Aug-2026"
-      });
-
-      fetchLoans();
-    } catch (error) {
-      console.error("Սխալ տվյալների ուղարկման ժամանակ:", error);
-      alert("Տեղի ունեցավ սխալ, խնդրում ենք կրկին փորձել:");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  if (loadingTexts) {
-    return <div className="text-center py-12 text-[#6B00D7] font-bold">Բեռնվում է տվյալները բազայից...</div>;
-  }
-
-  return (
-    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 flex flex-col items-center">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sm:p-8 max-w-5xl w-full mb-10">
-        
-        <h1 className="text-[#6B00D7] text-lg sm:text-xl font-bold mb-6">
-          {formTexts?.title}
-        </h1>
-
-        <form className="space-y-5 text-gray-800" onSubmit={handleSubmit}>
-          
-          <div>
-            <label className="block font-bold text-xs mb-2">
-              {formTexts?.appType?.label} <span className="text-red-500">*</span>
-            </label>
-            <div className="space-y-1.5 text-xs text-gray-600">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  name="loanTypeOnline"
-                  checked={formData.loanTypeOnline}
-                  onChange={handleChange}
-                  className="rounded border-gray-300 text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.appType?.online}</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  name="loanTypeOnSite"
-                  checked={formData.loanTypeOnSite}
-                  onChange={handleChange}
-                  className="rounded border-gray-300 text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.appType?.onSite}</span>
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.companyName} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.brandName} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="brandName"
-              value={formData.brandName}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.contactPerson} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="contactPerson"
-              value={formData.contactPerson}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.phoneNumber} <span className="text-red-500">*</span>
-            </label>
-            <div className="flex border border-gray-300 rounded overflow-hidden">
-              <div className="bg-gray-100 px-3 py-2 text-xs flex items-center gap-1.5 border-r border-gray-300 text-gray-700 select-none">
-                <span>🇦🇲</span>
-                <span>+374</span>
-              </div>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                className="w-full px-3 py-2 text-xs focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.email} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.website}
-            </label>
-            <input
-              type="text"
-              name="website"
-              value={formData.website}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.businessField} <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              rows={3}
-              name="businessField"
-              value={formData.businessField}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7] resize-y"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.marketExperience} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="marketExperience"
-              value={formData.marketExperience}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-2">
-              {formTexts?.evocabankClient?.label} <span className="text-red-500">*</span>
-            </label>
-            <div className="flex gap-6 text-xs text-gray-700">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="isEvocabankClient" 
-                  value="yes"
-                  checked={formData.isEvocabankClient === "yes"}
-                  onChange={handleChange}
-                  className="text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.evocabankClient?.yes}</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="isEvocabankClient" 
-                  value="no"
-                  checked={formData.isEvocabankClient === "no"}
-                  onChange={handleChange}
-                  className="text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.evocabankClient?.no}</span>
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.annualTurnover} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="annualTurnover"
-              value={formData.annualTurnover}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.storesCount} <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="storesCount"
-              value={formData.storesCount}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.storeAddresses} <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              rows={3}
-              name="storeAddresses"
-              value={formData.storeAddresses}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7] resize-y"
-            />
-          </div>
-
-          <div>
-            <label className="block font-bold text-xs mb-2">
-              {formTexts?.otherBankPartnerships?.label} <span className="text-red-500">*</span>
-            </label>
-            <div className="flex gap-6 text-xs text-gray-700">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="hasOtherBankPartnerships" 
-                  value="yes"
-                  checked={formData.hasOtherBankPartnerships === "yes"}
-                  onChange={handleChange}
-                  className="text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.otherBankPartnerships?.yes}</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="hasOtherBankPartnerships" 
-                  value="no"
-                  checked={formData.hasOtherBankPartnerships === "no"}
-                  onChange={handleChange}
-                  className="text-[#6B00D7] focus:ring-[#6B00D7]" 
-                />
-                <span>{formTexts?.otherBankPartnerships?.no}</span>
-              </label>
-            </div>
-          </div>
-
-          <p className="text-[10px] text-gray-500 leading-relaxed pt-1">
-            {formTexts?.disclaimer}
-          </p>
-
-          <div className="pt-4 flex justify-center">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`bg-[#6B00D7] text-white font-bold py-2.5 px-10 rounded-full text-xs transition-colors shadow-sm 
-                ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#5500aa]'}`}
-            >
-              {isSubmitting ? 'Ուղարկվում է...' : formTexts?.submitButton}
-            </button>
-          </div>
-
-        </form>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sm:p-8 max-w-5xl w-full">
-        <h2 className="text-[#6B00D7] text-md sm:text-lg font-bold mb-4">
-          Ուղարկված հայտերի ցանկը բազայից ({submittedLoans.length})
-        </h2>
-
-        {isLoadingList ? (
-          <p className="text-xs text-gray-500">Բեռնվում է...</p>
-        ) : submittedLoans.length === 0 ? (
-          <p className="text-xs text-gray-500">Բազայում դեռ հայտեր չկան:</p>
-        ) : (
-          <div className="space-y-4">
-            {submittedLoans.map((loan) => (
-              <div key={loan.id} className="border border-gray-200 rounded p-4 text-xs bg-gray-50 space-y-1">
-                <div className="flex justify-between font-bold text-gray-700">
-                  <span>Ընկերություն: {loan.companyName || 'Անհայտ'}</span>
-                  <span className="text-gray-400 font-normal">
-                    {loan.createdAt?.seconds ? new Date(loan.createdAt.seconds * 1000).toLocaleString() : ''}
-                  </span>
-                </div>
-                <p>Բրենդ: {loan.brandName}</p>
-                <p>Կոնտակտային անձ: {loan.contactPerson}</p>
-                <p>Հեռախոսահամար: +374 {loan.phoneNumber}</p>
-                <p>Էլ. փոստ: {loan.email}</p>
-                <p>Ոլորտ: {loan.businessField}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default Loan6iMasin4;
+export default Loan6iMasin3;
