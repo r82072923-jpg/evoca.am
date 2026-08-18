@@ -88,17 +88,6 @@ function Loan6iMasin5({ activeTab, setActiveTab }) {
 
   return (
     <div className="max-w-5xl mx-auto bg-white p-4">
-      <div className="mb-6 flex items-center gap-4">
-        <button
-          onClick={handleUploadToFirebase}
-          disabled={uploading}
-          className="bg-[#6b11cb] hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition-colors disabled:opacity-50"
-        >
-          {uploading ? 'Ուղարկվում է...' : 'Ուղարկել տվյալները Firebase'}
-        </button>
-        {message && <span className="text-sm font-medium text-gray-700">{message}</span>}
-      </div>
-
       <div className="border-b border-gray-200 mb-12 pb-4 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
