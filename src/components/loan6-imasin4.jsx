@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore"; 
 import { db } from './firebaseConfog';
 
-const initialFormTexts = {
+const formTexts = {
   title: "Ապառիկ համագործակցության դիմում / հայտ",
   appType: {
     label: "Ապառիկի հայտի տեսակ",
@@ -40,9 +40,6 @@ const initialFormTexts = {
 };
 
 function Loan6iMasin4() {
-  const [formTexts, setFormTexts] = useState(null);
-  const [loadingTexts, setLoadingTexts] = useState(true);
-
   const [formData, setFormData] = useState({
     loanTypeOnline: false,
     loanTypeOnSite: false,
@@ -66,28 +63,6 @@ function Loan6iMasin4() {
   const [submittedLoans, setSubmittedLoans] = useState([]);
   const [isLoadingList, setIsLoadingList] = useState(false);
 
-  useEffect(() => {
-    const syncFormTextsToFirebase = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "loanFormTexts"));
-        
-        if (querySnapshot.empty) {
-          await addDoc(collection(db, "loanFormTexts"), initialFormTexts);
-          setFormTexts(initialFormTexts);
-        } else {
-          setFormTexts(querySnapshot.docs[0].data());
-        }
-      } catch (error) {
-        console.error("Սխալ տեքստերը Firebase-ից բեռնելիս:", error);
-      } finally {
-        setLoadingTexts(false);
-      }
-    };
-
-    syncFormTextsToFirebase();
-    fetchLoans();
-  }, []);
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -99,18 +74,23 @@ function Loan6iMasin4() {
   const fetchLoans = async () => {
     setIsLoadingList(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "loans6iMasin3"));
+      const q = query(collection(db, "loans6iMasin3"), orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
       const loans = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
       setSubmittedLoans(loans);
     } catch (error) {
-      console.error("Սխալ հայտերի ստացման ժամանակ:", error);
+      console.error("Սխալ տվյալների ստացման ժամանակ:", error);
     } finally {
       setIsLoadingList(false);
     }
   };
+
+  useEffect(() => {
+    fetchLoans();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -151,23 +131,16 @@ function Loan6iMasin4() {
     }
   };
 
-  if (loadingTexts) {
-    return <div className="text-center py-12 text-[#6B00D7] font-bold">Բեռնվում է տվյալները բազայից...</div>;
-  }
-
   return (
     <div className="bg-gray-50 min-h-screen p-4 sm:p-6 flex flex-col items-center">
       <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sm:p-8 max-w-5xl w-full mb-10">
-        
         <h1 className="text-[#6B00D7] text-lg sm:text-xl font-bold mb-6">
-          {formTexts?.title}
+          {formTexts.title}
         </h1>
-
         <form className="space-y-5 text-gray-800" onSubmit={handleSubmit}>
-          
           <div>
             <label className="block font-bold text-xs mb-2">
-              {formTexts?.appType?.label} <span className="text-red-500">*</span>
+              {formTexts.appType.label} <span className="text-red-500">*</span>
             </label>
             <div className="space-y-1.5 text-xs text-gray-600">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -178,7 +151,7 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="rounded border-gray-300 text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.appType?.online}</span>
+                <span>{formTexts.appType.online}</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
@@ -188,14 +161,13 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="rounded border-gray-300 text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.appType?.onSite}</span>
+                <span>{formTexts.appType.onSite}</span>
               </label>
             </div>
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.companyName} <span className="text-red-500">*</span>
+              {formTexts.companyName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -205,10 +177,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.brandName} <span className="text-red-500">*</span>
+              {formTexts.brandName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -218,10 +189,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.contactPerson} <span className="text-red-500">*</span>
+              {formTexts.contactPerson} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -231,10 +201,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.phoneNumber} <span className="text-red-500">*</span>
+              {formTexts.phoneNumber} <span className="text-red-500">*</span>
             </label>
             <div className="flex border border-gray-300 rounded overflow-hidden">
               <div className="bg-gray-100 px-3 py-2 text-xs flex items-center gap-1.5 border-r border-gray-300 text-gray-700 select-none">
@@ -250,10 +219,9 @@ function Loan6iMasin4() {
               />
             </div>
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.email} <span className="text-red-500">*</span>
+              {formTexts.email} <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -263,10 +231,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.website}
+              {formTexts.website}
             </label>
             <input
               type="text"
@@ -276,10 +243,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.businessField} <span className="text-red-500">*</span>
+              {formTexts.businessField} <span className="text-red-500">*</span>
             </label>
             <textarea
               rows={3}
@@ -289,10 +255,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7] resize-y"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.marketExperience} <span className="text-red-500">*</span>
+              {formTexts.marketExperience} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -302,10 +267,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-2">
-              {formTexts?.evocabankClient?.label} <span className="text-red-500">*</span>
+              {formTexts.evocabankClient.label} <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-6 text-xs text-gray-700">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -317,7 +281,7 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.evocabankClient?.yes}</span>
+                <span>{formTexts.evocabankClient.yes}</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
@@ -328,14 +292,13 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.evocabankClient?.no}</span>
+                <span>{formTexts.evocabankClient.no}</span>
               </label>
             </div>
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.annualTurnover} <span className="text-red-500">*</span>
+              {formTexts.annualTurnover} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -345,10 +308,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.storesCount} <span className="text-red-500">*</span>
+              {formTexts.storesCount} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -358,10 +320,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7]"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-1.5">
-              {formTexts?.storeAddresses} <span className="text-red-500">*</span>
+              {formTexts.storeAddresses} <span className="text-red-500">*</span>
             </label>
             <textarea
               rows={3}
@@ -371,10 +332,9 @@ function Loan6iMasin4() {
               className="w-full border border-gray-300 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#6B00D7] resize-y"
             />
           </div>
-
           <div>
             <label className="block font-bold text-xs mb-2">
-              {formTexts?.otherBankPartnerships?.label} <span className="text-red-500">*</span>
+              {formTexts.otherBankPartnerships.label} <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-6 text-xs text-gray-700">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -386,7 +346,7 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.otherBankPartnerships?.yes}</span>
+                <span>{formTexts.otherBankPartnerships.yes}</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
@@ -397,13 +357,12 @@ function Loan6iMasin4() {
                   onChange={handleChange}
                   className="text-[#6B00D7] focus:ring-[#6B00D7]" 
                 />
-                <span>{formTexts?.otherBankPartnerships?.no}</span>
+                <span>{formTexts.otherBankPartnerships.no}</span>
               </label>
             </div>
           </div>
-
           <p className="text-[10px] text-gray-500 leading-relaxed pt-1">
-            {formTexts?.disclaimer}
+            {formTexts.disclaimer}
           </p>
 
           <div className="pt-4 flex justify-center">
@@ -413,41 +372,10 @@ function Loan6iMasin4() {
               className={`bg-[#6B00D7] text-white font-bold py-2.5 px-10 rounded-full text-xs transition-colors shadow-sm 
                 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#5500aa]'}`}
             >
-              {isSubmitting ? 'Ուղարկվում է...' : formTexts?.submitButton}
+              {isSubmitting ? 'Ուղարկվում է...' : formTexts.submitButton}
             </button>
           </div>
-
         </form>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sm:p-8 max-w-5xl w-full">
-        <h2 className="text-[#6B00D7] text-md sm:text-lg font-bold mb-4">
-          Ուղարկված հայտերի ցանկը բազայից ({submittedLoans.length})
-        </h2>
-
-        {isLoadingList ? (
-          <p className="text-xs text-gray-500">Բեռնվում է...</p>
-        ) : submittedLoans.length === 0 ? (
-          <p className="text-xs text-gray-500">Բազայում դեռ հայտեր չկան:</p>
-        ) : (
-          <div className="space-y-4">
-            {submittedLoans.map((loan) => (
-              <div key={loan.id} className="border border-gray-200 rounded p-4 text-xs bg-gray-50 space-y-1">
-                <div className="flex justify-between font-bold text-gray-700">
-                  <span>Ընկերություն: {loan.companyName || 'Անհայտ'}</span>
-                  <span className="text-gray-400 font-normal">
-                    {loan.createdAt?.seconds ? new Date(loan.createdAt.seconds * 1000).toLocaleString() : ''}
-                  </span>
-                </div>
-                <p>Բրենդ: {loan.brandName}</p>
-                <p>Կոնտակտային անձ: {loan.contactPerson}</p>
-                <p>Հեռախոսահամար: +374 {loan.phoneNumber}</p>
-                <p>Էլ. փոստ: {loan.email}</p>
-                <p>Ոլորտ: {loan.businessField}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
