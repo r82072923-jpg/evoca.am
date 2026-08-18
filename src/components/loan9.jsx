@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Header from "./header"
 import TopHeader from "./topHeader"
 import LoansiTopHeader from "./loans-itopHeader"
@@ -13,7 +14,7 @@ function Loan9(){
         <Loan9iMasin></Loan9iMasin>
         <div>
           {activeTab === 'Վարկի մասին' && (
-            <Loan8iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Loan9iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պայմաններ' && (
             <Loan8iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
