@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from './firebaseConfog';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
-const tabs = ['Վարկի մասին', 'Պայմաններ', 'Պահանջվող փաստաթղթերի ցանկ'];
+const tabs = ['Վարկի մասին', 'Պայմաններ և սակագներ'];
 
 const defaultOverdraftData = {
   leftContent: {
