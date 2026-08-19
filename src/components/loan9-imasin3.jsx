@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from './firebaseConfog'; // Համոզվիր, որ ճիշտ ես նշել ֆայլիդ ճանապարհը
+import { db } from './firebaseConfog';
 import { doc, getDoc } from "firebase/firestore";
 
 const tabs = ['Վարկի մասին', 'Պայմաններ'];
@@ -8,7 +8,6 @@ function Loan9iMasin3({ activeTab, setActiveTab }) {
   const [loanConditionsData, setLoanConditionsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Տվյալների բեռնումը Firebase-ից բաղադրիչը բացվելիս
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -16,7 +15,6 @@ function Loan9iMasin3({ activeTab, setActiveTab }) {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          // Ստանում ենք տվյալները և գրանցում ստեյթում
           setLoanConditionsData(docSnap.data().loanConditionsData || []);
         } else {
           console.log("Տվյալներ չեն գտնվել այս փաստաթղթում:");
