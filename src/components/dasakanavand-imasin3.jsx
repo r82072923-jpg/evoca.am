@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "./firebaseConfog";
 const tabs=['Ավանդի մասին','Պայմաններ և սակագներ']
+const uploadDepositData = async () => {
 const depositContent = {
   mainDepositTable: {
     headers: {
       minAmount: 'Նվազագույն\nգումար և\nարժույթ',
       paymentMethod: 'Տոկոսների\nվճարման եղանակը',
       termTitle: 'Ընդունման ժամկետներն ըստ օրերի քանակի',
-      days: ['31 - 90\nօր', '91 - 180\nօր', '181 - 270\nօր', '271 - 365\nօր', '366 - 549\nօր', '550 - 730\nօր', '731 - 1825\nօր']
+      days: ['31 - 90\nօր', '91 - 180\nօր', '181 - 270օր', '271 - 365\nօր', '366 - 549\nօր', '550 - 730\nօր', '731 - 1825\nօր']
     },
     currencies: [
       {
@@ -118,10 +121,18 @@ const depositContent = {
   ]
 };
 
+  try {
+    // Using a specific document ID like 'details', or you can use addDoc for a random ID
+    await setDoc(doc(db, "dasakanAvandiMasin2", "depositDetails"), depositContent);
+    console.log("Data successfully uploaded to Firestore!");
+  } catch (error) {
+    console.error("Error uploading data: ", error);
+  }
+};
 const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
   return (
     <div className="w-full overflow-x-auto p-4">
-      {/* Tabs */}
+        <button onClick={}></button>
       <div className="border-b border-gray-200 mb-8 pb-4 overflow-x-auto w-full">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab) => (
