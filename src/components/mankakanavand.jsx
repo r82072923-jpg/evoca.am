@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import MankakanAvandiMasin from "./mankakanavand-imasin"
 import MankakanAvandiMasin2 from "./mankakanavand-imasin2"
 import MankakanAvandiMasin3 from "./mankakanavand-imasin3"
+import Slayder7 from "./slayder7";
 function MankakanAvand(){
     const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
@@ -19,6 +20,7 @@ function MankakanAvand(){
             <MankakanAvandiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder7></Slayder7>
         </>
     )
 }

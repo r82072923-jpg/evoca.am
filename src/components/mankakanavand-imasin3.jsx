@@ -8,7 +8,6 @@ const MankakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
   const [loading, setLoading] = useState(true);
   const [contentData, setContentData] = useState(null);
 
-  // Տվյալների բեռնում Firebase-ից
   useEffect(() => {
     const fetchDataFromFirebase = async () => {
       try {
@@ -16,13 +15,11 @@ const MankakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         const querySnapshot = await getDocs(collection(db, 'mankakanAvandiMasin2'));
         
         if (!querySnapshot.empty) {
-          // Վերցնում ենք առաջին փաստաթղթի տվյալները
           const docData = querySnapshot.docs[0].data();
           if (docData) {
             setContentData(docData);
           }
         } else {
-          // Եթե բազան դատարկ է, սահմանում ենք դեֆոլտ տվյալներ
           setContentData({
             about: {
               paragraphs: [
@@ -71,7 +68,6 @@ const MankakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
     fetchDataFromFirebase();
   }, []);
 
-  // Տվյալները Firebase ուղարկելու ֆունկցիա (օգտակար է թարմացման կամ սկզբնական լցման համար)
   const uploadDataToFirebase = async () => {
     try {
       const db = getFirestore();
@@ -240,7 +236,6 @@ const MankakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
             ))}
           </ol>
 
-          {/* Լրացուցիչ պայմաններ և աղյուսակներ */}
           <div className="mt-12 space-y-6 pt-6 border-t border-gray-100">
             <h3 className="text-xl font-extrabold text-[#6b11cb]">Լրացուցիչ պայմաններ</h3>
             
@@ -278,7 +273,6 @@ const MankakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
             )}
           </div>
 
-          {/* Եկամտաբերության աղյուսակ */}
           <div className="mt-12 space-y-6 pt-6 border-t border-gray-100">
             <h3 className="text-xl font-extrabold text-[#6b11cb]">Ավանդի տարեկան տոկոսային եկամտաբերության չափը</h3>
             
