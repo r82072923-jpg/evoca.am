@@ -1,138 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfog";
-const tabs=['Ավանդի մասին','Պայմաններ և սակագներ']
+
+const tabs = ['Ավանդի մասին', 'Պայմաններ և սակագներ'];
+
 const uploadDepositData = async () => {
-const depositContent = {
-  mainDepositTable: {
-    headers: {
-      minAmount: 'Նվազագույն\nգումար և\nարժույթ',
-      paymentMethod: 'Տոկոսների\nվճարման եղանակը',
-      termTitle: 'Ընդունման ժամկետներն ըստ օրերի քանակի',
-      days: ['31 - 90\nօր', '91 - 180\nօր', '181 - 270օր', '271 - 365\nօր', '366 - 549\nօր', '550 - 730\nօր', '731 - 1825\nօր']
-    },
-    currencies: [
-      {
-        currency: '100,000 ՀՀ դրամ',
-        rows: [
-          { type: 'Տոկոսները ժամկետի\nվերջում վճարմամբ', rates: ['4.50 %', '6.00 %', '7.00 %', '8.00 %', '9.50 %', '10.00 %', '10.50 %'] },
-          { type: 'Ամենամսյա\nտոկոսների\nվճարմամբ', rates: ['4.00 %', '5.50 %', '6.50 %', '7.50 %', '9.00 %', '9.50 %', '10.00 %'] },
-          { type: 'Տոկոսները եռամսյա\nվճարմամբ', rates: ['-', '5.50 %', '6.50 %', '7.50 %', '9.00 %', '9.50 %', '10.00 %'] },
-        ]
-      },
-      {
-        currency: '200 ԱՄՆ\nդոլար',
-        rows: [
-          { type: 'Տոկոսները ժամկետի\nվերջում վճարմամբ', rates: ['0.75 %', '2.00 %', '2.50 %', '3.00 %', '4.00 %', '4.50 %', '5.00 %'] },
-          { type: 'Ամենամսյա\nտոկոսների\nվճարմամբ', rates: ['0.50 %', '1.75 %', '2.25 %', '2.75 %', '3.75 %', '4.25 %', '4.75 %'] },
-          { type: 'Տոկոսները եռամսյա\nվճարմամբ', rates: ['-', '1.75 %', '2.25 %', '2.75 %', '3.75 %', '4.25 %', '4.75 %'] },
-        ]
-      },
-      {
-        currency: '200 Եվրո',
-        rows: [
-          { type: 'Տոկոսները ժամկետի\nվերջում վճարմամբ', rates: ['0.35 %', '1.00 %', '1.50 %', '1.75 %', '2.00 %', '2.50 %', '3.00 %'] },
-          { type: 'Ամենամսյա\nտոկոսների\nվճարմամբ', rates: ['0.25 %', '0.75 %', '1.25 %', '1.50 %', '1.75 %', '2.25 %', '2.75 %'] },
-          { type: 'Տոկոսները եռամսյա\nվճարմամբ', rates: ['-', '0.75 %', '1.25 %', '1.50 %', '1.75 %', '2.25 %', '2.75 %'] },
-        ]
-      },
-      {
-        currency: '30,000 ՌԴ\nՌուբլի',
-        rows: [
-          { type: 'Տոկոսները ժամկետի\nվերջում վճարմամբ', rates: ['4.00 %', '5.00 %', '5.25 %', '5.50 %', '6.00 %', '-', '-'] },
-          { type: 'Ամենամսյա\nտոկոսների\nվճարմամբ', rates: ['3.75 %', '4.75 %', '5.00 %', '5.25 %', '5.75 %', '-', '-'] },
-          { type: 'Տոկոսները եռամսյա\nվճարմամբ', rates: ['-', '4.75 %', '5.00 %', '5.25 %', '5.75 %', '-', '-'] },
-        ]
-      }
-    ]
-  },
-
-  earlyTermination: {
-    headers: ['Ավանդի արժույթ', 'Տարեկան տոկոսադրույք ըստ ժամկետների', ['Մինչև 365 օր', '366 - 1095 օր']],
-    rows: [
-      { currency: 'ՀՀ դրամ', rates: ['0.5 %', '8.5 %'] },
-      { currency: 'ԱՄՆ դոլար', rates: ['0.1 %', '3.5 %'] },
-      { currency: 'Եվրո', rates: ['0.1 %', '1.5 %'] },
-      { currency: 'ՌԴ ռուբլի', rates: ['0.1 %', '5 %'] },
-    ]
-  },
-
-  cardConditions: {
-    headers: [
-      'Ավանդի արժույթ/Քարտի տեսակ *',
-      'ArCa Classic/ Mastercard Standard/ Visa Classic',
-      'Mastercard Gold/Evoca Travel',
-      'VISA Infinite'
-    ],
-    rows: [
-      { currency: 'ՀՀ դրամ', cards: ['500,000 - 10,000,000 (ներառյալ)', '10,000,000 - 40,000,000 (ներառյալ)', '40,000,000 և ավել'] },
-      { currency: 'ԱՄՆ դոլար', cards: ['1,000 - 25,000 (ներառյալ)', '25,000 - 100,000 (ներառյալ)', '100,000 և ավել'] },
-      { currency: 'Եվրո', cards: ['1,000 - 20,000 (ներառյալ)', '20,000 - 100,000 (ներառյալ)', '100,000 և ավել'] },
-      { currency: 'ՌԴ ռուբլի', cards: ['60,000 - 3,000,000 (ներառյալ)', '2,000,000 - 7,000,000 (ներառյալ)', '7,000,000 և ավել'] },
-    ]
-  },
-
-  cardRules: [
-    'Քարտերը տրամադրվում են տվյալ քարտային պրոդուկտի համար հասանելի արժույթով ըստ հաճախորդի ցանկության:',
-    'Հաճախորդի ցանկությամբ վերջինիս ընտանիքի անդամներին (ծնողներ, ամուսին/կին, չափահաս երեխաներ) կարող է տրամադրվել նույն դասի քարտ 50% զեղչով՝ բացառությամբ Infinite քարտի:',
-    'Մեկ ավանդի շրջանակներում տրամադրվում է մեկ անվճար քարտ ավանդատուի անունով: Ավանդատուի կողմից 1-ից ավել ավանդներ ներդնելու դեպքում յուրաքանչյուր ավանդը դիտարկվում է առանձին:',
-    'Ավանդի ժամկետը լրանալու կամ ավանդատուի կողմից Ավանդի պայմանագիրը ժամկետից շուտ դադարեցվելու դեպքում, Ավանդի ներդրման դիմաց տրամադրված վճարային քարտի սպասարկումը շարունակվում է իրականացվել առանց տարեկան սպասարկման վճարի գանձման, մինչև վճարային քարտի սպասարկման ժամկետի ավարտը, բացառությամբ Ավանդի ներդրման դիմաց տրամադրված Visa Infinite վճարային քարտերի:',
-    'Visa Infinite վճարային քարտի քարտապանների կողմից Ավանդի պայմանագիրը ժամկետից շուտ դադարեցվելու կամ Ավանդի ժամկետը լրանալու դեպքում Բանկն իրավունք ունի փակել նաև այդ Ավանդի ներդրման դիմաց տրամադրված Visa Infinite վճարային քարտը կամ հաճախորդի ցանկության դեպքում սկսել կիրառել տվյալ պահին Բանկում գործող սակագները և դրույքները:',
-    'Տրամադրվող հասանելի քարտի դասը որոշվում է քարտի բացման պահին ավանդի գումարի չափով: Ավանդի համալրման դեպքում, եթե հաճախորդը ցանկանում է ավելի բարձր դասի քարտ, ապա գործող քարտը պետք է փակվի և բացվի նոր ավելի բարձր դասի քարտ:',
-    'Քարտի վերաթողարկումը գործողության ժամկետը լրանալու կամ այլ պատճառով, իրականացվում է.',
-    'Քարտերի սպասարկման այլ սակագները և պայմանները՝ համաձայն Բանկի կողմից մատուցվող ծառայությունների սակագների և պայմանների:'
-  ],
-
-  yieldTable: [
-    {
-      category: 'Տոկոսների ամսական վճարման դեպքում',
-      rows: [
-        { currency: 'AMD', data: [['4.00%', '4.07%'], ['5.50%', '5.64%'], ['6.50%', '6.70%'], ['7.50%', '-']] },
-        { currency: 'USD', data: [['0.50%', '0.50%'], ['1.75%', '1.76%'], ['2.25%', '2.27%'], ['2.75%', '-']] },
-        { currency: 'EUR', data: [['0.25%', '0.25%'], ['0.75%', '0.75%'], ['1.25%', '1.26%'], ['1.50%', '-']] },
-        { currency: 'RUR', data: [['3.75%', '3.82%'], ['4.75%', '4.85%'], ['5.00%', '5.12%'], ['5.25%', '-']] },
-      ]
-    },
-    {
-      category: 'Տոկոսների եռամսյակային վճարման դեպքում',
-      rows: [
-        { currency: 'AMD', data: [['-', '-'], ['5.50%', '5.61%'], ['6.50%', '6.66%'], ['7.50%', '-']] },
-        { currency: 'USD', data: [['-', '-'], ['1.75%', '1.76%'], ['2.25%', '2.27%'], ['2.75%', '-']] },
-        { currency: 'EUR', data: [['-', '-'], ['0.75%', '0.75%'], ['1.25%', '1.26%'], ['1.50%', '-']] },
-        { currency: 'RUR', data: [['-', '-'], ['4.75%', '4.84%'], ['5.00%', '5.09%'], ['5.25%', '-']] },
-      ]
-    },
-    {
-      category: 'Տոկոսների ժամկետի վերջում վճարման դեպքում',
-      rows: [
-        { currency: 'AMD', data: [['4.50%', '4.50%'], ['6.00%', '6.00%'], ['7.00%', '7.00%'], ['8.00%', '-']] },
-        { currency: 'USD', data: [['0.75%', '0.75%'], ['2.00%', '2.00%'], ['2.50%', '2.50%'], ['3.00%', '-']] },
-        { currency: 'EUR', data: [['0.35%', '0.35%'], ['1.00%', '1.00%'], ['1.50%', '1.50%'], ['1.75%', '-']] },
-        { currency: 'RUR', data: [['4.00%', '4.00%'], ['5.00%', '5.00%'], ['5.25%', '5.25%'], ['5.50%', '-']] },
-      ]
-    }
-  ],
-
-  rurRules: [
-    'Կանխիկ կամ անկանխիկ ռուբլով ներդրված ավանդները վերադարձվում են ներդրման նույն եղանակով (համապատասխանաբար՝ կանխիկ կամ անկանխիկ) առանց միջնորդավճարների գանձման:',
-    'Անկանխիկ ռուբլով ներդրված ավանդը կանխիկ ռուբլով վերադարձնելու դեպքում գանձվում է վերադարձման օրը ռուբլու կանխիկացման համար սահմանված միջնորդավճարը:',
-    'Կանխիկ ռուբլով ներդրված ավանդը անկանխիկ ռուբլով վերադարձնելու դեպքում գանձվում է վերադարձման օրը կանխիկ ռուբլու մուտքագրման համար սահմանված միջնորդավճարը:'
-  ]
-};
-
   try {
-    // Using a specific document ID like 'details', or you can use addDoc for a random ID
     await setDoc(doc(db, "dasakanAvandiMasin2", "depositDetails"), depositContent);
     console.log("Data successfully uploaded to Firestore!");
   } catch (error) {
     console.error("Error uploading data: ", error);
   }
 };
+
 const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
+  const [depositData, setDepositData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDepositData = async () => {
+      try {
+        const docRef = doc(db, "dasakanAvandiMasin2", "depositDetails");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setDepositData(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDepositData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center p-10">
+        <span className="text-[#6b11cb] font-bold text-lg">Բեռնվում է...</span>
+      </div>
+    );
+  }
+
+  if (!depositData) {
+    return (
+      <div className="w-full flex justify-center items-center p-10">
+        <span className="text-red-500 font-bold text-lg">Տվյալները չեն գտնվել</span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full overflow-x-auto p-4">
-        <button onClick={}></button>
       <div className="border-b border-gray-200 mb-8 pb-4 overflow-x-auto w-full">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab) => (
@@ -152,28 +76,27 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </nav>
       </div>
 
-      {/* Main Deposit Table */}
       <table className="min-w-max w-full border-collapse border border-purple-200 text-center text-sm font-sans">
         <thead className="bg-white text-gray-800">
           <tr>
             <th rowSpan={2} className="border border-purple-200 p-4 w-32 font-bold align-middle whitespace-pre-line">
-              {depositContent.mainDepositTable.headers.minAmount}
+              {depositData.mainDepositTable.headers.minAmount}
             </th>
             <th rowSpan={2} className="border border-purple-200 p-4 w-48 font-bold align-middle whitespace-pre-line">
-              {depositContent.mainDepositTable.headers.paymentMethod}
+              {depositData.mainDepositTable.headers.paymentMethod}
             </th>
             <th colSpan={7} className="border border-purple-200 p-3 font-bold">
-              {depositContent.mainDepositTable.headers.termTitle}
+              {depositData.mainDepositTable.headers.termTitle}
             </th>
           </tr>
           <tr className="text-xs">
-            {depositContent.mainDepositTable.headers.days.map((day, i) => (
+            {depositData.mainDepositTable.headers.days.map((day, i) => (
               <th key={i} className="border border-purple-200 p-2 font-bold whitespace-pre-line">{day}</th>
             ))}
           </tr>
         </thead>
         <tbody className="text-gray-700 bg-white">
-          {depositContent.mainDepositTable.currencies.map((item, idx) => (
+          {depositData.mainDepositTable.currencies.map((item, idx) => (
             <React.Fragment key={idx}>
               {item.rows.map((row, rIdx) => (
                 <tr key={rIdx}>
@@ -197,7 +120,6 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </tbody>
       </table>
 
-      {/* Info texts */}
       <div className="mt-10 space-y-6 text-[15px] text-gray-800 font-medium leading-relaxed">
         <div className="flex gap-2">
           <span className="text-[#6b11cb] font-bold">1.</span>
@@ -226,25 +148,24 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
 
-      {/* Early Termination Table */}
       <div className="w-full overflow-x-auto my-6">
         <table className="min-w-max w-full border-collapse border border-purple-200 text-center text-sm font-sans bg-white">
           <thead className="bg-white text-gray-800">
             <tr>
               <th rowSpan={2} className="border border-purple-200 p-4 font-bold align-middle w-1/3 text-left pl-4">
-                {depositContent.earlyTermination.headers[0]}
+                {depositData.earlyTermination.headers.currency}
               </th>
               <th colSpan={2} className="border border-purple-200 p-3 font-bold">
-                {depositContent.earlyTermination.headers[1]}
+                {depositData.earlyTermination.headers.title}
               </th>
             </tr>
             <tr>
-              <th className="border border-purple-200 p-3 font-bold w-1/3">{depositContent.earlyTermination.headers[2][0]}</th>
-              <th className="border border-purple-200 p-3 font-bold w-1/3">{depositContent.earlyTermination.headers[2][1]}</th>
+              <th className="border border-purple-200 p-3 font-bold w-1/3">{depositData.earlyTermination.headers.subHeaders[0]}</th>
+              <th className="border border-purple-200 p-3 font-bold w-1/3">{depositData.earlyTermination.headers.subHeaders[1]}</th>
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {depositContent.earlyTermination.rows.map((item, idx) => (
+            {depositData.earlyTermination.rows.map((item, idx) => (
               <tr key={idx}>
                 <td className="border border-purple-200 p-3 font-bold text-left pl-4 text-gray-800">{item.currency}</td>
                 <td className="border border-purple-200 p-3 font-semibold">{item.rates[0]}</td>
@@ -255,13 +176,11 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </table>
       </div>
 
-      {/* 5-րդ կետ */}
       <div className="flex gap-2 mb-10 text-[15px] text-gray-800 font-medium leading-relaxed">
         <span className="text-[#6b11cb] font-bold">5.</span>
         <p>Ավանդի գումարի մասնակի նվազեցում չի թույլատրվում:</p>
       </div>
 
-      {/* Additional Conditions Block */}
       <div className="mt-8">
         <h3 className="text-[#6b11cb] font-extrabold text-lg mb-6">Լրացուցիչ պայմաններ</h3>
         
@@ -277,28 +196,27 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
           </div>
         </div>
 
-        {/* Card Conditions Table */}
         <div className="w-full overflow-x-auto mt-6">
           <table className="min-w-max w-full border-collapse border border-purple-200 text-sm font-sans bg-white">
             <thead className="bg-white text-gray-800">
               <tr>
                 <th className="border border-purple-200 p-4 font-bold align-middle w-1/4 text-left whitespace-pre-line">
-                  {depositContent.cardConditions.headers[0]}
+                  {depositData.cardConditions.headers[0]}
                 </th>
                 <th className="border border-purple-200 p-4 font-bold align-middle w-1/4 text-left">
-                  {depositContent.cardConditions.headers[1]}
+                  {depositData.cardConditions.headers[1]}
                 </th>
                 <th className="border border-purple-200 p-4 font-bold align-middle w-1/4 text-left">
                   Mastercard Gold/Evoca Travel<br />
                   <span className="font-normal text-xs mt-1 inline-block">(ըստ հաճախորդի ընտրության)</span>
                 </th>
                 <th className="border border-purple-200 p-4 font-bold align-middle w-1/4 text-left">
-                  {depositContent.cardConditions.headers[3]}
+                  {depositData.cardConditions.headers[3]}
                 </th>
               </tr>
             </thead>
             <tbody className="text-gray-700">
-              {depositContent.cardConditions.rows.map((item, idx) => (
+              {depositData.cardConditions.rows.map((item, idx) => (
                 <tr key={idx}>
                   <td className="border border-purple-200 p-3 font-bold pl-4 text-gray-800">{item.currency}</td>
                   <td className="border border-purple-200 p-3 pl-4 font-medium">{item.cards[0]}</td>
@@ -311,16 +229,15 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
 
-      {/* Card Rules List */}
       <ul className="mt-8 space-y-5 text-[15px] text-gray-800 font-medium leading-relaxed list-disc pl-5 marker:text-[#6b11cb] marker:text-xl">
-        <li className="pl-2">{depositContent.cardRules[0]}</li>
-        <li className="pl-2">{depositContent.cardRules[1]}</li>
-        <li className="pl-2">{depositContent.cardRules[2]}</li>
-        <li className="pl-2">{depositContent.cardRules[3]}</li>
-        <li className="pl-2">{depositContent.cardRules[4]}</li>
-        <li className="pl-2">{depositContent.cardRules[5]}</li>
+        <li className="pl-2">{depositData.cardRules[0]}</li>
+        <li className="pl-2">{depositData.cardRules[1]}</li>
+        <li className="pl-2">{depositData.cardRules[2]}</li>
+        <li className="pl-2">{depositData.cardRules[3]}</li>
+        <li className="pl-2">{depositData.cardRules[4]}</li>
+        <li className="pl-2">{depositData.cardRules[5]}</li>
         <li className="pl-2">
-          {depositContent.cardRules[6]}
+          {depositData.cardRules[6]}
           <ul className="mt-3 space-y-3 list-none pl-2">
             <li className="flex gap-3 items-start">
               <span className="text-[#6b11cb] font-bold text-lg leading-none">–</span>
@@ -332,10 +249,9 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
             </li>
           </ul>
         </li>
-        <li className="pl-2">{depositContent.cardRules[7]}</li>
+        <li className="pl-2">{depositData.cardRules[7]}</li>
       </ul>
 
-      {/* Yield Section */}
       <div className="mt-14">
         <div className="h-[3px] bg-[#6b11cb] w-full mb-5"></div>
         
@@ -352,7 +268,6 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
           <p>ՏՏԵ-տարեկան տոկոսային եկամտաբերություն</p>
         </div>
 
-        {/* Yield Table */}
         <div className="w-full overflow-x-auto shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-purple-100 rounded-lg">
           <div className="bg-white p-4 font-extrabold text-gray-800 border-b border-purple-200 text-[15px]">
             Դասական ավանդատեսակի տարեկան տոկոսային եկամտաբերություն
@@ -378,7 +293,7 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
               </tr>
             </thead>
             <tbody className="text-gray-700">
-              {depositContent.yieldTable.map((section, sIdx) => (
+              {depositData.yieldTable.map((section, sIdx) => (
                 <React.Fragment key={sIdx}>
                   <tr>
                     <td colSpan={9} className="border border-purple-200 p-3 font-bold text-left text-gray-800 bg-[#fbf9ff]">
@@ -390,8 +305,8 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
                       <td className="border border-purple-200 p-3 font-bold text-gray-800 text-left pl-4">{row.currency}</td>
                       {row.data.map((pair, pIdx) => (
                         <React.Fragment key={pIdx}>
-                          <td className="border border-purple-200 p-3 font-semibold">{pair[0]}</td>
-                          <td className="border border-purple-200 p-3 font-semibold">{pair[1]}</td>
+                          <td className="border border-purple-200 p-3 font-semibold">{pair.nominal}</td>
+                          <td className="border border-purple-200 p-3 font-semibold">{pair.annual}</td>
                         </React.Fragment>
                       ))}
                     </tr>
@@ -403,19 +318,17 @@ const DasakanAvandiMasin3 = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
 
-      {/* RUR deposit placement and return rules */}
       <div className="mt-14">
         <h3 className="font-extrabold text-gray-800 text-lg mb-6">
           Ռուբլով ավանդի ներդրման և վերադարձման կարգը՝
         </h3>
         
         <ul className="space-y-4 text-[15px] text-gray-800 font-medium leading-relaxed list-disc pl-5 marker:text-[#6b11cb] marker:text-xl mb-10">
-          <li className="pl-2">{depositContent.rurRules[0]}</li>
-          <li className="pl-2">{depositContent.rurRules[1]}</li>
-          <li className="pl-2">{depositContent.rurRules[2]}</li>
+          <li className="pl-2">{depositData.rurRules[0]}</li>
+          <li className="pl-2">{depositData.rurRules[1]}</li>
+          <li className="pl-2">{depositData.rurRules[2]}</li>
         </ul>
 
-        {/* Ուշադրություն բաժին */}
         <h3 className="text-[#6b11cb] font-extrabold text-lg mb-4">
           Ուշադրություն.
         </h3>
