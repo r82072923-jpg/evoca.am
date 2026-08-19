@@ -48,7 +48,6 @@ function DasakanAvandiMasin2({ activeTab, setActiveTab }) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      {/* ՏԱԲԵՐԻ ՀԱՏՎԱԾԸ - Տեղափոխված է վերև */}
       <div className="border-b border-gray-200 mb-8 pb-4 overflow-x-auto w-full">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab) => (
@@ -68,9 +67,7 @@ function DasakanAvandiMasin2({ activeTab, setActiveTab }) {
         </nav>
       </div>
 
-      {/* ՏԵՔՍՏԻ ԵՎ ՔԱՐՏԻ ՀԱՏՎԱԾԸ - Գտնվում է տաբերի տակ */}
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-        {/* Ձախ կողմի տեքստը */}
         <div className="flex-1 text-gray-800 text-[15px] leading-relaxed font-medium">
           <p className="mb-6">
             {depositData.description.paragraph1.text1}
@@ -89,8 +86,6 @@ function DasakanAvandiMasin2({ activeTab, setActiveTab }) {
             {depositData.description.paragraph3}
           </p>
         </div>
-
-        {/* Աջ կողմի քարտը */}
         <div className="w-full lg:w-[500px] flex-shrink-0">
           <div className="bg-white rounded-3xl p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
             <div className="flex gap-3 mb-8">
