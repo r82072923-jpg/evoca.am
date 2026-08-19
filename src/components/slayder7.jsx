@@ -69,7 +69,7 @@ useEffect(() => {
     return (
         <div className="w-full max-w-7xl mx-auto my-12 px-4 font-sans">
         <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Այլ վարկեր</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Այլ ավանդներ</h2>
         </div>
         
         <div className="flex items-center justify-between gap-2 md:gap-6 relative group">
