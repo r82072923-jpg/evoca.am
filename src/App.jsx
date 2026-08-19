@@ -71,10 +71,11 @@ import Avandner from "./components/avandner.jsx"
 import DasakanAvand from "./components/dasakanavand.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
+
 function Home(){
-const [activeTab, setActiveTab] = useState('Կանխիկ');
-    return(
-      <>
+  const [activeTab, setActiveTab] = useState('Կանխիկ');
+  return(
+    <>
       <Header></Header>
       <TopHeader></TopHeader>
       <Slayder1></Slayder1>
@@ -102,68 +103,69 @@ const [activeTab, setActiveTab] = useState('Կանխիկ');
       <Kartiqner></Kartiqner>
       <Footer></Footer>
       <FooterBottom></FooterBottom>
-      </>
-    )
+    </>
+  )
 }
+
 function App() {
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Home/>}></Route>
-      <Route path="/business" element={<Business/>}></Route>
-      <Route path="/payments" element={<AkntartayinVjarumner/>}></Route>
-      <Route path="/about" element={<MerMasin/>}></Route>
-      <Route path="/news" element={<News/>}></Route>
-      <Route path="/blog" element={<Blog/>}></Route>
-      <Route path="/career" element={<Career/>}></Route>
-      <Route path="/business-loan6" element={<BusinessLoan6/>}></Route>
-      <Route path="/visa-infinite" element={<VisaInfiniteCard/>}></Route>
-      <Route path="/mastercard-gold" element={<MasterCardGold/>}></Route>
-      <Route path="/visa-gold" element={<VisaGold/>}></Route>
-      <Route path="/salary" element={<Salary/>}></Route>
-      <Route path="/travel-gold" element={<TravelGold/>}></Route>
-      <Route path="/visa-vision" element={<VisaVision/>}></Route>
-      <Route path="/unionpay-gold" element={<UnionPayGold/>}></Route>
-      <Route path="/biometrik-nuynakanacum" element={<BiometricNuynakanacum/>}></Route>
-      <Route path="/visa-platinum" element={<VisaPlatinum/>}></Route>
-      <Route path="/4u.am-gift-card" element={<FourUamGiftCard/>}></Route>
-      <Route path="/gift-card" element={<GiftCard/>}></Route>
-      <Route path="/arca-classic" element={<ArcaClassic/>}></Route>
-      <Route path="/dalma-gift-card" element={<DalmaGiftCard/>}></Route>
-      <Route path="/rio-gift-card" element={<RioGiftCard/>}></Route>
-      <Route path="/world-digital" element={<WorldDigital/>}></Route>
-      <Route path="/digital-gift-card" element={<DigitalGiftCard/>}></Route>
-      <Route path="/business-platinum" element={<UnionPayBusinessPlatinum/>}></Route>
-      <Route path="/myler-gift-card" element={<MyLer/>}></Route>
-      <Route path="/wilco-visa-infinite" element={<WilcoVisaInfinite/>}></Route>
-      <Route path="/visa-business" element={<VisaBusiness/>}></Route>
-      <Route path="/visa-digital" element={<VisaDigital/>}></Route>
-      <Route path="/visa-classic" element={<VisaClassic/>}></Route>
-      <Route path="/mastercard-standard" element={<MasterCardStandard/>}></Route>
-      <Route path="/customer" element={<Customer/>}></Route>
-      <Route path="/loans" element={<Loans/>}></Route>
-      <Route path="/credit-history" element={<VarkayinPatmutyun/>}></Route>
-      <Route path="/important-information" element={<KarevorTexakatvutyun />}></Route>
-      <Route path="/loan1" element={<Loan1/>}></Route>
-      <Route path="/loan2" element={<Loan2/>}></Route>
-      <Route path="/loan3" element={<Loan3/>}></Route>
-      <Route path="/loan4" element={<Loan4/>}></Route>
-      <Route path="/loan5" element={<Loan5/>}></Route>
-      <Route path="/loan6" element={<Loan6/>}></Route>
-      <Route path="/loan7" element={<Loan7/>}></Route>
-      <Route path="/loan8" element={<Loan8/>}></Route>
-      <Route path="/loan9" element={<Loan9/>}></Route>
-      <Route path="/loan10" element={<Loan10/>}></Route>
-      <Route path="/loan11" element={<Loan11/>}></Route>
-      <Route path="/loan12" element={<Loan12/>}></Route>
-      <Route path="/loan13" element={<Loan13/>}></Route>
-      <Route path="/loan14" element={<Loan14/>}></Route>
-      <Route path="/loan15" element={<Loan15/>}></Route>
-      <Route path="/loan16" element={<Loan16/>}></Route>
-      <Route path="/cards" element={<Cards2/>}></Route>
-      <Route path="/deposits" element={<Avandner/>}></Route>
-      <Route path="/deposits/classic" element={<DasakanAvand/>}></Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/business" element={<Business/>}></Route>
+        <Route path="/payments" element={<AkntartayinVjarumner/>}></Route>
+        <Route path="/about" element={<MerMasin/>}></Route>
+        <Route path="/news" element={<News/>}></Route>
+        <Route path="/blog" element={<Blog/>}></Route>
+        <Route path="/career" element={<Career/>}></Route>
+        <Route path="/business-loan6" element={<BusinessLoan6/>}></Route>
+        <Route path="/visa-infinite" element={<VisaInfiniteCard/>}></Route>
+        <Route path="/mastercard-gold" element={<MasterCardGold/>}></Route>
+        <Route path="/visa-gold" element={<VisaGold/>}></Route>
+        <Route path="/salary" element={<Salary/>}></Route>
+        <Route path="/travel-gold" element={<TravelGold/>}></Route>
+        <Route path="/visa-vision" element={<VisaVision/>}></Route>
+        <Route path="/unionpay-gold" element={<UnionPayGold/>}></Route>
+        <Route path="/biometrik-nuynakanacum" element={<BiometricNuynakanacum/>}></Route>
+        <Route path="/visa-platinum" element={<VisaPlatinum/>}></Route>
+        <Route path="/4u.am-gift-card" element={<FourUamGiftCard/>}></Route>
+        <Route path="/gift-card" element={<GiftCard/>}></Route>
+        <Route path="/arca-classic" element={<ArcaClassic/>}></Route>
+        <Route path="/dalma-gift-card" element={<DalmaGiftCard/>}></Route>
+        <Route path="/rio-gift-card" element={<RioGiftCard/>}></Route>
+        <Route path="/world-digital" element={<WorldDigital/>}></Route>
+        <Route path="/digital-gift-card" element={<DigitalGiftCard/>}></Route>
+        <Route path="/business-platinum" element={<UnionPayBusinessPlatinum/>}></Route>
+        <Route path="/myler-gift-card" element={<MyLer/>}></Route>
+        <Route path="/wilco-visa-infinite" element={<WilcoVisaInfinite/>}></Route>
+        <Route path="/visa-business" element={<VisaBusiness/>}></Route>
+        <Route path="/visa-digital" element={<VisaDigital/>}></Route>
+        <Route path="/visa-classic" element={<VisaClassic/>}></Route>
+        <Route path="/mastercard-standard" element={<MasterCardStandard/>}></Route>
+        <Route path="/customer" element={<Customer/>}></Route>
+        <Route path="/loans" element={<Loans/>}></Route>
+        <Route path="/credit-history" element={<VarkayinPatmutyun/>}></Route>
+        <Route path="/important-information" element={<KarevorTexakatvutyun />}></Route>
+        <Route path="/loan1" element={<Loan1/>}></Route>
+        <Route path="/loan2" element={<Loan2/>}></Route>
+        <Route path="/loan3" element={<Loan3/>}></Route>
+        <Route path="/loan4" element={<Loan4/>}></Route>
+        <Route path="/loan5" element={<Loan5/>}></Route>
+        <Route path="/loan6" element={<Loan6/>}></Route>
+        <Route path="/loan7" element={<Loan7/>}></Route>
+        <Route path="/loan8" element={<Loan8/>}></Route>
+        <Route path="/loan9" element={<Loan9/>}></Route>
+        <Route path="/loan10" element={<Loan10/>}></Route>
+        <Route path="/loan11" element={<Loan11/>}></Route>
+        <Route path="/loan12" element={<Loan12/>}></Route>
+        <Route path="/loan13" element={<Loan13/>}></Route>
+        <Route path="/loan14" element={<Loan14/>}></Route>
+        <Route path="/loan15" element={<Loan15/>}></Route>
+        <Route path="/loan16" element={<Loan16/>}></Route>
+        <Route path="/cards" element={<Cards2/>}></Route>
+        <Route path="/deposits" element={<Avandner/>}></Route>
+        <Route path="/deposits/classic" element={<DasakanAvand/>}></Route>
+      </Routes>
     </>
   )
 }
