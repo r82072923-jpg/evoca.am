@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import MankakanAvandiMasin from "./mankakanavand-imasin"
 import MankakanAvandiMasin2 from "./mankakanavand-imasin2"
+import MankakanAvandiMasin3 from "./mankakanavand-imasin3"
 function MankakanAvand(){
     const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
@@ -15,7 +16,7 @@ function MankakanAvand(){
             <MankakanAvandiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պայմաններ և սակագներ' && (
-            <DasakanAvandiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <MankakanAvandiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
