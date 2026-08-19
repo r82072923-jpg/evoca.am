@@ -7,6 +7,7 @@ import MankakanAvandiMasin3 from "./mankakanavand-imasin3"
 import Slayder7 from "./slayder7";
 import OnlineEvMobileBanking from "./onlineevmobilebanking";
 import Footer from "./footer";
+import FooterBottom from "./footerBottom";
 function MankakanAvand(){
     const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
@@ -25,6 +26,7 @@ function MankakanAvand(){
         <Slayder7></Slayder7>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
