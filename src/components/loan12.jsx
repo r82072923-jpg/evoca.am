@@ -5,6 +5,7 @@ import LoansiTopHeader from "./loans-itopHeader"
 import Loan12iMasin from "./loan12-imasin"
 import Loan12iMasin2 from "./loan12-imasin2"
 import Loan12iMasin3 from "./loan12-imasin3"
+import Slayder6 from "./slayder6"
 function Loan12(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -21,6 +22,7 @@ function Loan12(){
             <Loan12iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder6></Slayder6>
         </>
     )
 }
