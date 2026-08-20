@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: "AIzaSyBUu6qkC5S36HTc8rRUf9DqUFdlLLz5OxE",
+  apiKey: "AIzaSyBUu6qkc5S36HTc8rRUf9DqUFdllLz50xE",
   authDomain: "evoca-754b1.firebaseapp.com",
   projectId: "evoca-754b1",
   storageBucket: "evoca-754b1.firebasestorage.app",
@@ -11,5 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();

@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
 import { NavLink, Link } from "react-router-dom";
+import Chat from "./chat";
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);     
   const fetchHeaderData = async () => {
     try {
       setLoading(true);
@@ -81,8 +83,27 @@ function Header() {
         </div>
 
         <div className="flex items-center gap-5 text-gray-900 ml-4">
-          
-          <Link to="/branches" className="hover:text-purple-700 transition-colors">
+<Link to="/mutq" className="text-gray-700 hover:text-black transition-colors text-base md:text-lg">
+            <i className="fa fa-user"></i>
+          </Link>
+<div className="fixed bottom-4 right-4 z-50">
+        {isChatOpen && (
+          <div className="absolute bottom-[55px] right-0 z-50"> 
+            <Chat onClose={() => setIsChatOpen(false)} />
+          </div>
+        )}
+        <button 
+          className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-lg bg-white hover:bg-gray-50 transition-colors"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+        >
+          <img 
+            src="https://static.vecteezy.com/system/resources/thumbnails/000/441/080/small/Basic_Ui__282_29.jpg" 
+            alt="chat icon" 
+            className="w-8 h-8 md:w-10 md:h-10"
+          />
+        </button>
+      </div>
+          <Link to="/qartez" className="hover:text-purple-700 transition-colors">
             <i className="fa-solid fa-location-dot text-lg"></i>
           </Link>
 

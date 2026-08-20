@@ -179,7 +179,7 @@ function Kanxik({ activeTab = 'Կանխիկ', setActiveTab }) {
               alt="Map Background"
               className="w-full h-auto opacity-70 object-cover"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/280x150/f4f4f4/cccccc?text=Map+Image';
+                e.target.src = '(https://placehold.co/280x150?text=Map+Image)';
               }}
             />
             <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
