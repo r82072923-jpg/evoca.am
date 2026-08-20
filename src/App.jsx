@@ -70,6 +70,7 @@ import Cards2 from "./components/cards2.jsx"
 import Avandner from "./components/avandner.jsx"
 import DasakanAvand from "./components/dasakanavand.jsx"
 import MankakanAvand from "./components/mankakanavand.jsx"
+import OnlineAvand from "./components/onlineavand.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -167,6 +168,7 @@ function App() {
         <Route path="/deposits" element={<Avandner/>}></Route>
         <Route path="/deposits/classic" element={<DasakanAvand/>}></Route>
         <Route path="/deposits/kids" element={<MankakanAvand/>}></Route>
+        <Route path="/deposits/online" element={<OnlineAvand/>}></Route>
       </Routes>
     </>
   )
