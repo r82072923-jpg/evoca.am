@@ -1,12 +1,23 @@
+import { useState } from "react"
 import Header from "./header"
 import TopHeader from "./topHeader"
-import DasakanAvandiMasin from "./dasakanavand-imaisn"
+import DasakanAvandiMasin from "./dasakanavand-imasin"
+import DasakanAvandiMasin2 from "./dasakanavand-imasin2"
 function DasakanAvand(){
+    const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
         <>
         <Header></Header>
         <TopHeader></TopHeader>
         <DasakanAvandiMasin></DasakanAvandiMasin>
+        <div>
+          {activeTab === 'Ավանդի մասին' && (
+            <DasakanAvandiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+          {activeTab === 'Պայմաններ և սակագներ' && (
+            <Loan15iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+        </div>
         </>
     )
 }
