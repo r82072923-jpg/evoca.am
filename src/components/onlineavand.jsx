@@ -3,6 +3,8 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import OnlineAvandiMasin from "./onlineavand-imasin"
 import OnlineAvandiMasin2 from "./onlineavand-imasin2"
+import DasakanAvandiMasin3 from "./dasakanavand-imasin3"
+import Slayder7 from "./slayder7"
 function OnlineAvand(){
     const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
@@ -15,9 +17,10 @@ function OnlineAvand(){
             <OnlineAvandiMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պայմաններ և սակագներ' && (
-            <MankakanAvandiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <DasakanAvandiMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder7></Slayder7>
         </>
     )
 }
