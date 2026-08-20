@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import AvandneriMasin from "./avandner-imasin"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Avandner(){
     return(
         <>
@@ -9,6 +10,7 @@ function Avandner(){
         <TopHeader></TopHeader>
         <AvandneriMasin></AvandneriMasin>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
