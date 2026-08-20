@@ -12,9 +12,6 @@ function Cards() {
   const [transformStyle, setTransformStyle] = useState('perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)');
   const imageRef = useRef(null);
 
-  // ----------------------------------------------------
-  // Firebase-ից տվյալների ստացում (fetch)
-  // ----------------------------------------------------
   useEffect(() => {
     const fetchCards = async () => {
       try {
@@ -76,12 +73,10 @@ function Cards() {
     setTransformStyle('perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)');
   };
 
-  // Եթե բեռնվում է, ցույց ենք տալիս լոուդեր
   if (loading) {
     return <div className="min-h-screen bg-[#F0F8FF] flex justify-center items-center font-sans">Բեռնվում են քարտերը...</div>;
   }
 
-  // Եթե բազայում տվյալներ չեն գտնվել
   if (cards.length === 0) {
     return <div className="min-h-screen bg-[#F0F8FF] flex justify-center items-center font-sans text-gray-700">Բազայում քարտեր չկան:</div>;
   }
@@ -91,8 +86,7 @@ function Cards() {
   return (
     <div className="min-h-screen bg-[#F0F8FF] flex justify-center items-center font-sans p-4">
       <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-[1100px] w-full p-8">
-        
-        {/* Ձախ մաս (Սլայդեր / Ցանկ) */}
+
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleUpClick}
@@ -138,7 +132,6 @@ function Cards() {
           </button>
         </div>
 
-        {/* Կենտրոնական մաս */}
         <div className="relative flex justify-center items-center py-6">
           {currentCard && (
             <img
@@ -156,7 +149,6 @@ function Cards() {
           )}
         </div>
 
-        {/* Աջ մաս (Տեքստեր և Link) */}
         <div className="max-w-[320px]">
           {currentCard && (
             <>

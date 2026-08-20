@@ -11,7 +11,6 @@ import Footer from "./footer"
 import FooterBottom from "./footerBottom"
 function Loan16(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
-
     return(
         <>
         <Header></Header>

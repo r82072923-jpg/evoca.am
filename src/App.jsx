@@ -66,6 +66,7 @@ import Loan13 from "./components/loan13.jsx"
 import Loan14 from "./components/loan14.jsx"
 import Loan15 from "./components/loan15.jsx"
 import Loan16 from "./components/loan16.jsx"
+import Cards2 from "./components/cards2.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 function Home(){
@@ -157,6 +158,7 @@ function App() {
       <Route path="/loan14" element={<Loan14/>}></Route>
       <Route path="/loan15" element={<Loan15/>}></Route>
       <Route path="/loan16" element={<Loan16/>}></Route>
+      <Route path="/cards" element={<Cards2/>}></Route>
     </Routes>
     </>
   )
