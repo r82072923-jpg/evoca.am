@@ -6,6 +6,7 @@ import OnlineAvandiMasin2 from "./onlineavand-imasin2"
 import DasakanAvandiMasin3 from "./dasakanavand-imasin3"
 import Slayder7 from "./slayder7"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function OnlineAvand(){
     const [activeTab, setActiveTab] = useState('Ավանդի մասին');
     return(
@@ -23,6 +24,7 @@ function OnlineAvand(){
         </div>
         <Slayder7></Slayder7>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
