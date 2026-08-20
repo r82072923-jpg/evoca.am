@@ -16,7 +16,6 @@ function Cards2iMasin() {
           ...doc.data()
         }));
 
-        // Դասավորում ենք ըստ ID-ների (1-ից 21)
         cardsArray.sort((a, b) => Number(a.id) - Number(b.id));
 
         setCards(cardsArray);
@@ -45,7 +44,6 @@ function Cards2iMasin() {
           key={card.id} 
           className="flex flex-col md:flex-row items-start gap-8 py-10 border-b border-gray-200 last:border-b-0"
         >
-          {/* Card Image */}
           <div className="w-full md:w-64 flex-shrink-0 flex justify-center">
             <img 
               src={card.image} 
@@ -54,7 +52,6 @@ function Cards2iMasin() {
             />
           </div>
 
-          {/* Card Content */}
           <div className="flex-1">
             <h2 className="text-2xl md:text-3xl font-extrabold text-black mb-3">
               {card.title}
@@ -63,7 +60,6 @@ function Cards2iMasin() {
               {card.description}
             </p>
 
-            {/* Features */}
             {card.features && card.features.length > 0 && (
               <div className="flex flex-wrap gap-8 mb-7">
                 {card.features.map((feature, idx) => (
@@ -81,8 +77,7 @@ function Cards2iMasin() {
                 ))}
               </div>
             )}
-
-            {/* Button */}
+            
             <Link
               to={card.link}
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-full font-bold text-sm transition-colors duration-200"
