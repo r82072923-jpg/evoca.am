@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import KarjHeraxosahamariMasin from "./karjheraxosahamar-imaisn"
 import KarjHeraxosahamariMasin2 from "./karjheraxosahamar-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function KarjHeraxosahamar(){
     return(
         <>
@@ -11,6 +12,7 @@ function KarjHeraxosahamar(){
         <KarjHeraxosahamariMasin></KarjHeraxosahamariMasin>
         <KarjHeraxosahamariMasin2></KarjHeraxosahamariMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
