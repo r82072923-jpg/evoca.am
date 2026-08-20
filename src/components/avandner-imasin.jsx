@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore'; 
-import { db } from "./firebaseConfog";
+import { db } from "./firebaseConfog" 
 
 function AvandneriMasin() {
   const [deposits, setDeposits] = useState([]);
