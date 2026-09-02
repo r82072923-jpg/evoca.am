@@ -44,16 +44,16 @@ function AvandiHashvich() {
   const depositResultsList = calculateDeposit();
 
   return (
-    <div className="p-8 font-sans text-gray-800 bg-gray-50 min-h-screen relative">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Հաշվիչներ</h1>
+    <div className="p-4 md:p-8 font-sans text-gray-800 bg-gray-50 min-h-screen relative overflow-x-hidden">
+      <div className="max-w-5xl mx-auto w-full">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">Հաշվիչներ</h1>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-8 mb-8">
           
-          <div className="flex gap-4 border-b border-gray-200 mb-6 pb-2">
+          <div className="flex gap-4 border-b border-gray-200 mb-6 pb-2 overflow-x-auto">
             <button 
               onClick={() => setActiveTab('loan')}
-              className={`pb-2 px-2 font-bold transition-colors cursor-pointer ${
+              className={`pb-2 px-2 font-bold transition-colors cursor-pointer shrink-0 ${
                 activeTab === 'loan' 
                   ? 'text-gray-900 border-b-2 border-purple-600' 
                   : 'text-gray-400 hover:text-gray-600 border-b-2 border-transparent'
@@ -63,7 +63,7 @@ function AvandiHashvich() {
             </button>
             <button 
               onClick={() => setActiveTab('deposit')}
-              className={`pb-2 px-2 font-bold transition-colors cursor-pointer ${
+              className={`pb-2 px-2 font-bold transition-colors cursor-pointer shrink-0 ${
                 activeTab === 'deposit' 
                   ? 'text-gray-900 border-b-2 border-purple-600' 
                   : 'text-gray-400 hover:text-gray-600 border-b-2 border-transparent'
@@ -79,14 +79,14 @@ function AvandiHashvich() {
               parseFormattedNumber={parseFormattedNumber} 
             />
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-6 space-y-6">
                 <div>
                   <div className="flex justify-between items-center border border-gray-200 rounded-lg p-3 mb-2">
                     <span className="text-sm text-gray-600">Ներդրվող գումար</span>
                     <input
                       type="text"
-                      className="text-right font-bold text-lg outline-none w-1/2"
+                      className="text-right font-bold text-base md:text-lg outline-none w-1/2"
                       value={formatNumber(depositData.amount, 0)}
                       onChange={(e) => handleDepositChange('amount', parseFormattedNumber(e.target.value))}
                     />
@@ -108,7 +108,7 @@ function AvandiHashvich() {
                       <input
                         type="number"
                         step="0.1"
-                        className="text-right font-bold text-lg outline-none w-16"
+                        className="text-right font-bold text-base md:text-lg outline-none w-16"
                         value={depositData.rate}
                         onChange={(e) => handleDepositChange('rate', Number(e.target.value))}
                       />
@@ -132,7 +132,7 @@ function AvandiHashvich() {
                     <div className="flex items-center gap-1">
                       <input
                         type="number"
-                        className="text-right font-bold text-lg outline-none w-20"
+                        className="text-right font-bold text-base md:text-lg outline-none w-20"
                         value={depositData.term}
                         onChange={(e) => handleDepositChange('term', Number(e.target.value))}
                       />
@@ -152,9 +152,9 @@ function AvandiHashvich() {
 
               <div className="lg:col-span-6 space-y-6 pt-2">
                 {depositResultsList.map((item) => (
-                  <div key={item.id} className="flex justify-between items-center border-b border-gray-100 pb-4">
-                    <span className="text-sm text-gray-600 max-w-[260px]">{item.label}</span>
-                    <span className="text-xl font-bold text-gray-900">{formatNumber(item.value)}</span>
+                  <div key={item.id} className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-100 pb-4 gap-2 md:gap-0">
+                    <span className="text-sm text-gray-600 max-w-full md:max-w-[260px]">{item.label}</span>
+                    <span className="text-lg md:text-xl font-bold text-gray-900 self-end md:self-auto">{formatNumber(item.value)}</span>
                   </div>
                 ))}
                 <div className="text-xs text-gray-400 flex items-start gap-2 pt-2">
@@ -168,4 +168,5 @@ function AvandiHashvich() {
     </div>
   );
 }
-export default AvandiHashvich
+
+export default AvandiHashvich;

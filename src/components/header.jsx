@@ -3,10 +3,13 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
 import { NavLink, Link } from "react-router-dom";
 import Chat from "./chat";
+
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isChatOpen, setIsChatOpen] = useState(false);     
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Ավելացվել է մենյուի բացման/փակման վիճակը
+
   const fetchHeaderData = async () => {
     try {
       setLoading(true);
@@ -31,9 +34,21 @@ function Header() {
 
   return (
     <header className="relative bg-white shadow-sm border-b border-gray-100 w-full z-50">
-      <div className="max-w-full mx-auto h-14 flex items-center justify-between px-6">
+      <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 md:px-6">
         
-        <div className="flex items-center gap-5 h-full whitespace-nowrap">
+        {/* Լոգո կամ ձախ կողմի հատված (անհրաժեշտության դեպքում կարող եք ավելացնել) */}
+        <div className="flex items-center gap-2">
+          {/* Mobile Menu Toggle Button (☰) */}
+          <button 
+            className="text-slate-800 hover:text-purple-700 transition-colors md:hidden text-xl"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <i className={`fa-solid ${isMenuOpen ? "fa-xmark" : "fa-bars"}`}></i>
+          </button>
+        </div>
+
+        {/* Դեսկտոպ մենյու (Թաքցված է հեռախոսների վրա, երևում է միայն md-ից սկսած) */}
+        <div className="hidden md:flex items-center gap-5 h-full whitespace-nowrap">
           {loading ? (
             <p className="text-gray-500 text-sm font-medium">Բեռնվում է...</p>
           ) : (
@@ -50,7 +65,6 @@ function Header() {
                   }
                 >
                   {item.title}
-
                   {item.subItems && (
                     <i className="fa-solid fa-chevron-down text-[10px] mt-0.5 group-hover:rotate-180 transition-transform duration-200"></i>
                   )}
@@ -82,48 +96,99 @@ function Header() {
           )}
         </div>
 
-        <div className="flex items-center gap-5 text-gray-900 ml-4">
-<Link to="/mutq" className="text-gray-700 hover:text-black transition-colors text-base md:text-lg">
+        {/* Աջ կողմի գործիքներ / Ինկոններ */}
+        <div className="flex items-center gap-4 text-gray-900">
+          <Link to="/mutq" className="text-gray-700 hover:text-black transition-colors text-base md:text-lg">
             <i className="fa fa-user"></i>
           </Link>
-<div className="fixed bottom-4 right-4 z-50">
-        {isChatOpen && (
-          <div className="absolute bottom-[55px] right-0 z-50"> 
-            <Chat onClose={() => setIsChatOpen(false)} />
-          </div>
-        )}
-        <button 
-          className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-lg bg-white hover:bg-gray-50 transition-colors"
-          onClick={() => setIsChatOpen(!isChatOpen)}
-        >
-          <img 
-            src="https://static.vecteezy.com/system/resources/thumbnails/000/441/080/small/Basic_Ui__282_29.jpg" 
-            alt="chat icon" 
-            className="w-8 h-8 md:w-10 md:h-10"
-          />
-        </button>
-      </div>
-          <Link to="/qartez" className="hover:text-purple-700 transition-colors">
+
+          <Link to="/qartez" className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-solid fa-location-dot text-lg"></i>
           </Link>
 
-          <Link to="/faq" className="hover:text-purple-700 transition-colors">
+          <Link to="/faq" className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-regular fa-circle-question text-lg"></i>
           </Link>
 
-          <button className="hover:text-purple-700 transition-colors">
+          <button className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-solid fa-globe text-lg"></i>
           </button>
 
           <button className="hover:text-purple-700 transition-colors">
             <i className="fa-solid fa-magnifying-glass text-lg"></i>
           </button>
-
-          <button className="hover:text-purple-700 transition-colors ml-2">
-            <i className="fa-solid fa-bars text-xl"></i>
-          </button>
-
         </div>
+      </div>
+
+      {/* Բջջային մենյուի բացվող պատուհան (Dropdown/Drawer) հեռախոսների համար */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-xl border-b border-gray-200 py-4 px-6 flex flex-col gap-3 md:hidden">
+          {loading ? (
+            <p className="text-gray-500 text-sm">Բեռնվում է...</p>
+          ) : (
+            navItems.map((item) => (
+              <div key={item.id || item.path} className="flex flex-col">
+                <NavLink
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `text-base font-bold py-2 ${
+                      isActive ? "text-purple-700" : "text-slate-800"
+                    }`
+                  }
+                >
+                  {item.title}
+                </NavLink>
+                {item.subItems && (
+                  <div className="pl-4 flex flex-col gap-2 border-l-2 border-purple-100 my-1">
+                    {item.subItems.map((subItem, index) => (
+                      <NavLink
+                        key={index}
+                        to={subItem.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-sm text-gray-600 hover:text-purple-700 py-1"
+                      >
+                        {subItem.title}
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+          
+          {/* Լրացուցիչ հղումներ, որոնք տեղ չունեին վերևում */}
+          <div className="border-t border-gray-100 pt-3 flex items-center justify-around sm:hidden">
+            <Link to="/qartez" onClick={() => setIsMenuOpen(false)} className="text-gray-700">
+              <i className="fa-solid fa-location-dot text-lg"></i>
+            </Link>
+            <Link to="/faq" onClick={() => setIsMenuOpen(false)} className="text-gray-700">
+              <i className="fa-regular fa-circle-question text-lg"></i>
+            </Link>
+            <button className="text-gray-700">
+              <i className="fa-solid fa-globe text-lg"></i>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Չաթի կոճակը */}
+      <div className="fixed bottom-4 right-4 z-50">
+        {isChatOpen && (
+          <div className="relative bottom-[55px] right-0 z-50"> 
+            <Chat onClose={() => setIsChatOpen(false)} />
+          </div>
+        )}
+        <button 
+          className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-lg bg-white hover:bg-gray-50 transition-colors border border-gray-200"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+        >
+          <img 
+            src="https://static.vecteezy.com/system/resources/thumbnails/000/441/080/small/Basic_Ui__282_29.jpg" 
+            alt="chat icon" 
+            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+          />
+        </button>
       </div>
     </header>
   );

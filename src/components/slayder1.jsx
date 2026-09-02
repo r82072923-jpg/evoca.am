@@ -161,12 +161,12 @@ const Slayder1 = () => {
   };
 
   if (loading) {
-    return <div className="w-full min-h-[600px] flex items-center justify-center">Բեռնվում է...</div>;
+    return <div className="w-full min-h-[450px] md:min-h-[600px] flex items-center justify-center">Բեռնվում է...</div>;
   }
 
   if (slides.length === 0) {
     return (
-      <div className="w-full min-h-[600px] flex flex-col items-center justify-center space-y-4">
+      <div className="w-full min-h-[450px] md:min-h-[600px] flex flex-col items-center justify-center space-y-4 px-4 text-center">
         <p>Բազայում սլայդեր չկան:</p>
         <button 
           onClick={uploadDataToFirebase}
@@ -184,67 +184,71 @@ const Slayder1 = () => {
     <div className="w-full relative overflow-hidden">
       <style>{`
         @keyframes slideFromLeft {
-          from { opacity: 0; transform: translateX(-50px); }
+          from { opacity: 0; transform: translateX(-30px); }
           to { opacity: 1; transform: translateX(0); }
         }
         @keyframes slideFromRight {
-          from { opacity: 0; transform: translateX(50px); }
+          from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-        .animate-from-left { animation: slideFromLeft 0.6s ease-out forwards; }
-        .animate-from-right { animation: slideFromRight 0.6s ease-out forwards; }
+        .animate-from-left { animation: slideFromLeft 0.5s ease-out forwards; }
+        .animate-from-right { animation: slideFromRight 0.5s ease-out forwards; }
       `}</style>
 
-      <div className={`${currentSlide?.bgColor || 'bg-gray-100'} rounded-bl-[200px] w-full min-h-[600px] flex flex-col justify-center transition-colors duration-500 py-10 px-8 md:px-20 relative`}>
+      {/* Main Container - Adjusted radius, padding & min-height for mobile */}
+      <div className={`${currentSlide?.bgColor || 'bg-gray-100'} rounded-bl-[60px] sm:rounded-bl-[120px] md:rounded-bl-[200px] w-full min-h-[500px] md:min-h-[600px] flex flex-col justify-between transition-colors duration-500 py-8 px-4 sm:px-8 md:px-20 relative`}>
         
-        <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between flex-1">
+        <div className="max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between flex-1 gap-6 md:gap-0">
           
-          <div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 mb-8 md:mb-0">
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${currentSlide?.textColor}`}>
+          {/* Text Content */}
+          <div key={`text-${currentIndex}`} className="w-full md:w-1/2 animate-from-left z-10 text-center md:text-left flex flex-col items-center md:items-start">
+            <h2 className={`text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-6 leading-snug md:leading-tight transition-colors duration-300 ${currentSlide?.textColor}`}>
               {currentSlide?.title}
             </h2>
-            <p className={`text-base md:text-xl mb-8 max-w-lg leading-relaxed transition-colors duration-300 ${currentSlide?.descColor}`}>
+            <p className={`text-sm sm:text-base md:text-xl mb-6 max-w-lg leading-relaxed transition-colors duration-300 ${currentSlide?.descColor}`}>
               {currentSlide?.description}
             </p>
-            <Link to={currentSlide?.link || "#"}>
-              <button className={`${currentSlide?.btnBg} ${currentSlide?.btnTextColor} font-medium py-3.5 px-8 rounded-full transition-colors text-lg`}>
+            <Link to={currentSlide?.link || "#"} className="w-full sm:w-auto">
+              <button className={`${currentSlide?.btnBg} ${currentSlide?.btnTextColor} font-medium py-3 px-6 sm:px-8 rounded-full transition-colors text-base md:text-lg w-full sm:w-auto shadow-sm`}>
                 {currentSlide?.buttonText}
               </button>
             </Link>
           </div>
 
+          {/* Image Container */}
           <div key={`img-${currentIndex}`} className="w-full md:w-1/2 flex justify-center items-center animate-from-right z-10">
             <img 
               src={currentSlide?.image} 
               alt={currentSlide?.title}
-              className="max-h-[380px] object-contain" 
+              className="max-h-[220px] sm:max-h-[300px] md:max-h-[380px] w-auto object-contain" 
             />
           </div>
 
         </div>
 
-        <div className="w-full flex justify-center items-center space-x-6 mt-8 z-20">
+        {/* Navigation Controls */}
+        <div className="w-full flex justify-center items-center space-x-4 sm:space-x-6 mt-6 md:mt-8 z-20">
           
-          <button onClick={prevSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={prevSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2" aria-label="Previous slide">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </button>
 
-          <div className="flex space-x-3">
+          <div className="flex space-x-2 sm:space-x-3 overflow-x-auto max-w-[200px] sm:max-w-none py-1">
             {slides.map((_, slideIndex) => (
               <div
                 key={slideIndex}
                 onClick={() => goToSlide(slideIndex)}
-                className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-colors duration-300 ${
-                  currentIndex === slideIndex ? 'bg-[#6712E0]' : 'bg-gray-300'
+                className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 shrink-0 ${
+                  currentIndex === slideIndex ? 'bg-[#6712E0] w-5' : 'bg-gray-300'
                 }`}
               />
             ))}
           </div>
 
-          <button onClick={nextSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={nextSlide} className="text-[#6712E0] hover:text-[#560ec0] transition-colors p-2" aria-label="Next slide">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
