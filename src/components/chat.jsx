@@ -16,7 +16,7 @@ function Chat() {
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
 
-    const socket = useMemo(() => io("http://192.168.15.174:3001"), []);
+    const socket = useMemo(() => io("https://evoca-am-two.vercel.app"), []);
     const peerInstance = useRef(null);
     const localVideoRef = useRef(null);
     const remoteVideoRef = useRef(null);
@@ -75,7 +75,7 @@ function Chat() {
     }, []);
 
     useEffect(() => {
-        fetch("http://192.168.15.174:3001/messages")
+        fetch("https://evoca-am-two.vercel.app/messages")
             .then((res) => res.json())
             .then((data) => setMessages(data))
             .catch((err) => console.error(err));
@@ -247,7 +247,7 @@ useEffect(() => {
         };
 
         try {
-            const res = await fetch("http://192.168.15.174:3001/messages", { 
+            const res = await fetch("https://evoca-am-two.vercel.app/messages", { 
                 method: "POST", 
                 headers: { "Content-Type": "application/json" }, 
                 body: JSON.stringify(newMessage) 
