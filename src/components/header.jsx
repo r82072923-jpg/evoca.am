@@ -7,8 +7,8 @@ import Chat from "./chat";
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Ավելացվել է մենյուի բացման/փակման վիճակը
+  const [isChatOpen, setIsChatOpen] = useState(false);     
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fetchHeaderData = async () => {
     try {
@@ -35,10 +35,8 @@ function Header() {
   return (
     <header className="relative bg-white shadow-sm border-b border-gray-100 w-full z-50">
       <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 md:px-6">
-        
-        {/* Լոգո կամ ձախ կողմի հատված (անհրաժեշտության դեպքում կարող եք ավելացնել) */}
+
         <div className="flex items-center gap-2">
-          {/* Mobile Menu Toggle Button (☰) */}
           <button 
             className="text-slate-800 hover:text-purple-700 transition-colors md:hidden text-xl"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -47,7 +45,6 @@ function Header() {
           </button>
         </div>
 
-        {/* Դեսկտոպ մենյու (Թաքցված է հեռախոսների վրա, երևում է միայն md-ից սկսած) */}
         <div className="hidden md:flex items-center gap-5 h-full whitespace-nowrap">
           {loading ? (
             <p className="text-gray-500 text-sm font-medium">Բեռնվում է...</p>
@@ -75,8 +72,7 @@ function Header() {
                     <div className="py-3 flex flex-col">
                       {item.subItems.map((subItem, index) => {
                         const isPhoneLink = subItem.path.startsWith("tel:");
-                        const linkClasses =
-                          "px-5 py-2.5 text-sm font-bold text-slate-800 hover:text-purple-700 hover:bg-purple-50 text-right transition-colors block";
+                        const linkClasses = "px-5 py-2.5 text-sm font-bold text-slate-800 hover:text-purple-700 hover:bg-purple-50 text-right transition-colors block";
 
                         return isPhoneLink ? (
                           <a key={index} href={subItem.path} className={linkClasses}>
@@ -96,31 +92,25 @@ function Header() {
           )}
         </div>
 
-        {/* Աջ կողմի գործիքներ / Ինկոններ */}
         <div className="flex items-center gap-4 text-gray-900">
           <Link to="/mutq" className="text-gray-700 hover:text-black transition-colors text-base md:text-lg">
             <i className="fa fa-user"></i>
           </Link>
-
-          <Link to="/qartez" className="hover:text-purple-700 transition-colors hidden sm:block">
+          <Link to="/qartez" className="hover:text-purple-700 transition-colors">
             <i className="fa-solid fa-location-dot text-lg"></i>
           </Link>
-
           <Link to="/faq" className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-regular fa-circle-question text-lg"></i>
           </Link>
-
           <button className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-solid fa-globe text-lg"></i>
           </button>
-
           <button className="hover:text-purple-700 transition-colors">
             <i className="fa-solid fa-magnifying-glass text-lg"></i>
           </button>
         </div>
       </div>
 
-      {/* Բջջային մենյուի բացվող պատուհան (Dropdown/Drawer) հեռախոսների համար */}
       {isMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-xl border-b border-gray-200 py-4 px-6 flex flex-col gap-3 md:hidden">
           {loading ? (
@@ -157,7 +147,6 @@ function Header() {
             ))
           )}
           
-          {/* Լրացուցիչ հղումներ, որոնք տեղ չունեին վերևում */}
           <div className="border-t border-gray-100 pt-3 flex items-center justify-around sm:hidden">
             <Link to="/qartez" onClick={() => setIsMenuOpen(false)} className="text-gray-700">
               <i className="fa-solid fa-location-dot text-lg"></i>
@@ -172,10 +161,9 @@ function Header() {
         </div>
       )}
 
-      {/* Չաթի կոճակը */}
       <div className="fixed bottom-4 right-4 z-50">
         {isChatOpen && (
-          <div className="relative bottom-[55px] right-0 z-50"> 
+          <div className="absolute bottom-[55px] right-0 z-50"> 
             <Chat onClose={() => setIsChatOpen(false)} />
           </div>
         )}
