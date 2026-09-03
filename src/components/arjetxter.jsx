@@ -10,6 +10,7 @@ function Arjetxter(){
         <TopHeader></TopHeader>
         <ArjetxteriMasin></ArjetxteriMasin>
         <ArjetxteriMasin2></ArjetxteriMasin2>
+        <ArjetxteriMasin3></ArjetxteriMasin3>
         </>
     )
 }
