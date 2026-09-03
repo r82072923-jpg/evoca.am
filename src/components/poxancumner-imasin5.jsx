@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "./firebaseConfog";
 
 const documentsData = [
   {
@@ -14,11 +16,36 @@ const documentsData = [
 ];
 
 function PoxancumneriMasin5() {
+  const uploadDataToFirebase = async () => {
+    try {
+      for (const item of documentsData) {
+        const docRef = doc(db, "poxancumneriMasin2", item.id);
+        
+        await setDoc(docRef, {
+          title: item.title,
+          link: item.link
+        });
+      }
+      alert("Տվյալները հաջողությամբ պահպանվեցին poxancumneriMasin2 հավաքածուում:");
+    } catch (error) {
+      console.error("Սխալ տվյալները պահպանելիս:", error);
+    }
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto p-4 font-sans">
-      <h2 className="text-xl font-bold text-slate-900 mb-4">
-        Փաստաթղթեր
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-bold text-slate-900">
+          Փաստաթղթեր
+        </h2>
+
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition"
+        >
+          Ուղարկել Firebase
+        </button>
+      </div>
 
       <div className="flex flex-col gap-3">
         {documentsData.map((docItem) => (
