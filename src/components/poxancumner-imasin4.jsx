@@ -1,153 +1,120 @@
-import React, { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
-const accordionData = [
-  {
-    id: "dram",
-    title: "Փոխանցումներ դրամով",
-    content: [
-      "Մեզ մոտ գործող վճարահաշվարկային համակարգն ապահովում է արագ և հուսալի դրամային փոխանցումներ ինչպես մեր համակարգում, այնպես էլ հայաստանյան այլ բանկերի միջև:",
-      "Դրամով փոխանցումները Հայաստանի տարածքում կատարվում են 1 բանկային օրվա ընթացքում:",
-    ],
-  },
-  {
-    id: "international",
-    title: "Միջազգային փոխանցումներ",
-    content: [
-      "Մենք SWIFT համակարգի անդամ ենք և ձեր արտարժութային միջազգային փոխանցումներն իրականացնում ենք այս համակարգով: Այն ապահովում է արագ և անվտանգ փոխանցումներ՝ միջազգային բանկային ստանդարտներին համապատասխան:",
-      "Փոխանցումը կատարում ենք միայն փոխանցվող գումարի և միջնորդավճարի գումարի փաստացի առկայության դեպքում:",
-      "Արտարժութային միջազգային փոխանցում իրականացնելու համար մեզ եք ներկայացնում սահմանված ձևանմուշի վճարման հանձնարարագիր (անհրաժեշտության դեպքում մեր աշխատակիցները կօգնեն լրացնել այն):",
-      "Արտարժութային միջազգային բանկային փոխանցումները, ըստ մեր սակագների, իրականացվում են OUR (ծախսերը՝ փոխանցողի հաշվին), Guaranted OUR (գումարը ստացողին հասնում է ամբողջական) և BEN (ծախսերը՝ ստացողի հաշվին) տարբերակներով:",
-      "Արտարժութային միջազգային փոխանցումները, որպես կանոն, տևում են 1-3 բանկային օր: Փոխանցումների կատարման տևողությունը կախված է այն բանկերի թվից, որոնց միջոցով կատարվում է փոխանցումը:",
-    ],
-  },
-  {
-    id: "systems",
-    title: "Վճարային համակարգեր",
-    content: [
-      "Դրամական փոխանցումների վճարային համակարգերը հնարավորություն են տալիս շատ արագ՝ առանց բանկային հաշվի բացման, պարզեցված ընթացակարգով, ոչ առևտրային բնույթի փոխանցումներ կատարել ֆիզիկական անձանց միջև՝ դեպի աշխարհի տարբեր երկրներ:",
-      "Մեր կողմից սպասարկվող վճարային համակարգերին կարող եք ծանոթանալ այստեղ:",
-    ],
-  },
-  {
-    id: "change",
-    title: "Փոխանցման պայմանների փոփոխում կամ չեղյալացում",
-    content: [
-      "Փոխանցումների վավերապայմանների փոփոխումը կամ փոխանցման չեղյալացումը կատարում ենք փոխանցումը նախաձեռնող անձի գրավոր դիմումի հիման վրա՝ նրանից գանձելով միջնորդավճարներ (սակագներին կարող եք ծանոթանալ Բանկային փոխանցումներ բաժնում):",
-      "Փոխանցման մեջ առկա սխալների ուղղումը, ինչպես նաև փոխանցման չեղյալացումն իրականացում ենք փոխանցող և ստացող բանկերի հնարավորության սահմաններում և ժամկետներում, սովորաբար դա կարող է տևել 2-5 բանկային օր:",
-      "Եթե փոխանցումը նախաձեռնող անձը ներկայացրել է փոխանցման չեղյալացման հայտ, սակայն ըստ հարցման՝ միջոցներն արդեն հաշվեգրված են, ապա մենք չենք կարող պատասխանատվություն կրել գումարների վերադարձի համար: Փոխանցված միջոցները ստացողին չհասնելու դեպքում`Փոխանցված միջոցները թղթակից բանկի կողմից վերադարձվում են փոխանցում կատարած բանկին: Դրամական միջոցների վերադարձի ժամկետները կախված են թղթակից բանկերում գործող ընթացակարգային ժամկետներից և այն բանկերի թվից, որոնց միջոցով կատարվել է փոխանցումը:Վերադարձված դրամական միջոցները հաշվեգրում ենք փոխանցում իրականացրած անձի բանկային հաշվին, իսկ առանց բանկային հաշվի բացման կատարված փոխանցման դեպքում՝ փոխանցման հանձնարարագրում նշված անձնագրային հիմքերով վերադարձնում ենք փոխանցում իրականացրած անձին:",
-      "Վճարային համակարգերով իրականացված փոխանցումների (ֆիզանձանց միջև ոչ առևտրային բնույթի արագ դրամական փոխանցումներ) վավերապայմանների փոփոխման/սխալների ուղղման, կատարված փոխանցման չեղյալացման, ինչպես նաև փոխանցում ստացողի կողմից գումարի չհայտնաբերման պարագայում դրամական միջոցների հետ վերադարձի համար գործում են տվյալ համակարգերի ներքին ընթացակարգերով սահմանված պայմանները և ժամկետները:",
-    ],
-  },
-];
 
 function PoxancumneriMasin4() {
+  const [accordionData, setAccordionData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState(null);
+
+  useEffect(() => {
+    const fetchAccordionData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "poxancumneriMasin"));
+        
+        const fetchedData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        // Սահմանում ենք ճիշտ հերթականությունը
+        const order = ["dram", "international", "systems", "change"];
+        fetchedData.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+
+        setAccordionData(fetchedData);
+      } catch (error) {
+        console.error("Սխալ տվյալները բեռնելիս:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAccordionData();
+  }, []);
 
   const toggleAccordion = (id) => {
     setOpenId((prevId) => (prevId === id ? null : id));
   };
 
-  // Ֆունկցիա տվյալները Firebase ուղարկելու համար
-  const uploadDataToFirebase = async () => {
-    try {
-      for (const item of accordionData) {
-        const docRef = doc(db, "poxancumneriMasin", item.id);
-        
-        await setDoc(docRef, {
-          title: item.title,
-          content: item.content
-        });
-      }
-      alert("Տվյալները հաջողությամբ պահպանվել են poxancumneriMasin հավաքածուում:");
-    } catch (error) {
-      console.error("Սխալ տվյալները պահպանելիս:", error);
-    }
-  };
-
   return (
     <div className="w-full max-w-4xl mx-auto p-4 font-sans">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold uppercase text-slate-900 tracking-wide">
-          ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ
-        </h2>
+      <h2 className="text-xl font-bold uppercase mb-6 text-slate-900 tracking-wide">
+        ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ
+      </h2>
 
-        {/* Ժամանակավոր կոճակ տվյալները բազա ուղարկելու համար */}
-        <button 
-          onClick={uploadDataToFirebase}
-          className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition"
-        >
-          Ուղարկել Firebase
-        </button>
-      </div>
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {accordionData.map((item) => {
+            const isOpen = openId === item.id;
 
-      <div className="flex flex-col gap-3">
-        {accordionData.map((item) => {
-          const isOpen = openId === item.id;
-
-          return (
-            <div
-              key={item.id}
-              className={`border rounded-2xl transition-all duration-200 overflow-hidden ${
-                isOpen
-                  ? "border-purple-600 shadow-sm"
-                  : "border-purple-200 hover:border-purple-300"
-              }`}
-            >
-              <button
-                onClick={() => toggleAccordion(item.id)}
-                className="w-full text-left p-5 flex items-center gap-4 bg-white focus:outline-none"
+            return (
+              <div
+                key={item.id}
+                className={`border rounded-2xl transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? "border-purple-600 shadow-sm"
+                    : "border-purple-200 hover:border-purple-300"
+                }`}
               >
-                <span className="text-purple-700 transition-transform duration-200">
-                  {isOpen ? (
-                    <svg
-                      className="w-5 h-5 stroke-[2.5]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 15l7-7 7 7"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      className="w-5 h-5 stroke-[2.5]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  )}
-                </span>
+                <button
+                  onClick={() => toggleAccordion(item.id)}
+                  className="w-full text-left p-5 flex items-center gap-4 bg-white focus:outline-none"
+                >
+                  <span className="text-purple-700 transition-transform duration-200">
+                    {isOpen ? (
+                      <svg
+                        className="w-5 h-5 stroke-[2.5]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 15l7-7 7 7"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="w-5 h-5 stroke-[2.5]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </span>
 
-                <span className="font-bold text-slate-800 text-base">
-                  {item.title}
-                </span>
-              </button>
+                  <span className="font-bold text-slate-800 text-base">
+                    {item.title}
+                  </span>
+                </button>
 
-              {isOpen && item.content?.length > 0 && (
-                <div className="px-14 pb-6 pt-1 text-slate-700 text-sm leading-relaxed">
-                  <ul className="list-disc flex flex-col gap-3 marker:text-purple-600">
-                    {item.content.map((point, index) => (
-                      <li key={index} className="pl-1">
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                {isOpen && item.content?.length > 0 && (
+                  <div className="px-14 pb-6 pt-1 text-slate-700 text-sm leading-relaxed">
+                    <ul className="list-disc flex flex-col gap-3 marker:text-purple-600">
+                      {item.content.map((point, index) => (
+                        <li key={index} className="pl-1">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
