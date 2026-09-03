@@ -5,6 +5,7 @@ import PoxancumneriMasin2 from "./poxancumner-imasin2"
 import PoxancumneriMasin3 from "./poxancumner-imasin3"
 import PoxancumneriMasin4 from "./poxancumner-imasin4"
 import PoxancumneriMasin5 from "./poxancumner-imasin5"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function Poxancumner(){
     return(
         <>
@@ -15,6 +16,7 @@ function Poxancumner(){
         <PoxancumneriMasin3></PoxancumneriMasin3>
         <PoxancumneriMasin4></PoxancumneriMasin4>
         <PoxancumneriMasin5></PoxancumneriMasin5>
+        <OnlineEvmObileBanking></OnlineEvmObileBanking>
         </>
     )
 }
