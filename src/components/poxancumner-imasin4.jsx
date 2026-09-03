@@ -41,10 +41,10 @@ const accordionData = [
 ];
 
 function PoxancumneriMasin4() {
-  const [openId, setOpenId] = useState(dram);
+  const [openId, setOpenId] = useState(null);
 
   const toggleAccordion = (id) => {
-    setOpenId((prevId) => (prevId === id ? dram : id));
+    setOpenId((prevId) => (prevId === id ? null : id));
   };
 
   return (
