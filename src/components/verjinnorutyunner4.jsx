@@ -16,7 +16,6 @@ function VerjinNorutyunner4() {
           ...doc.data()
         }));
 
-        // Սորտավորում ենք ըստ id-ի (1, 2, 3...)
         newsArray.sort((a, b) => Number(a.id) - Number(b.id));
 
         setFetchedNews(newsArray);
