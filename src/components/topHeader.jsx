@@ -74,8 +74,9 @@ function TopHeader() {
                   )}
                 </NavLink>
 
+                {/* Submenu opacity & translate settings configured to reveal upwards */}
                 {item.subItems && item.subItems.length > 0 && (
-                  <div className="absolute top-full right-0 mt-0 w-48 bg-white shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top group-hover:translate-y-0 translate-y-2">
+                  <div className="absolute bottom-full right-0 mb-0 w-48 bg-white shadow-lg rounded-t-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-bottom group-hover:translate-y-0 -translate-y-2">
                     <div className="py-3 flex flex-col">
                       {item.subItems.map((subItem, index) => {
                         const isPhoneLink = subItem.path.startsWith("tel:");
