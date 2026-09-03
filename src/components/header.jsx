@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
 import { NavLink, Link } from "react-router-dom";
 import Chat from "./chat";
-  
+
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ function Header() {
   }, []);
 
   return (
-    <header className="relative bg-white shadow-sm border-b border-gray-100 w-full z-50">
+    <header className="relative bg-white shadow-sm border-b border-gray-100 w-full z-[100]">
       <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 md:px-6">
 
         <div className="flex items-center gap-2">
@@ -67,8 +67,9 @@ function Header() {
                   )}
                 </NavLink>
 
+                {/* Dropdown configured with z-[110] to render over all page layers */}
                 {item.subItems && (
-                  <div className="absolute top-full right-0 mt-0 w-48 bg-white shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top group-hover:translate-y-0 translate-y-2">
+                  <div className="absolute top-full right-0 mt-0 w-48 bg-white shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top group-hover:translate-y-0 translate-y-2 z-[110]">
                     <div className="py-3 flex flex-col">
                       {item.subItems.map((subItem, index) => {
                         const isPhoneLink = subItem.path.startsWith("tel:");
@@ -112,7 +113,7 @@ function Header() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-xl border-b border-gray-200 py-4 px-6 flex flex-col gap-3 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-white shadow-xl border-b border-gray-200 py-4 px-6 flex flex-col gap-3 md:hidden z-[110]">
           {loading ? (
             <p className="text-gray-500 text-sm">Բեռնվում է...</p>
           ) : (
@@ -161,9 +162,9 @@ function Header() {
         </div>
       )}
 
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-[120]">
         {isChatOpen && (
-          <div className="absolute bottom-[55px] right-0 z-50"> 
+          <div className="absolute bottom-[55px] right-0 z-[120]"> 
             <Chat onClose={() => setIsChatOpen(false)} />
           </div>
         )}

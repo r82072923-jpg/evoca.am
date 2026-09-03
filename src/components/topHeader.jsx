@@ -37,7 +37,6 @@ function TopHeader() {
     <header className="w-full bg-white shadow-sm border-b border-gray-100 z-50 sticky top-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
         
-        {/* Logo */}
         <div className="flex items-center">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <img 
@@ -48,7 +47,6 @@ function TopHeader() {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6 lg:gap-7 h-full">
           {loading ? (
             <p className="text-gray-500 text-sm font-medium">Բեռնվում է...</p>
@@ -74,7 +72,6 @@ function TopHeader() {
                   )}
                 </NavLink>
 
-                {/* Submenu opacity & translate settings configured to reveal upwards */}
                 {item.subItems && item.subItems.length > 0 && (
                   <div className="absolute bottom-full right-0 mb-0 w-48 bg-white shadow-lg rounded-t-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-bottom group-hover:translate-y-0 -translate-y-2">
                     <div className="py-3 flex flex-col">
@@ -101,7 +98,6 @@ function TopHeader() {
           )}
         </div>
 
-        {/* Actions & Hamburger Toggle */}
         <div className="flex items-center gap-3">
           <Link
             to="/evoca-online"
@@ -110,7 +106,6 @@ function TopHeader() {
             EvocaONLINE
           </Link>
 
-          {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-slate-800 p-2 text-xl focus:outline-none"
@@ -122,7 +117,6 @@ function TopHeader() {
 
       </div>
 
-      {/* Mobile Navigation Drawer */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-gray-200 px-6 py-4 flex flex-col gap-3 shadow-lg max-h-[80vh] overflow-y-auto">
           {loading ? (
@@ -159,7 +153,6 @@ function TopHeader() {
                   )}
                 </div>
 
-                {/* Mobile Submenu Accordion */}
                 {item.subItems && item.subItems.length > 0 && activeDropdown === (item.id || item.path) && (
                   <div className="pl-4 py-2 flex flex-col gap-2 bg-purple-50/50 rounded-lg my-1">
                     {item.subItems.map((subItem, index) => {
