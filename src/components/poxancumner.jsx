@@ -4,6 +4,7 @@ import PoxancumneriMasin from "./poxancumner-imasin"
 import PoxancumneriMasin2 from "./poxancumner-imasin2"
 import PoxancumneriMasin3 from "./poxancumner-imasin3"
 import PoxancumneriMasin4 from "./poxancumner-imasin4"
+import PoxancumneriMasin5 from "./poxancumner-imasin5"
 function Poxancumner(){
     return(
         <>
@@ -13,6 +14,7 @@ function Poxancumner(){
         <PoxancumneriMasin2></PoxancumneriMasin2>
         <PoxancumneriMasin3></PoxancumneriMasin3>
         <PoxancumneriMasin4></PoxancumneriMasin4>
+        <PoxancumneriMasin5></PoxancumneriMasin5>
         </>
     )
 }
