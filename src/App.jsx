@@ -75,6 +75,7 @@ import OnlineAvand from "./components/onlineavand.jsx"
 import Mutq from "./components/mutq.jsx"
 import LiveQartez from "./components/qartez.jsx"
 import Hashivner from "./components/hashivner.jsx"
+import Poxancumner from "./components/poxancumner.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -177,6 +178,7 @@ function App() {
         <Route path="/mutq" element={<Mutq/>}></Route>
         <Route path="/qartez" element={<LiveQartez/>}></Route>
         <Route path="/acounts" element={<Hashivner/>}></Route>
+        <Route path="/transfers" element={<Poxancumner/>}></Route>
       </Routes>
     </>
   )
