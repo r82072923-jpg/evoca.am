@@ -6,6 +6,7 @@ import ArjetxteriMasin3 from "./arjetxter-imasin3"
 import VerjinNorutyunner4 from "./verjinnorutyunner4"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Arjetxter(){
     return(
         <>
@@ -17,6 +18,7 @@ function Arjetxter(){
         <VerjinNorutyunner4></VerjinNorutyunner4>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
