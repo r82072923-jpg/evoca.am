@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "./firebaseConfog";
 const accordionData = {
   title: "ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ",
   items: [
@@ -72,7 +73,7 @@ const accordionData = {
     },
     {
       id: "warning",
-      title: "Երաշխավորված ավանդների սահմանաչափերը",
+      title: "ՈՒՇԱԴՐՈՒԹՅՈՒՆ",
       content: [
         "Առարկայազուրկ մետաղական հաշիվների, Ավանդային և Քարտային հաշիվների սպասարկման պայմաններին կարող եք ծանոթանալ Առարկայազուրկ մետաղական հաշիվներ, Վճարային քարտեր ենթաբաժիններում և ֆիզիկական անձանց բանկային ծառայությունների Ավանդներ բաժնում:",
         "Ձեր հաշվում առկա միջոցների նկատմամբ տոկոսագումարները հաշվարկվում են ԱՆՎԱՆԱԿԱՆ ՏՈԿՈՍԱԴՐՈՒՅՔԻ հիման վրա: Իակ ՏԱՐԵԿԱՆ ՏՈԿՈՍԱՅԻՆ ԵԿԱՄՏԱԲԵՐՈՒԹՅՈՒՆԸ ցույց է տալիս, թե որքան եկամուտ կստանայիք Դուք, եթե Ձեր ավանդի դիմաց ստացված տոկոսագումարները վերաներդնեիք ավանդի տեսքով: ՏԱՐԵԿԱՆ ՏՈԿՈՍԱՅԻՆ ԵԿԱՄՏԱԲԵՐՈՒԹՅԱՆ հաշվարկման կարգին կարող եք ծանոթանալ ԱՅՍՏԵՂ:",
@@ -81,7 +82,7 @@ const accordionData = {
     },
     {
       id: "warning2",
-      title: "Երաշխավորված ավանդների սահմանաչափերը",
+      title: "Օտարերկրյա Հաշիվների Հարկման Հմապատասխանության ակտի (FATCA) ծանուցում",
       content: [
         "Հարգելի Հաճախորդ,",
         "«ԷՎՈԿԱԲԱՆԿ» ԲԲԸ-ն Հայաստանի Հանրապետության և Ամերիկայի Միացյալ Նահանգների միջև «Օտարերկրյա հաշիվների հարկային համապատասխանության ակտի» կիրարկմանն օժանդակելու համագործակցության մասին համաձայնագրի պահանջներից ելնելով իրավասու է հաճախորդներից պահանջել լրացուցիչ տեղեկատվություն, մասնավորապես հաճախորդներից պահանջվում է լրացնել վերջիններիս ԱՄՆ անձ կարգավիճակի նույնականացման համար պահանջվող հետևյալ ձևաթղթերը՝ Իրավաբանական անձ հաճախորդների ինքնահայտարարագրման ձև` Մոդել 2-ի համաձայն (FATCA) կամ Ֆիզիկական անձ (ներառյալ անհատ ձեռնարկատեր) հաճախորդների ինքնահայտարարագրման ձև FATCA նպատակների համար",
@@ -92,13 +93,33 @@ const accordionData = {
 
 function HashivneriMasin4() {
   const [openId, setOpenId] = useState("docs");
-
   const toggleAccordion = (id) => {
     setOpenId((prevId) => (prevId === id ? null : id));
   };
+const uploadDataToFirebase = async () => {
+    try {
+      for (const item of accordionData.items) {
+        const docRef = doc(db, "hashivneriMasin", item.id);
+        
 
+        await setDoc(docRef, {
+          title: item.title,
+          content: item.content
+        });
+      }
+      alert("Տվյալները հաջողությամբ պահպանվել են Firebase-ում:");
+    } catch (error) {
+      console.error("Սխալ տվյալները պահպանելիս:", error);
+    }
+  };
   return (
     <div className="w-full max-w-4xl mx-auto p-4 font-sans">
+<button 
+          onClick={uploadDataToFirebase}
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition"
+        >
+          Ուղարկել Firebase
+        </button>
       <h2 className="text-xl font-bold uppercase mb-6 text-slate-900 tracking-wide">
         {accordionData.title}
       </h2>
