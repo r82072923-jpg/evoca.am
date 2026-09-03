@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader from "./topHeader"
 import PoxancumneriMasin from "./poxancumner-imasin"
 import PoxancumneriMasin2 from "./poxancumner-imasin2"
+import PoxancumneriMasin3 from "./poxancumner-imasin3"
 function Poxancumner(){
     return(
         <>
@@ -9,6 +10,7 @@ function Poxancumner(){
         <TopHeader></TopHeader>
         <PoxancumneriMasin></PoxancumneriMasin>
         <PoxancumneriMasin2></PoxancumneriMasin2>
+        <PoxancumneriMasin3></PoxancumneriMasin3>
         </>
     )
 }
