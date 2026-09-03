@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfog";
 import { NavLink, Link } from "react-router-dom";
 import Chat from "./chat";
-
+  
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
