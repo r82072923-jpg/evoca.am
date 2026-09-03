@@ -6,6 +6,7 @@ import HashivneriMasin3 from "./hashivner-imasin3"
 import HashivneriMasin4 from "./hashivner-imasin4"
 import HashivneriMasin5 from "./hashivner-imasin5"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function Hashivner(){
     return(
         <>
@@ -17,6 +18,7 @@ function Hashivner(){
         <HashivneriMasin4></HashivneriMasin4>
         <HashivneriMasin5></HashivneriMasin5>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
