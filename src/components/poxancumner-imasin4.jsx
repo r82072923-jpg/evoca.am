@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "./firebaseConfog";
 const accordionData = [
   {
     id: "dram",
@@ -47,11 +48,38 @@ function PoxancumneriMasin4() {
     setOpenId((prevId) => (prevId === id ? null : id));
   };
 
+  // Ֆունկցիա տվյալները Firebase ուղարկելու համար
+  const uploadDataToFirebase = async () => {
+    try {
+      for (const item of accordionData) {
+        const docRef = doc(db, "poxancumneriMasin", item.id);
+        
+        await setDoc(docRef, {
+          title: item.title,
+          content: item.content
+        });
+      }
+      alert("Տվյալները հաջողությամբ պահպանվել են poxancumneriMasin հավաքածուում:");
+    } catch (error) {
+      console.error("Սխալ տվյալները պահպանելիս:", error);
+    }
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto p-4 font-sans">
-      <h2 className="text-xl font-bold uppercase mb-6 text-slate-900 tracking-wide">
-        ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-bold uppercase text-slate-900 tracking-wide">
+          ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ
+        </h2>
+
+        {/* Ժամանակավոր կոճակ տվյալները բազա ուղարկելու համար */}
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition"
+        >
+          Ուղարկել Firebase
+        </button>
+      </div>
 
       <div className="flex flex-col gap-3">
         {accordionData.map((item) => {
