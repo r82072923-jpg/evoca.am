@@ -16,7 +16,7 @@ function Poxancumner(){
         <PoxancumneriMasin3></PoxancumneriMasin3>
         <PoxancumneriMasin4></PoxancumneriMasin4>
         <PoxancumneriMasin5></PoxancumneriMasin5>
-        <OnlineEvMObileBanking></OnlineEvMObileBanking>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
