@@ -1,7 +1,6 @@
 import React from 'react';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from './firebaseConfog';
-import { db } from './firebaseConfog'; 
 
 const tabs = [
   'Վարկի մասին',
