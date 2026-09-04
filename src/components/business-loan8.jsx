@@ -5,6 +5,7 @@ import BusinessLoan8iMasin from "./business-loan8-imasin"
 import BusinessLoan8iMasin2 from "./business-loan8-imasin2"
 import BusinessLoan8iMasin3 from "./business-loan8-imasin3"
 import Slayder4 from "./slayder4"
+import OnlineEvMobileBanking from "./onlineevmobilebanking"
 function BusinessLoan8(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -22,6 +23,7 @@ function BusinessLoan8(){
           )}
         </div>
         <Slayder4></Slayder4>
+        <OnlineEvMobileBanking></OnlineEvMobileBanking>
         </>
     )
 }
