@@ -1,5 +1,5 @@
-import React from 'react';
-import { doc, setDoc } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
+import { doc, getDoc } from "firebase/firestore";
 import { db } from './firebaseConfog';
 
 const tabs = [
@@ -7,68 +7,61 @@ const tabs = [
   'Պայմաններ և սակագներ',
 ];
 
-const loanData = {
-  mainDescription: "Վարկային գծերը տրամադրվում են Հայաստանի ռեզիդենտ և ոչ ռեզիդենտ իրավաբանական և անհատ ձեռնարկատեր անձանց` բիզնես վարկերի համար սահմանված տոկոսադրույքներով, մինչև 5 տարի մարման ժամկետով, դրամով կամ արտարժույթով` շրջանառու կապիտալի համալրման նպատակով: Կարող եք օգտվել հետևյալ վարկային գծերից`",
-  creditTypes: [
-    {
-      id: 1,
-      title: "Վարկային գիծ վերականգնվող",
-      description: ", որի դեպքում կարող եք հաստատված վարկային գծի սահմանաչափում և գործելու ժամանակահատվածում պարբերաբար մարումներ կատարել և մնացորդի սահմաններում միջոցներ ստանալ վարկային գծից: Ընդ որում` վարկային գծի չօգտագործված մասի վրա սահմանվում է 0-3% տարեկան տոկոսադրույք:"
-    },
-    {
-      id: 2,
-      title: "Չվերականգնվող վարկային գիծ",
-      description: ", որի դեպքում վարկային գիծը տրամադրում ենք մաս-մաս, և կատարված մարումներից հետո վարկային գծի սահմանաչափը չի վերականգնվում, ընդ որում` չօգտագործված մասի վրա տոկոսների հաշվարկում չի կատարվում:"
-    }
-  ],
-  footerNote: "Վարկերը կարող եք ձևակերպել մեր Գլխամասային գրասենյակում և ցանկացած մասնաճյուղում (բացառությամբ «Էրեբունի», «Երևան Մոլ», «Հանրապետություն» մասնաճյուղերի):",
-  currencies: ["֏", "$", "€"],
-  statistics: [
-    { id: 1, prefix: "մինչև", value: "1.5 մլրդ. ֏", label: "Սահմանաչափ" },
-    { id: 2, prefix: "մինչև", value: "5 տարի", label: "Մարման ժամկետ" },
-    { id: 3, prefix: "սկսած", value: "6%-ից", label: "Տոկոսադրույք" }
-  ]
-};
+function BusinessLoan13iMasin2({ activeTab, setActiveTab }) {
+  const [loanData, setLoanData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-const uploadLoanData = async () => {
-  try {
-    await setDoc(doc(db, "businessLoan13iMasin", "info"), loanData);
-    console.log("Տվյալները հաջողությամբ պահպանվեցին Firebase-ում:");
-  } catch (error) {
-    console.error("Սխալ տվյալները պահպանելիս:", error);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "businessLoan13iMasin", "info");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setLoanData(docSnap.data());
+        } else {
+          console.log("Տվյալներ չեն գտնվել Firebase-ում:");
+        }
+      } catch (error) {
+        console.error("Սխալ տվյալները բեռնելիս:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-20 text-lg text-gray-500">Տվյալները բեռնվում են...</div>;
   }
-};
 
-function BusinessLoan13iMasin2({activeTab, setActiveTab}) {
+  if (!loanData) {
+    return <div className="text-center py-20 text-lg text-red-500">Տվյալները հասանելի չեն:</div>;
+  }
+
   return (
     <section className="max-w-6xl mx-auto p-6 bg-white text-gray-800 font-sans">
-        <button 
-          onClick={uploadLoanData}
-          className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Ուղարկել firebase
-        </button>
-        
-        <div className="border-b border-gray-200 mb-12 overflow-x-auto">
-          <nav className="flex space-x-10 min-w-max">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
-                  activeTab === tab
-                    ? 'text-[#6b11cb]'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                {tab}
-                {activeTab === tab && (
-                  <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
-                )}
-              </button>
-            ))}
-          </nav>
-        </div>
+      <div className="border-b border-gray-200 mb-12 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         <div className="lg:col-span-7 space-y-6 text-sm md:text-base leading-relaxed">
