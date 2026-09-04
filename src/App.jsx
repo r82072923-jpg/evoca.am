@@ -78,6 +78,7 @@ import Hashivner from "./components/hashivner.jsx"
 import Poxancumner from "./components/poxancumner.jsx"
 import Arjetxter from "./components/arjetxter.jsx"
 import BusinessLoan13 from "./components/business-loan13.jsx"
+import BusinessLoan12 from "./components/business-loan12.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -183,6 +184,7 @@ function App() {
         <Route path="/transfers" element={<Poxancumner/>}></Route>
         <Route path="/securuties" element={<Arjetxter/>}></Route>
         <Route path="/business-loan13" element={<BusinessLoan13/>}></Route>
+        <Route path="/business-loan12" element={<BusinessLoan12/>}></Route>
       </Routes>
     </>
   )
