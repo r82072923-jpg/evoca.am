@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from './firebaseConfog';
 const loanData = {
   currencies: ["֏"],
   paragraphs: [
@@ -40,33 +41,57 @@ const loanData = {
     }
   ]
 };
-  const tabs = [
-    'Վարկի մասին',
-    'Պայմաններ և սակագներ',
-  ];
-const BusinessLoan8iMasin2 = ({activeTab,setActiveTab}) => {
+
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ և սակագներ',
+];
+
+const BusinessLoan8iMasin2 = ({ activeTab, setActiveTab }) => {
+
+  const uploadDataToFirebase = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "businessLoan8iMasin"), loanData);
+      console.log("Տվյալները հաջողությամբ պահպանվեցին, Document ID: ", docRef.id);
+      alert("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
+    } catch (error) {
+      console.error("Առաջացավ սխալ տվյալները ուղարկելիս: ", error);
+      alert("Սխալ տվյալները ուղարկելիս");
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans">
-        <div className="border-b border-gray-200 mb-12 overflow-x-auto">
-          <nav className="flex space-x-10 min-w-max">
-            {tabs.map((tab, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
-                  activeTab === tab
-                    ? 'text-[#6b11cb]'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                {tab}
-                {activeTab === tab && (
-                  <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
-                )}
-              </button>
-            ))}
-          </nav>
-        </div>
+      <div className="mb-6">
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Ուղարկել FIREBASE (businessLoan8iMasin)
+        </button>
+      </div>
+
+      <div className="border-b border-gray-200 mb-12 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
+      
       <div className="flex flex-col lg:flex-row items-start justify-between gap-10">
         <div className="lg:w-1/2 space-y-6 text-[#2D2D2D] text-base md:text-lg leading-relaxed">
           {loanData.paragraphs.map((paragraph, index) => (
