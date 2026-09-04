@@ -2,7 +2,7 @@ import React from 'react';
   const tabs = [
     'Վարկի մասին',
   ];
-const BusinessLoan4iMasin2 = () => {
+const BusinessLoan4iMasin2 = ({activeTab,setActiveTab}) => {
   return (
     <div className="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-purple-100">
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
