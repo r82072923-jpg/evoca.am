@@ -1,68 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from './firebaseConfog';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 
 const tabs = [
   'Վարկի մասին',
   'Պայմաններ'
 ];
 
-const loanData = {
-  currencies: ['֏', '$', '€'],
-  paragraphs: [
-    {
-      type: 'highlight',
-      text: 'Ցանկանում եք ներմուծել հումք և մեծացնել տեքստիլի',
-      rest: ' արտադրության ծավալները, բարձրացնել արդյունավետությունը։ Այդ դեպքում այս վարկատեսակը հենց Ձեզ համար է։'
-    },
-    {
-      type: 'standard',
-      text: 'Օգտվելով այս բիզնես վարկից՝ Դուք կստանաք մրցունակ տոկոսադրույք, երկարաժամկետ մարման հնարավորություն, պարզ պայմաններ և ձևակերպման արագ գործընթաց։ ',
-      highlightText: 'Դուք նաև կարող եք ստանալ մինչև 8% սուբսիդավորում',
-      rest: ' պետության կողմից։'
-    },
-    {
-      type: 'simple',
-      text: 'Այս վարկը նախատեսված է ՀՀ ռեզիդենտ իրավաբանական անձանց և անհատ ձեռնարկատերերի համար, որոնք գործունեություն են ծավալում տեքստիլ ոլորտում և զբաղվում են հումքի ներմուծմամբ։'
-    },
-    {
-      type: 'simple',
-      text: 'Բիզնես վարկը կարող եք ձևակերպել նաև արտարժույթով։'
-    }
-  ],
-  highlights: [
-    {
-      limitText: 'Մինչև',
-      mainValue: '36 ամիս',
-      label: 'Ժամկետ',
-    },
-    {
-      limitText: 'Մինչև',
-      mainValue: '500 մլն ֏',
-      label: 'Սահմանաչափ կամ համարժեք արտարժույթ',
-    },
-    {
-      limitText: null,
-      mainValue: '8%',
-      label: 'Տոկոսադրույքի սուբսիդավորման չափ',
-    },
-  ]
-};
-
 const BusinessLoan2iMasin2 = ({ activeTab, setActiveTab }) => {
-  
+  const [loanData, setLoanData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const sendDataToFirebase = async () => {
+    const fetchDataFromFirebase = async () => {
       try {
-        await addDoc(collection(db, 'businessLoan2iMasin'), loanData);
-        console.log('Տվյալները հաջողությամբ ուղարկվեցին Firebase');
-      } catch (error) {
-        console.error('Սխալ տվյալների ուղարկման ժամանակ:', error);
+        const querySnapshot = await getDocs(collection(db, 'businessLoan2iMasin'));
+        if (!querySnapshot.empty) {
+          const docData = querySnapshot.docs[0].data();
+          setLoanData(docData);
+        } else {
+          setError('Տվյալներ չեն գտնվեց բազայում։');
+        }
+      } catch (err) {
+        console.error('Սխալ տվյալների ստացման ժամանակ:', err);
+        setError('Չհաջողվեց բեռնել տվյալները։');
+      } finally {
+        setLoading(false);
       }
     };
 
-    sendDataToFirebase();
+    fetchDataFromFirebase();
   }, []);
+
+  if (loading) {
+    return <div className="w-full bg-white p-8 text-center text-gray-500">Բեռնվում է...</div>;
+  }
+
+  if (error) {
+    return <div className="w-full bg-white p-8 text-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="w-full bg-white p-4 sm:p-6">
@@ -89,7 +66,7 @@ const BusinessLoan2iMasin2 = ({ activeTab, setActiveTab }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-7 space-y-4 text-gray-800 text-sm sm:text-base leading-relaxed">
-          {loanData.paragraphs.map((p, index) => {
+          {loanData?.paragraphs?.map((p, index) => {
             if (p.type === 'highlight') {
               return (
                 <p key={index}>
@@ -112,16 +89,17 @@ const BusinessLoan2iMasin2 = ({ activeTab, setActiveTab }) => {
             );
           })}
         </div>
+
         <div className="lg:col-span-5 bg-white border border-purple-100 rounded-xl shadow-sm overflow-hidden">
           <div className="p-4 border-b border-purple-100 flex gap-2">
-            {loanData.currencies.map((curr, idx) => (
+            {loanData?.currencies?.map((curr, idx) => (
               <span key={idx} className="w-8 h-8 rounded-full bg-[#6b11cb] text-white flex items-center justify-center font-bold text-sm">
                 {curr}
               </span>
             ))}
           </div>
 
-          {loanData.highlights.map((item, index) => (
+          {loanData?.highlights?.map((item, index) => (
             <div 
               key={index} 
               className={`p-4 flex items-center justify-between ${
