@@ -75,7 +75,7 @@ function BusinessLoan15iMasin2() {
               className={`w-10 h-10 rounded-full font-bold text-lg flex items-center justify-center select-none cursor-pointer ${
                 curr.isActive
                   ? 'bg-[#6F11B7] text-white shadow-md'
-                  : 'bg-[#6F11B7] text-[#6F11B7]'
+                  : 'bg-[#6F11B7] text-white'
               }`}
             >
               {curr.symbol}
