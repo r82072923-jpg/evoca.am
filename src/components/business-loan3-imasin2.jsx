@@ -17,7 +17,6 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
       try {
         const querySnapshot = await getDocs(collection(db, "businessLoan3iMasin"));
         if (!querySnapshot.empty) {
-          // Վերցնում ենք հավաքածուի առաջին document-ը
           const data = querySnapshot.docs[0].data();
           setLoanData(data);
         } else {
