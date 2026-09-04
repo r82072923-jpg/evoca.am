@@ -1,43 +1,42 @@
 import React from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from './firebaseConfog';
+const loanData = {
+  introText: "Ունե՞ք գործող բիզնես վարկ, օվերդրաֆտ կամ վարկային գիծ այլ ֆինանսական կառույցում, կարող եք այն տեղափոխել Evocabank և միաժամանակ ստանալ հավելյալ միջոցներ՝ Ձեր բիզնեսի ընթացիկ ծախսերի կամ զարգացման նպատակների համար։",
+  advantagesTitle: "Առավելություններ՝",
+  advantages: [
+    "վերաֆինանսավորվող վարկի գումարի մինչև 2%-ի չափով cashback (cashback-ի առավելագույն չափը՝ մինչև 2,000,000 ՀՀ դրամ կամ համարժեք արտարժույթ),",
+    "մինչև 120 ամիս մարման ժամկետ,",
+    "մայր գումարի մարման արտոնյալ ժամանակահատված՝ մինչև 6 ամիս,",
+    "լրացուցիչ ֆինանսավորման հնարավորություն,",
+    "ֆինանսավորում ՀՀ դրամով, ԱՄՆ դոլարով կամ Եվրոյով։"
+  ],
+  additionalFundingTitle: "Լրացուցիչ ֆինանսավորումը կարող եք օգտագործել՝",
+  additionalFundingUses: [
+    "հիմնական միջոցների ձեռքբերման,",
+    "շրջանառու միջոցների համալրման,",
+    "կրեդիտորական պարտքերի մարման,",
+    "ընթացիկ ծախսերի կամ այլ ներդրումների համար։"
+  ],
+  outroText: "Evocabank-ի հետ կարող եք ոչ միայն ավելի հարմար պայմաններով վերաֆինանսավորել Ձեր գործող վարկերը, այլ նաև ստանալ նոր հնարավորություններ՝ Ձեր բիզնեսն ընդլայնելու համար:",
+  term: {
+    title: "Վերաֆինանսավորում",
+    value: "36-120 ամիս",
+    label: "Ժամկետ"
+  },
+  amount: {
+    title: "Գումար",
+    value: "15մլն-500մլն",
+    label: "ՀՀ դրամ կամ համարժեք արտարժույթ"
+  },
+  rates: [
+    { currencyLabel: "ՀՀ դրամ՝ 12%" },
+    { currencyLabel: "ԱՄՆ դոլար՝ 9%" },
+    { currencyLabel: "Եվրո՝ 8%" }
+  ]
+};
 
 export const uploadBusinessLoan3Data = async () => {
-  const loanData = {
-    introText: "Ունե՞ք գործող բիզնես վարկ, օվերդրաֆտ կամ վարկային գիծ այլ ֆինանսական կառույցում, կարող եք այն տեղափոխել Evocabank և միաժամանակ ստանալ հավելյալ միջոցներ՝ Ձեր բիզնեսի ընթացիկ ծախսերի կամ զարգացման նպատակների համար։",
-    advantagesTitle: "Առավելություններ՝",
-    advantages: [
-      "վերաֆինանսավորվող վարկի գումարի մինչև 2%-ի չափով cashback (cashback-ի առավելագույն չափը՝ մինչև 2,000,000 ՀՀ դրամ կամ համարժեք արտարժույթ),",
-      "մինչև 120 ամիս մարման ժամկետ,",
-      "մայր գումարի մարման արտոնյալ ժամանակահատված՝ մինչև 6 ամիս,",
-      "լրացուցիչ ֆինանսավորման հնարավորություն,",
-      "ֆինանսավորում ՀՀ դրամով, ԱՄՆ դոլարով կամ Եվրոյով։"
-    ],
-    additionalFundingTitle: "Լրացուցիչ ֆինանսավորումը կարող եք օգտագործել՝",
-    additionalFundingUses: [
-      "հիմնական միջոցների ձեռքբերման,",
-      "շրջանառու միջոցների համալրման,",
-      "կրեդիտորական պարտքերի մարման,",
-      "ընթացիկ ծախսերի կամ այլ ներդրումների համար։"
-    ],
-    outroText: "Evocabank-ի հետ կարող եք ոչ միայն ավելի հարմար պայմաններով վերաֆինանսավորել Ձեր գործող վարկերը, այլ նաև ստանալ նոր հնարավորություններ՝ Ձեր բիզնեսն ընդլայնելու համար:",
-    term: {
-      title: "Վերաֆինանսավորում",
-      value: "36-120 ամիս",
-      label: "Ժամկետ"
-    },
-    amount: {
-      title: "Գումար",
-      value: "15մլն-500մլն",
-      label: "ՀՀ դրամ կամ համարժեք արտարժույթ"
-    },
-    rates: [
-      { currencyLabel: "ՀՀ դրամ՝ 12%" },
-      { currencyLabel: "ԱՄՆ դոլար՝ 9%" },
-      { currencyLabel: "Եվրո՝ 8%" }
-    ]
-  };
-
   try {
     const docRef = await addDoc(collection(db, "businessLoan3iMasin"), loanData);
     console.log("Տվյալները հաջողությամբ ավելացվեցին ID-ով՝ ", docRef.id);
@@ -47,13 +46,20 @@ export const uploadBusinessLoan3Data = async () => {
 };
 
 const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
-const tabs = [
-  'Վարկի մասին',
-  'Պայմաններ',
-];
+  const tabs = [
+    'Վարկի մասին',
+    'Պայմաններ',
+  ];
+
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans bg-white">
-    <button onClick={uploadBusinessLoan3Data}>Ուղարկել firebase</button>
+      <button 
+        onClick={uploadBusinessLoan3Data}
+        className="mb-6 px-4 py-2 bg-[#6b11cb] text-white rounded-md hover:bg-purple-800 transition-colors"
+      >
+        Ուղարկել Firebase
+      </button>
+
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
@@ -79,7 +85,7 @@ const tabs = [
         <div className="lg:col-span-7 space-y-6">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
             {loanData.introText.split('Evocabank').map((part, i, arr) => (
-              <React.Fragment key="{i}">
+              <React.Fragment key={i}>
                 {part}
                 {i < arr.length - 1 && <strong className="text-gray-900 font-bold">Evocabank</strong>}
               </React.Fragment>
@@ -126,6 +132,7 @@ const tabs = [
             <strong className="text-[#6b11cb]">Evocabank</strong>-ի հետ կարող եք ոչ միայն ավելի հարմար պայմաններով վերաֆինանսավորել Ձեր գործող վարկերը, այլ նաև ստանալ նոր հնարավորություններ՝ Ձեր բիզնեսն ընդլայնելու համար:
           </p>
         </div>
+        
         <div className="lg:col-span-5 bg-white border border-gray-100 rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8">
           <div className="flex gap-3 mb-6">
             {['֏', '$', '€'].map((symbol) => (
