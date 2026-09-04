@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BusinessLoan6iMasin() {
+function BusinessLoan8iMasin() {
   return (
     <section className="relative w-full bg-[#f8f9fb] pt-20 pb-20 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,4 +37,4 @@ function BusinessLoan6iMasin() {
   );
 }
 
-export default BusinessLoan6iMasin;
+export default BusinessLoan8iMasin;
