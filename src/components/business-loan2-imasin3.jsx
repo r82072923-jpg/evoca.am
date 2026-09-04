@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebaseConfog';
 import { collection, getDocs } from 'firebase/firestore';
+import BusinessLoan2iMasin2 from './business-loan2-imasin2';
 
 const tabs = [
   'Վարկի մասին',
@@ -94,7 +95,7 @@ const loanTermsData = [
   },
 ];
 
-const BusinessLoanContainer = () => {
+const BusinessLoan2iMasin3 = () => {
   const [activeTab, setActiveTab] = useState('Վարկի մասին');
   const [loanData, setLoanData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -223,4 +224,4 @@ const BusinessLoanContainer = () => {
   );
 };
 
-export default BusinessLoanContainer;
+export default BusinessLoan2iMasin3;
