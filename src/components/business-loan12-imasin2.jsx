@@ -1,9 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-const tabs = [
-  'Վարկի մասին',
-  'Պայմաններ և սակագներ',
-];
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebaseConfog";
 const loanAboutData = {
   currencies: ["֏", "$", "€"],
   paragraphs: [
@@ -31,9 +27,22 @@ const loanAboutData = {
   ]
 };
 
+const uploadDataToFirebase = async () => {
+  try {
+    const docRef = await addDoc(collection(db, "businessLoan12iMasin"), loanAboutData);
+    console.log("Տվյալները հաջողությամբ պահպանվեցին, Document ID: ", docRef.id);
+  } catch (error) {
+    console.error("Առաջացավ սխալ տվյալները ուղարկելիս: ", error);
+  }
+};
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ և սակագներ',
+];
 const BusinessLoan12iMasin2 = ({activeTab,setActiveTab}) => {
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans">
+        <button onClick={uploadDataToFirebase}>Ուղարկել FIREBASE</button>
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
