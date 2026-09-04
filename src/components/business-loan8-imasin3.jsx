@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { db } from '../firebaseConfog';
+import { db } from './firebaseConfog'; // Ճշգրտեք ձեր firebase-ի ֆայլի ճանապարհը (path)
 import { doc, setDoc } from 'firebase/firestore';
 
 const tabs = [
@@ -89,7 +89,7 @@ const termsData = {
 };
 
 const BusinessLoan8iMasin3 = ({ activeTab, setActiveTab }) => {
-
+  
   useEffect(() => {
     const uploadDataToFirebase = async () => {
       try {
