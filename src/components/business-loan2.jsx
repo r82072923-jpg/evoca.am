@@ -6,7 +6,7 @@ function BusinessLoan2(){
         <>
         <Header></Header>
         <TopHeader2></TopHeader2>
-        <BusBusinessLoan2iMasin></BusBusinessLoan2iMasin>
+        <BusinessLoan2iMasin></BusinessLoan2iMasin>
         </>
     )
 }
