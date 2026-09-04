@@ -12,7 +12,7 @@ function BusinessLoan13(){
         <BusinessLoan13iMasin></BusinessLoan13iMasin>
         <div>
           {activeTab === 'Վարկի մասին' && (
-            <BusinessLoan13iMasin2 loanData={loanData} activeTab={activeTab} setActiveTab={setActiveTab} />
+            <BusinessLoan13iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           
           {activeTab === 'Պայմաններ և սակագներ' && (

@@ -26,7 +26,7 @@ const loanData = {
   ]
 };
 
-function BusinessLoan13iMasin2() {
+function BusinessLoan13iMasin2({activeTab,setActiveTab}) {
   return (
     <section className="max-w-6xl mx-auto p-6 bg-white text-gray-800 font-sans">
         <div className="border-b border-gray-200 mb-12 overflow-x-auto">
