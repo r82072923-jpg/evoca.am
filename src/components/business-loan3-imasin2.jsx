@@ -27,7 +27,7 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
     term: {
       title: "Վերաֆինանսավորում",
       value: "36-120 ամիս",
-      label: "ժամկետ"
+      label: "Ժամկետ"
     },
     amount: {
       title: "Գումար",
@@ -36,19 +36,13 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
     },
     rates: [
       {
-        currencySymbol: "֏",
         currencyLabel: "ՀՀ դրամ՝ 12%",
-        description: "Տարեկան անվանական տոկոսադրույք"
       },
       {
-        currencySymbol: "$",
         currencyLabel: "ԱՄՆ դոլար՝ 9%",
-        description: "Տարեկան անվանական տոկոսադրույք"
       },
       {
-        currencySymbol: "€",
         currencyLabel: "Եվրո՝ 8%",
-        description: "Տարեկան անվանական տոկոսադրույք"
       }
     ]
   };
@@ -80,7 +74,7 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
         <div className="lg:col-span-7 space-y-6">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
             {loanData.introText.split('Evocabank').map((part, i, arr) => (
-              <React.Fragment key={i}>
+              <React.Fragment key="{i}">
                 {part}
                 {i < arr.length - 1 && <strong className="text-gray-900 font-bold">Evocabank</strong>}
               </React.Fragment>
@@ -127,50 +121,52 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
             <strong className="text-[#6b11cb]">Evocabank</strong>-ի հետ կարող եք ոչ միայն ավելի հարմար պայմաններով վերաֆինանսավորել Ձեր գործող վարկերը, այլ նաև ստանալ նոր հնարավորություններ՝ Ձեր բիզնեսն ընդլայնելու համար:
           </p>
         </div>
-
-        <div className="lg:col-span-5 bg-white border border-purple-100 rounded-2xl shadow-sm p-6 space-y-6">
-          <div className="divide-y divide-purple-100">
-            
-            <div className="py-4 flex justify-between items-center">
-              <div>
-                <p className="text-[#6b11cb] text-sm font-medium">{loanData.term.title}</p>
-                <p className="text-gray-900 font-extrabold text-xl">{loanData.term.value}</p>
-              </div>
-              <span className="text-[#6b11cb] text-sm">{loanData.term.label}</span>
-            </div>
-
-            <div className="py-4 flex justify-between items-center">
-              <div>
-                <p className="text-[#6b11cb] text-sm font-medium">{loanData.amount.title}</p>
-                <p className="text-gray-900 font-extrabold text-xl">{loanData.amount.value}</p>
-              </div>
-              <span className="text-[#6b11cb] text-sm text-right">{loanData.amount.label}</span>
-            </div>
-
-            {loanData.rates.map((rate, index) => (
-              <div key={index} className="py-4 flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 text-[#6b11cb] flex items-center justify-center font-bold text-base shadow-sm">
-                    {rate.currencySymbol}
-                  </div>
-                  <div>
-                    <p className="text-[#6b11cb] text-sm font-medium">Սկսած</p>
-                    <p className="text-gray-900 font-extrabold text-xl">{rate.currencyLabel}</p>
-                  </div>
-                </div>
-                <span className="text-[#6b11cb] text-sm text-right">
-                  {rate.description.split(' ').map((word, i) => (
-                    <React.Fragment key={i}>
-                      {word} {i === 1 && <br />}
-                    </React.Fragment>
-                  ))}
-                </span>
+        <div className="lg:col-span-5 bg-white border border-gray-100 rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8">
+          <div className="flex gap-3 mb-6">
+            {['֏', '$', '€'].map((symbol) => (
+              <div 
+                key={symbol} 
+                className="w-9 h-9 rounded-full bg-[#6b11cb] text-white flex items-center justify-center font-bold text-lg"
+              >
+                {symbol}
               </div>
             ))}
+          </div>
 
+          <div className="divide-y divide-gray-100 flex flex-col">
+            <div className="py-4 grid grid-cols-2 gap-4 items-center">
+              <div>
+                <p className="text-gray-400 text-xs mb-0.5">{loanData.term.title}</p>
+                <p className="text-[#6b11cb] font-bold text-xl sm:text-2xl whitespace-nowrap">{loanData.term.value}</p>
+              </div>
+              <div className="text-gray-800 text-sm font-medium ml-2">
+                {loanData.term.label}
+              </div>
+            </div>
+            <div className="py-4 grid grid-cols-2 gap-4 items-center">
+              <div>
+                <p className="text-gray-400 text-xs mb-0.5">{loanData.amount.title}</p>
+                <p className="text-[#6b11cb] font-bold text-xl sm:text-2xl whitespace-nowrap">{loanData.amount.value}</p>
+              </div>
+              <div className="text-gray-800 text-sm font-medium ml-2 max-w-[160px]">
+                {loanData.amount.label}
+              </div>
+            </div>
+            {loanData.rates.map((rate, index) => (
+              <div key={index} className="py-4 grid grid-cols-2 gap-4 items-center">
+                <div>
+                  <p className="text-gray-400 text-xs mb-0.5">Սկսած</p>
+                  <p className="text-[#6b11cb] font-bold text-xl sm:text-2xl whitespace-nowrap">{rate.currencyLabel}</p>
+                </div>
+                <div className="text-gray-800 text-sm font-medium ml-2">
+                  Տարեկան անվանական
+                  <br />
+                  տոկոսադրույք
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-
       </div>
     </div>
   );
