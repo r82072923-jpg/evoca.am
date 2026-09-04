@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader2 from "./topHeader2"
 import BusinessLoan3iMasin from "./business-loan3-imasin"
 import BusinessLoan3iMasin2 from "./business-loan3-imasin2"
+import BusinessLoan3iMasin3 from "./business-loan3-imasin3"
 function BusinessLoan3(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
