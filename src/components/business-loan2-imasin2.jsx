@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { db } from './firebaseConfog';
+import { collection, addDoc } from 'firebase/firestore';
 
 const tabs = [
   'Վարկի մասին',
@@ -48,6 +50,20 @@ const loanData = {
 };
 
 const BusinessLoan2iMasin2 = ({ activeTab, setActiveTab }) => {
+  
+  useEffect(() => {
+    const sendDataToFirebase = async () => {
+      try {
+        await addDoc(collection(db, 'businessLoan2iMasin'), loanData);
+        console.log('Տվյալները հաջողությամբ ուղարկվեցին Firebase');
+      } catch (error) {
+        console.error('Սխալ տվյալների ուղարկման ժամանակ:', error);
+      }
+    };
+
+    sendDataToFirebase();
+  }, []);
+
   return (
     <div className="w-full bg-white p-4 sm:p-6">
       <div className="border-b border-gray-200 mb-8 overflow-x-auto">
