@@ -1,5 +1,8 @@
 import React from 'react';
-
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ և սակագներ',
+];
 const termsData = {
   currency: "ՀՀ դրամ",
   borrowers: [
@@ -84,6 +87,26 @@ const termsData = {
 const BusinessLoan8iMasin3 = () => {
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans">
+      <div className="border-b border-gray-200 mb-12 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       <div className="border border-purple-200 rounded-lg overflow-hidden shadow-sm bg-white mb-10">
         <table className="w-full border-collapse text-left">
           <tbody>

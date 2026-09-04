@@ -3,6 +3,7 @@ import Header from "./header"
 import TopHeader2 from "./topHeader2"
 import BusinessLoan8iMasin from "./business-loan8-imasin"
 import BusinessLoan8iMasin2 from "./business-loan8-imasin2"
+import BusinessLoan8iMasin3 from "./business-loan8-imasin3"
 function BusinessLoan8(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -16,7 +17,7 @@ function BusinessLoan8(){
           )}
           
           {activeTab === 'Պայմաններ և սակագներ' && (
-            <BusinessLoan13iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <BusinessLoan8iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
