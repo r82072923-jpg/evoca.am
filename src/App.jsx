@@ -77,6 +77,7 @@ import LiveQartez from "./components/qartez.jsx"
 import Hashivner from "./components/hashivner.jsx"
 import Poxancumner from "./components/poxancumner.jsx"
 import Arjetxter from "./components/arjetxter.jsx"
+import BusinessLoan13 from "./components/business-loan13.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -181,6 +182,7 @@ function App() {
         <Route path="/acounts" element={<Hashivner/>}></Route>
         <Route path="/transfers" element={<Poxancumner/>}></Route>
         <Route path="/securuties" element={<Arjetxter/>}></Route>
+        <Route path="/business-loan13" element={<BusinessLoan13/>}></Route>
       </Routes>
     </>
   )
