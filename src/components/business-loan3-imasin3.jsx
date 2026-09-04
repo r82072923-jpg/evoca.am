@@ -1,5 +1,6 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { collection, doc, setDoc, getDocs, } from 'firebase/firestore';
+import { db } from './firebaseConfog'; 
 const fullLoanTermsData = [
   {
     id: '1.',
@@ -182,11 +183,37 @@ const fullLoanTermsData = [
     isFullWidth: true,
   },
 ];
-  const tabs = [
-    'Վարկի մասին',
-    'Պայմաններ',
-  ];
-const BusinessLoan3iMasin3 = ({activeTab,setActiveTab}) => {
+
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ',
+];
+
+const BusinessLoan3iMasin3 = ({ activeTab, setActiveTab }) => {
+  
+  useEffect(() => {
+    const uploadDataToFirebase = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "businessLoan3iMasin2"));
+        
+        if (querySnapshot.empty) {
+          console.log("Տվյալները ուղարկվում են Firebase...");
+          
+          for (const item of fullLoanTermsData) {
+            const docId = `item_${item.id.replace('.', '')}`;
+            await setDoc(doc(db, "businessLoan3iMasin2", docId), item);
+          }
+          
+          console.log("Տվյալները հաջողությամբ պահպանվեցին Firebase-ում:");
+        }
+      } catch (error) {
+        console.error("Սխալ տվյալները Firebase ուղարկելիս:", error);
+      }
+    };
+
+    uploadDataToFirebase();
+  }, []);
+
   return (
     <div className="w-full overflow-x-auto bg-white p-4">
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
@@ -241,7 +268,7 @@ const BusinessLoan3iMasin3 = ({activeTab,setActiveTab}) => {
                 {!row.isFullWidth && (
                   <td className={`align-top p-4 border border-purple-100 text-gray-800 ${
                     row.isBoldValues ? 'text-gray-900 font-bold' : ''
-                  } w-[35%]`}>
+                  } w-[35%] tr`}>
                     
                     {row.col2 && <span>{row.col2}</span>}
                     
