@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const businessLoanData = {
   currencies: [
     { id: 'amd', symbol: '֏', isActive: true },
@@ -40,9 +40,9 @@ const businessLoanData = {
       id: 2,
       content: (
         <>
-          <a href="#" className="text-[#6F11B7] font-semibold underline underline-offset-2 hover:opacity-80">
+          <Link to="/loans" className="text-[#6F11B7] font-semibold underline underline-offset-2 hover:opacity-80">
             Վարկի
-          </a>{' '}
+          </Link>{' '}
           համար կարող են դիմել արդյունաբերության, շինարարության, առևտրի, տրանսպորտի և կապի, գյուղատնտեսության և այլ ոլորտներում գործունեություն ծավալող կազմակերպությունները: Վարկերը կարող են տրամադրվել միանվագ կամ փուլային եղանակով, ինչպես նաև, կախված գործունեության ոլորտից, կարող են ունենալ մարման արտոնյալ ժամանակաշրջան:
         </>
       ),
