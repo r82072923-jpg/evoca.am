@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { db } from '../firebaseConfog';
+import { doc, setDoc } from 'firebase/firestore';
+
 const tabs = [
   'Վարկի մասին',
   'Պայմաններ և սակագներ',
 ];
+
 const termsData = {
   currency: "ՀՀ դրամ",
   borrowers: [
@@ -84,7 +88,21 @@ const termsData = {
   ]
 };
 
-const BusinessLoan8iMasin3 = ({activeTab,setActiveTab}) => {
+const BusinessLoan8iMasin3 = ({ activeTab, setActiveTab }) => {
+
+  useEffect(() => {
+    const uploadDataToFirebase = async () => {
+      try {
+        await setDoc(doc(db, "businessLoan8iMasin2", "loanTermsDoc"), termsData);
+        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase (`businessLoan8iMasin2`)։");
+      } catch (error) {
+        console.error("Սխալ տվյալների ուղարկման ժամանակ:", error);
+      }
+    };
+
+    uploadDataToFirebase();
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans">
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
@@ -332,11 +350,11 @@ const BusinessLoan8iMasin3 = ({activeTab,setActiveTab}) => {
         </table>
       </div> 
       <div className="mt-8 space-y-4">
-        <h3 className="text-red-600 font-bold text-lg">Զգուշացում</h3>
+        <h3 className="text-[#6b11cb] font-bold text-lg">Զգուշացում</h3>
         <div className="space-y-3 text-gray-700 text-sm md:text-base">
           {termsData.warnings.map((warning, index) => (
             <div key={index} className="flex items-start gap-3">
-              <span className="text-red-500 font-bold text-xl leading-none mt-[2px]">•</span>
+              <span className="text-[#6b11cb] font-bold text-xl leading-none mt-[2px]">•</span>
               <p>{warning}</p>
             </div>
           ))}
