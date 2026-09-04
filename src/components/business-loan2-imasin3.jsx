@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from './firebaseConfog';
+import { db } from './firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 
 const tabs = [
@@ -76,8 +76,9 @@ const BusinessLoan2iMasin3 = () => {
 
         const termsQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin2'));
         if (!termsQuerySnapshot.empty) {
-          const fetchedTerms = termsQuerySnapshot.docs[0].data().terms || [];
-          setTermsData(fetchedTerms);
+          const docData = termsQuerySnapshot.docs[0].data();
+          const fetchedTerms = docData.terms || docData || [];
+          setTermsData(Array.isArray(fetchedTerms) ? fetchedTerms : []);
         }
 
         if (loanQuerySnapshot.empty && termsQuerySnapshot.empty) {
