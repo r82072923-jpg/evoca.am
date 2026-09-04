@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import BusinessLoan13iMasin from "./business-loan13-imasin"
 import BusinessLoan13iMasin2 from "./business-loan13-imasin2"
 import BusinessLoan13iMasin3 from "./business-loan13-imasin3"
+import Slayder4 from "./slayder4"
 function BusinessLoan13(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -20,6 +21,7 @@ function BusinessLoan13(){
             <BusinessLoan13iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
+        <Slayder4></Slayder4>
         </>
     )
 }
