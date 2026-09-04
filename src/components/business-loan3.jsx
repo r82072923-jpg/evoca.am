@@ -16,7 +16,7 @@ function BusinessLoan3(){
           )}
           
           {activeTab === 'Պայմաններ' && (
-            <BusinessLoan8iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <BusinessLoan3iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>

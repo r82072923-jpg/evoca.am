@@ -182,10 +182,33 @@ const fullLoanTermsData = [
     isFullWidth: true,
   },
 ];
-
-const BusinessLoanTermsTable = () => {
+  const tabs = [
+    'Վարկի մասին',
+    'Պայմաններ',
+  ];
+const BusinessLoan3iMasin3 = ({activeTab,setActiveTab}) => {
   return (
     <div className="w-full overflow-x-auto bg-white p-4">
+      <div className="border-b border-gray-200 mb-12 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       <div className="min-w-[800px] border-t-[3px] border-t-[#6b11cb]">
         <table className="w-full text-sm sm:text-base text-left border-collapse">
           <tbody>
@@ -253,4 +276,4 @@ const BusinessLoanTermsTable = () => {
   );
 };
 
-export default BusinessLoanTermsTable;
+export default BusinessLoan3iMasin3;
