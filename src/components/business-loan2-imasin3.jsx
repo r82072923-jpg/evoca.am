@@ -69,11 +69,11 @@ const BusinessLoan2iMasin3 = () => {
   useEffect(() => {
     const fetchDataFromFirebase = async () => {
       try {
-        const loanQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin'));
+        const loanQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin2'));
         if (!loanQuerySnapshot.empty) {
           setLoanData(loanQuerySnapshot.docs[0].data());
         }
-        
+
         const termsQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin2'));
         if (!termsQuerySnapshot.empty) {
           const fetchedTerms = termsQuerySnapshot.docs[0].data().terms || [];
