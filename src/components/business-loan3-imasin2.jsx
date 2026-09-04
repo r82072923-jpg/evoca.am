@@ -1,11 +1,8 @@
 import React from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from './firebaseConfog';
 
-const tabs = [
-  'Վարկի մասին',
-  'Պայմաններ',
-];
-
-const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
+export const uploadBusinessLoan3Data = async () => {
   const loanData = {
     introText: "Ունե՞ք գործող բիզնես վարկ, օվերդրաֆտ կամ վարկային գիծ այլ ֆինանսական կառույցում, կարող եք այն տեղափոխել Evocabank և միաժամանակ ստանալ հավելյալ միջոցներ՝ Ձեր բիզնեսի ընթացիկ ծախսերի կամ զարգացման նպատակների համար։",
     advantagesTitle: "Առավելություններ՝",
@@ -35,20 +32,28 @@ const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
       label: "ՀՀ դրամ կամ համարժեք արտարժույթ"
     },
     rates: [
-      {
-        currencyLabel: "ՀՀ դրամ՝ 12%",
-      },
-      {
-        currencyLabel: "ԱՄՆ դոլար՝ 9%",
-      },
-      {
-        currencyLabel: "Եվրո՝ 8%",
-      }
+      { currencyLabel: "ՀՀ դրամ՝ 12%" },
+      { currencyLabel: "ԱՄՆ դոլար՝ 9%" },
+      { currencyLabel: "Եվրո՝ 8%" }
     ]
   };
 
+  try {
+    const docRef = await addDoc(collection(db, "businessLoan3iMasin"), loanData);
+    console.log("Տվյալները հաջողությամբ ավելացվեցին ID-ով՝ ", docRef.id);
+  } catch (error) {
+    console.error("Սխալ տվյալները ավելացնելիս: ", error);
+  }
+};
+
+const BusinessLoan3iMasin2 = ({ activeTab, setActiveTab }) => {
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ',
+];
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 font-sans bg-white">
+    <button onClick={uploadBusinessLoan3Data}>Ուղարկել firebase</button>
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
