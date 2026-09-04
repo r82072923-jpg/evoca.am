@@ -1,5 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebaseConfog";
+import { Link } from "react-router-dom";
 const loanAboutData = {
   currencies: ["֏", "$", "€"],
   paragraphs: [
