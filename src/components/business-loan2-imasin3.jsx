@@ -1,102 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { db } from './firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+import React from 'react';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from './firebaseConfog';
+import { db } from './firebaseConfog'; 
 
 const tabs = [
   'Վարկի մասին',
   'Պայմաններ'
 ];
 
-const renderTermValue = (row) => {
-  switch (row.type) {
-    case 'text':
-      return <>{row.value}</>;
+const loanTermsData = [
+  { id: '1.', label: 'Ֆինանսավորում', value: 'Վարկ', order: 1 },
+  { id: '2.', label: 'Արժույթ', value: 'ՀՀ դրամ, ԱՄՆ դոլար, եվրո', order: 2 },
+  { id: '3.', label: 'Վարկառու*', value: 'ՀՀ ռեզիդենտ իրավաբանական անձ, անհատ ձեռնարկատեր', order: 3 },
+  { id: '4.', label: 'Նպատակ**', value: 'Հումքի ներմուծում', order: 4 },
+  { id: '5.', label: 'Վարկի գումար***', value: '5,100,000-500,000,000 ՀՀ դրամ կամ համարժեք արտարժույթ', order: 5 },
+  { id: '6.', label: 'Բիզնես ուղղություն', value: 'Գործունեություն տեքստիլ ոլորտում', order: 6 },
+  { id: '7.', label: 'Մարման ժամկետ', value: 'Մինչև 36 ամիս', order: 7 },
+  { id: '8.', label: 'Սուբսիդավորման ժամկետ', value: 'Մինչև 12 ամիս', order: 8 },
+  { id: '9.', label: 'Տոկոսադրույքի սուբսիդավորման չափ', value: 'ՀՀ դրամ՝ 8%\nԱՄՆ դոլար, եվրո՝ 6%', order: 9 },
+  { id: '10.', label: 'Ապահովում', value: '• Երաշխավորություն՝ մինչև 10 մլն ՀՀ դրամ (ներառյալ) կամ համարժեք վարկերի դեպքում։\n• Գրավ՝ 10,000,000 ՀՀ դրամը գերազանցող կամ համարժեք արտարժույթով վարկերի դեպքում։', order: 10 },
+  { id: '11.', label: 'Երաշխավոր', value: 'ՀՀ ռեզիդենտ իրավաբանական անձ, ֆիզիկական անձ', order: 11 },
+  { id: '12.', label: 'Գրավ', value: '• Անշարժ և շարժական գույքը\n• Ավանդային կամ ընթացիկ հաշիվների դրամական միջոցները\n• Ոսկու ստանդարտացված ձուլակտորները կամ ջարդոնը\n• Պետական կարճաժամկետ պարտատոմսերը կամ այլ արժեթղթերը\n\nԱնհրաժեշտության դեպքում՝ այլ գրավների առկայության պարագայում կարող են ընդունվել նաև շրջանառու միջոցները և պատրաստի արտադրանքը (հաշվի առնելով այլ գրավների իրացվելիության աստիճանը կամ վարկ/գրավ հարաբերակցության չափը վարկավորման ժամկետը, հաճախորդի բնութագիրը և այլն):\n\nԼրացուցիչ պայման՝ Բանկը կարող է պահանջել նաև այլ ֆիզիկական կամ իրավաբանական անձանց երաշխավորություն։', order: 12 },
+  { id: '13.', label: 'Վարկային միջոցի օգտագործում', value: 'Անկանխիկ և բանկային փոխանցումներով', order: 13 },
+  { id: '14.', label: 'Մարման եղանակը', value: '• Անուիտետային\n• Հավասարաչափ', order: 14 },
+  { id: '15.', label: 'Ժամկետանց պարտավորությունների մարման տույժեր', value: 'Յուրաքանչյուր ժամկետանց օրվա համար Բանկն իրավունք ունի հաշվարկել տույժ՝ սկսած ուշացման առաջին օրվանից`\n• Ժամկետանց մայր գումարի համար՝ օրական 0.015%\n• Ժամկետանց տոկոսագումարի համար՝ օրական 0.1%', order: 15 },
+  { id: '16.', label: 'Վարկի գումարը պայմանագրով ամրագրված ժամանակացույցից շուտ մարելու համար վճարվող տուգանք', value: 'Չի սահմանվում', order: 16 },
+  { id: '17.', label: 'Գանձվող վճարներ', value: '• Վարկային հայտի ուսումնասիրման վճար՝ չի սահմանվում\n• Վարկի տրամադրման վճար՝ չի սահմանվում', order: 17 },
+];
+
+const BusinessLoan2iMasin3 = ({ activeTab, setActiveTab }) => {
+
+  const uploadDataToFirebase = async () => {
+    try {
+      const collectionRef = collection(db, "businessLoan2iMasin2");
       
-    case 'multiline':
-      return (
-        <>
-          <span>{row.value[0]}</span>
-          <div className="mt-1">{row.value[1]}</div>
-        </>
-      );
-      
-    case 'list':
-      return (
-        <ul className="list-disc pl-5 space-y-1">
-          {row.value.map((item, i) => <li key={i}>{item}</li>)}
-        </ul>
-      );
-      
-    case 'complex':
-      if (row.id === '12.') {
-        return (
-          <div className="space-y-3">
-            <ul className="list-disc pl-5 space-y-1">
-              {row.value.list.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-            <p>{row.value.paragraphs[0]}</p>
-            <p>
-              <strong className="text-gray-900">Լրացուցիչ պայման՝</strong>{' '}
-              {row.value.paragraphs[1].replace('Լրացուցիչ պայման՝ ', '')}
-            </p>
-          </div>
-        );
+      for (const item of loanTermsData) {
+        await addDoc(collectionRef, item);
       }
-      if (row.id === '15.') {
-        return (
-          <div className="space-y-2">
-            <p>{row.value.title}</p>
-            <ul className="list-disc pl-5 space-y-1">
-              {row.value.list.map((item, i) => <li key={i}>{item}</li>)}
-            </ul>
-          </div>
-        );
-      }
-      return null;
-      
-    default:
-      return null;
-  }
-};
-
-const BusinessLoan2iMasin3 = () => {
-  const [activeTab, setActiveTab] = useState('Վարկի մասին');
-  const [loanData, setLoanData] = useState(null);
-  const [termsData, setTermsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchDataFromFirebase = async () => {
-      try {
-        const loanQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin2'));
-        if (!loanQuerySnapshot.empty) {
-          setLoanData(loanQuerySnapshot.docs[0].data());
-        }
-
-        const termsQuerySnapshot = await getDocs(collection(db, 'businessLoan2iMasin2'));
-        if (!termsQuerySnapshot.empty) {
-          const docData = termsQuerySnapshot.docs[0].data();
-          const fetchedTerms = docData.terms || docData || [];
-          setTermsData(Array.isArray(fetchedTerms) ? fetchedTerms : []);
-        }
-
-        if (loanQuerySnapshot.empty && termsQuerySnapshot.empty) {
-          setError('Տվյալներ չգտնվեցին բազայում։');
-        }
-      } catch (err) {
-        console.error('Սխալ տվյալների ստացման ժամանակ:', err);
-        setError('Չհաջողվեց բեռնել տվյալները։');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDataFromFirebase();
-  }, []);
+      alert("Տվյալները հաջողությամբ վերբեռնվեցին Firebase-ի businessLoan2iMasin2 collection!");
+    } catch (error) {
+      console.error("Սխալ վերբեռնելիս: ", error);
+      alert("Տեղի ունեցավ սխալ, տես console-ը");
+    }
+  };
 
   return (
     <div className="w-full bg-white p-4 sm:p-6">
+
+      <div className="mb-4 flex justify-end">
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-[#6b11cb] text-white px-4 py-2 rounded-md hover:bg-purple-700 transition shadow-sm text-sm"
+        >
+          Վերբեռնել Firebase
+        </button>
+      </div>
+
       <div className="border-b border-gray-200 mb-8 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
@@ -118,83 +77,21 @@ const BusinessLoan2iMasin3 = () => {
         </nav>
       </div>
 
-      {loading ? (
-        <div className="py-12 text-center text-gray-500">Բեռնվում է...</div>
-      ) : error ? (
-        <div className="py-12 text-center text-red-500">{error}</div>
-      ) : activeTab === 'Վարկի մասին' ? (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-7 space-y-4 text-gray-800 text-sm sm:text-base leading-relaxed">
-            {loanData?.paragraphs?.map((p, index) => {
-              if (p.type === 'highlight') {
-                return (
-                  <p key={index}>
-                    <span className="text-[#6b11cb] font-bold">{p.text}</span>
-                    {p.rest}
-                  </p>
-                );
-              }
-              if (p.type === 'standard') {
-                return (
-                  <p key={index}>
-                    {p.text}
-                    <span className="text-[#6b11cb] font-bold">{p.highlightText}</span>
-                    {p.rest}
-                  </p>
-                );
-              }
-              return <p key={index}>{p.text}</p>;
-            })}
-          </div>
-
-          <div className="lg:col-span-5 bg-white border border-purple-100 rounded-xl shadow-sm overflow-hidden">
-            <div className="p-4 border-b border-purple-100 flex gap-2">
-              {loanData?.currencies?.map((curr, idx) => (
-                <span key={idx} className="w-8 h-8 rounded-full bg-[#6b11cb] text-white flex items-center justify-center font-bold text-sm">
-                  {curr}
-                </span>
-              ))}
-            </div>
-
-            {loanData?.highlights?.map((item, index) => (
-              <div 
-                key={index} 
-                className={`p-4 flex items-center justify-between ${
-                  index !== loanData.highlights.length - 1 ? 'border-b border-purple-100' : ''
-                }`}
-              >
-                <div>
-                  {item.limitText && <span className="text-xs text-gray-400 block">{item.limitText}</span>}
-                  <span className="text-xl sm:text-2xl font-bold text-[#6b11cb]">{item.mainValue}</span>
-                </div>
-                <span className={`text-gray-600 text-sm sm:text-base ${index > 0 ? 'text-right' : ''}`}>
-                  {item.label}
-                </span>
+      <div className="w-full border border-purple-100 rounded-xl overflow-hidden shadow-sm">
+        <div className="divide-y divide-purple-100">
+          {loanTermsData.map((row) => (
+            <div key={row.id} className="grid grid-cols-1 md:grid-cols-12 text-sm sm:text-base">
+              <div className="md:col-span-4 p-4 bg-purple-50/40 text-gray-700 font-medium flex items-center gap-3 border-r border-purple-100">
+                <span className="text-gray-400 font-normal">{row.id}</span>
+                <span>{row.label}</span>
               </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div className="w-full border border-purple-100 rounded-xl overflow-hidden shadow-sm">
-          {termsData && termsData.length > 0 ? (
-            <div className="divide-y divide-purple-100">
-              {termsData.map((row) => (
-                <div key={row.id} className="grid grid-cols-1 md:grid-cols-12 text-sm sm:text-base">
-                  <div className="md:col-span-4 p-4 bg-purple-50/40 text-gray-700 font-medium flex items-start gap-3 border-r border-purple-100">
-                    <span className="text-gray-400 font-normal">{row.id}</span>
-                    <span>{row.label}</span>
-                  </div>
-                  <div className="md:col-span-8 p-4 text-gray-800 flex items-center">
-                    {renderTermValue(row)}
-                  </div>
-                </div>
-              ))}
+              <div className="md:col-span-8 p-4 text-gray-800 flex items-center whitespace-pre-line">
+                {row.value}
+              </div>
             </div>
-          ) : (
-             <div className="p-6 text-center text-gray-500">Այս պահին պայմաններ առկա չեն։</div>
-          )}
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };
