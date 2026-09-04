@@ -6,8 +6,8 @@ const tabs = [
 
 const BusinessLoan4iMasin2 = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="w-full bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-purple-100">
-      <div className="border-b border-gray-200 mb-12 overflow-x-auto">
+    <div className="w-full bg-white p-4 sm:p-6">
+      <div className="border-b border-gray-200 mb-8 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
           {tabs.map((tab, index) => (
             <button
@@ -27,18 +27,16 @@ const BusinessLoan4iMasin2 = ({ activeTab, setActiveTab }) => {
           ))}
         </nav>
       </div>
-      <div className="space-y-6 text-gray-800 text-base sm:text-lg leading-relaxed">
+      <div className="space-y-4 text-gray-800 text-sm sm:text-base leading-relaxed">
         <p>
           Ստացեք վարկ՝ Բանկի կողմից թողարկված պարտատոմսերի գրավով, շարունակեք ստանալ եկամուտ Ձեր ներդրումից և օգտագործեք անհրաժեշտ գումարը բիզնեսի զարգացման կամ ընթացիկ ծախսերի համար։
         </p>
         <p>
           Դիմել կարող են Բանկի պարտատոմսերում ներդրում կատարած իրավաբանական անձինք և անհատ ձեռնարկատերերը։ Վարկը տրամադրվում է օլայն՝ ՀՀ դրամով, մինչև պարտատոմսերի անվանական արժեքի 80%-ը (ՀՀ դրամով) կամ մինչև 70%-ը (արտարժույթով)։
         </p>
-        <div className="mt-8 p-6 bg-purple-50 rounded-xl border-l-4 border-[#6b11cb]">
-          <p className="font-bold text-[#6b11cb] text-lg sm:text-xl">
-            Ձեր ներդրումները թող շարունակեն աշխատել։ Բիզնեսը՝ նույնպես։
-          </p>
-        </div>
+        <p className="pt-2">
+          Ձեր ներդրումները թող շարունակեն աշխատել։ Բիզնեսը՝ նույնպես։
+        </p>
       </div>
     </div>
   );
