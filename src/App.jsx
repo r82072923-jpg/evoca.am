@@ -80,6 +80,7 @@ import Arjetxter from "./components/arjetxter.jsx"
 import BusinessLoan13 from "./components/business-loan13.jsx"
 import BusinessLoan12 from "./components/business-loan12.jsx"
 import BusinessLoan8 from "./components/business-loan8.jsx"
+import BusinessLoan3 from "./components/business-loan3.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -187,6 +188,7 @@ function App() {
         <Route path="/business-loan13" element={<BusinessLoan13/>}></Route>
         <Route path="/business-loan12" element={<BusinessLoan12/>}></Route>
         <Route path="/business-loan8" element={<BusinessLoan8/>}></Route>
+        <Route path="/business-loan3" element={<BusinessLoan3/>}></Route>
       </Routes>
     </>
   )
