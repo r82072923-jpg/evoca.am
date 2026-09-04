@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
+import { db } from './firebaseConfog';
+
 const tabs = [
   'Վարկի մասին',
   'Պայմաններ և սակագներ',
 ];
+
 const loanConditionsData = {
   loanTypes: {
     title: "Վարկային գիծ",
@@ -111,7 +115,22 @@ const loanConditionsData = {
   ]
 };
 
-const BusinessLoan13iMasin3 = ({activeTab,setActiveTab}) => {
+const BusinessLoan13iMasin3 = ({ activeTab, setActiveTab }) => {
+  
+  useEffect(() => {
+    const uploadDataToFirebase = async () => {
+      try {
+        await addDoc(collection(db, "businessLoan13iMasin2"), loanConditionsData);
+
+        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase (`businessLoan13iMasin2`):");
+      } catch (error) {
+        console.error("Սխալ Firebase տվյալներ ուղարկելիս:", error);
+      }
+    };
+
+    uploadDataToFirebase();
+  }, []);
+
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-6 font-sans space-y-6">
       <div className="border-b border-gray-200 mb-12 overflow-x-auto">
