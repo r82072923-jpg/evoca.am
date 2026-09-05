@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from './firebaseConfog';
 
 const investmentData = {
   title: "Ներդրումային ծառայություններ",
@@ -76,6 +78,19 @@ const investmentData = {
 
 function ArjetxteriShukaiMasin() {
   const [openAccordion, setOpenAccordion] = useState(0);
+
+  useEffect(() => {
+    const uploadDataToFirebase = async () => {
+      try {
+        await setDoc(doc(db, "arjetxterishuka-imasin", "mainContent"), investmentData);
+        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
+      } catch (error) {
+        console.error("Սխալ տվյալների ուղարկման ժամանակ՝ ", error);
+      }
+    };
+
+    uploadDataToFirebase();
+  }, []);
 
   const toggleAccordion = (index) => {
     setOpenAccordion(openAccordion === index ? null : index);
