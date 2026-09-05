@@ -70,8 +70,8 @@ const contentData = {
 
 const DigitaliMasin2 = () => {
   return (
-    <div className="flex justify-center w-full bg-gray-50 py-8">
-      <div className="max-w-5xl w-full p-6 font-sans bg-white text-gray-800 space-y-8 shadow-sm rounded-xl">
+    <div className="flex justify-center w-full bg-white py-8">
+      <div className="max-w-5xl w-full px-6 font-sans text-gray-800 space-y-8">
         <div className="space-y-6">
           <p className="text-sm md:text-base leading-relaxed">
             <span className="font-bold text-purple-900">Evocabank</span>-ը կապահովի Ձեր կայքում V-POS տերմինալի տեղադրումը: Այն հնարավորություն կտա Ձեզ{' '}
