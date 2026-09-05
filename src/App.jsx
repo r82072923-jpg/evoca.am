@@ -90,6 +90,7 @@ import Ayl from "./components/ayl.jsx"
 import ArjetxteriShuka from "./components/arjetxterishuka.jsx"
 import Haytararutyunner from "./components/haytararutyunner.jsx"
 import ArevtriFinansavorum from "./components/arevtrifinansavorum.jsx"
+import Hashvetvutyunner from "./components/hashvetvutyunner.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -207,6 +208,7 @@ function App() {
         <Route path="/securities" element={<ArjetxteriShuka/>}></Route>
         <Route path="/trade-finance" element={<ArevtriFinansavorum/>}></Route>
         <Route path="/announcements" element={<Haytararutyunner/>}></Route>
+        <Route path="/reports" element={<Hashvetvutyunner/>}></Route>
       </Routes>
     </>
   )
