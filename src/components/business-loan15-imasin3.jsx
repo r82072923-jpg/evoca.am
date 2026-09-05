@@ -113,22 +113,13 @@ const loanData = {
   ]
 };
 
-export const uploadBusinessLoanData = async () => {
-  try {
-    const docRef = await addDoc(collection(db, "businessLoan15iMasin2"), loanData);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-};
-
 const tabs = [
   'Վարկի մասին',
   'Պայմաններ և սակագներ',
   'Պահանջվող փաստաթղթեր'
 ];
 
-function BusinessLoan15iMasin3({activeTab, setActiveTab}) {
+function BusinessLoan15iMasin3({ activeTab, setActiveTab }) {
   const {
     tableData,
     limitsData,
@@ -141,15 +132,71 @@ function BusinessLoan15iMasin3({activeTab, setActiveTab}) {
     warningsData
   } = loanData;
 
+  // Firebase-ում պահելու ֆունկցիան
+  const uploadBusinessLoanData = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "businessLoan15iMasin2"), loanData);
+      console.log("Document written with ID: ", docRef.id);
+      alert("Տվյալները հաջողությամբ գրանցվեցին Firebase-ում:");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      alert("Սխալ տեղի ունեցավ գրանցման ժամանակ։ Ստուգեք Console-ը:");
+    }
+  };
+
+  // Ֆունկցիա, որը ճիշտ կցուցադրի բոլոր տիպի տվյալները աղյուսակում (String, Array, Object)
+  const renderTableContent = (content) => {
+    if (typeof content === 'string') {
+      return <p>{content}</p>;
+    }
+    
+    if (Array.isArray(content)) {
+      return (
+        <ul className="list-disc pl-4 space-y-1">
+          {content.map((item, idx) => {
+            if (typeof item === 'string') {
+              return <li key={idx}>{item}</li>;
+            }
+            if (item.currency) { // Հատուկ դեպք 9-րդ կետի համար
+              return (
+                <li key={idx}>
+                  <strong>{item.currency}</strong> - Հաստատուն՝ {item.fixed}, Լողացող՝ {item.floating}
+                </li>
+              );
+            }
+            return null;
+          })}
+        </ul>
+      );
+    }
+    
+    if (typeof content === 'object' && content !== null) {
+      return (
+        <div className="space-y-2">
+          {content.types && (
+            <ul className="list-disc pl-4 space-y-1">
+              {content.types.map((type, idx) => (
+                <li key={idx}>{type}</li>
+              ))}
+            </ul>
+          )}
+          {content.description && <p>{content.description}</p>}
+        </div>
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white font-sans">
-        <div className="flex justify-end mb-4">
-            <button
-            onClick={uploadBusinessLoanData}
-            className="bg-[#6F11B7] text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-purple-800 transition-colors"
-            >
-            Ուղարկել տվյալները Firebase
-            </button>
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={uploadBusinessLoanData}
+          className="bg-[#6F11B7] text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-purple-800 transition-colors"
+        >
+          Ուղարկել տվյալները Firebase
+        </button>
       </div>
       <div className="border-b border-gray-200 mb-8 overflow-x-auto">
         <nav className="flex space-x-10 min-w-max">
@@ -183,7 +230,8 @@ function BusinessLoan15iMasin3({activeTab, setActiveTab}) {
                   {row.title}
                 </td>
                 <td className="p-4 align-top">
-                  {row.content}
+                  {/* Այստեղ կանչվում է մեր նոր ֆունկցիան */}
+                  {renderTableContent(row.content)}
                 </td>
               </tr>
             ))}
@@ -350,4 +398,4 @@ function BusinessLoan15iMasin3({activeTab, setActiveTab}) {
   );
 }
 
-export default BusinessLoan15iMasin3;   
+export default BusinessLoan15iMasin3;
