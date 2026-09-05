@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfog';
-
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ և սակագներ',
+  'Պահանջվող փաստաթղթեր'
+];
 export default function BusinessLoan15iMasin2() {
   const [businessLoanData, setBusinessLoanData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,7 +48,26 @@ export default function BusinessLoan15iMasin2() {
 
   return (
     <section className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white font-sans text-gray-800">
-      
+      <div className="border-b border-gray-200 mb-8 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       <div className="md:col-span-7 space-y-5 text-sm leading-relaxed text-gray-700">
         {businessLoanData.infoParagraphs?.map((item) => (
           <p key={item.id} dangerouslySetInnerHTML={{ __html: item.content }} />
