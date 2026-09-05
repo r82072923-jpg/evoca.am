@@ -10,7 +10,7 @@ function ArjetxteriShukaiMasin() {
   useEffect(() => {
     const fetchInvestmentData = async () => {
       try {
-        const docRef = doc(db, "arjetxterishukaMasin", "mainContent");
+        const docRef = doc(db, "arjetxterishukaiMasin", "mainContent");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
