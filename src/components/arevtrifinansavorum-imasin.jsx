@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from './firebaseConfog';
+import { collection, addDoc } from 'firebase/firestore';
 
 function ArevtriFinansavorumiMasin() {
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -128,6 +130,20 @@ function ArevtriFinansavorumiMasin() {
       }
     ]
   };
+
+  // Տվյալները Firestore ուղարկելու ֆունկցիա
+  useEffect(() => {
+    const saveDataToFirebase = async () => {
+      try {
+        const docRef = await addDoc(collection(db, "arevtrifinansavorumiMasin"), content);
+        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase, Document ID: ", docRef.id);
+      } catch (e) {
+        console.error("Սխալ տվյալների ուղարկման ժամանակ: ", e);
+      }
+    };
+
+    saveDataToFirebase();
+  }, []);
 
   const toggleAccordion = (index) => {
     setOpenAccordion(openAccordion === index ? null : index);
