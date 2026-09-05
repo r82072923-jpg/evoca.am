@@ -59,7 +59,7 @@ export default function BusinessLoan15iMasin2() {
               className={`w-10 h-10 rounded-full font-bold text-lg flex items-center justify-center select-none cursor-pointer transition-colors ${
                 curr.isActive
                   ? 'bg-[#6F11B7] text-white shadow-md'
-                  : 'bg-[#6F11B7]/10 text-[#6F11B7] hover:bg-[#6F11B7]/20'
+                  : 'bg-[#6F11B7] text-white hover:bg-[#6F11B7]/20'
               }`}
             >
               {curr.symbol}
