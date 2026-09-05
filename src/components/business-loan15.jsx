@@ -4,6 +4,7 @@ import TopHeader2 from "./topHeader2"
 import BusinessLoan15iMasin from "./business-loan15-imasin"
 import BusinessLoan15iMasin2 from "./business-loan15-imasin2"
 import BusinessLoan15iMasin3 from "./business-loan15-imasin3"
+import BusinessLoan15iMasin4 from "./business-loan15-imasin4"
 function BusinessLoan15(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -19,7 +20,7 @@ function BusinessLoan15(){
             <BusinessLoan15iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պահանջվող փաստաթղթեր' && (
-            <BusinessLoan15iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+            <BusinessLoan15iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
