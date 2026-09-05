@@ -1,21 +1,6 @@
-import React, { useEffect } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from './firebaseConfog'; 
-
-const linksDataArray = [
-  {
-    title: "Վարկավորման նպատակով հաճախորդներից պահանջվող փաստաթղթերի և տվյալների ցանկ",
-    href: "https://www.evoca.am/files/global_files/1/16148640021543.pdf"
-  },
-  {
-    title: "Գնահատող ընկերությունների ցանկ",
-    href: "https://www.evoca.am/files/global_files/1/16148640316517.pdf"
-  },
-  {
-    title: "Կարևոր տեղեկատվություն",
-    href: "https://www.evoca.am/files/global_files/1/important-information-pdf.pdf"
-  }
-];
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './firebaseConfig';
 
 function BusinessLoan15iMasin4({ activeTab, setActiveTab }) {
   const tabs = [
@@ -24,17 +9,31 @@ function BusinessLoan15iMasin4({ activeTab, setActiveTab }) {
     'Պահանջվող փաստաթղթեր'
   ];
 
+  const [links, setLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const uploadLinksDataToFirebase = async () => {
+    const fetchLinksDataFromFirebase = async () => {
       try {
-        const docRef = await addDoc(collection(db, "businessLoan15iMasin3"), { linksData: linksDataArray });
-        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase, Document ID:", docRef.id);
+        const querySnapshot = await getDocs(collection(db, "businessLoan15iMasin3"));
+        let fetchedLinks = [];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.linksData) {
+            fetchedLinks = [...fetchedLinks, ...data.linksData];
+          }
+        });
+
+        setLinks(fetchedLinks);
       } catch (e) {
-        console.error("Սխալ տվյալների ուղարկման ժամանակ՝ ", e);
+        console.error("Սխալ տվյալների բեռնման ժամանակ՝ ", e);
+      } finally {
+        setLoading(false); 
       }
     };
 
-    uploadLinksDataToFirebase();
+    fetchLinksDataFromFirebase();
   }, []);
 
   return (
@@ -60,15 +59,29 @@ function BusinessLoan15iMasin4({ activeTab, setActiveTab }) {
         </nav>
       </div>
 
-      {linksDataArray.map((item, index) => (
+      {loading && (
+        <div className="text-center text-gray-500 py-4 text-lg">
+          Տվյալները բեռնվում են...
+        </div>
+      )}
+
+      {!loading && links.length > 0 && links.map((item, index) => (
         <a
           key={index}
           href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center justify-between bg-purple-50 hover:bg-purple-100 transition-colors rounded-xl p-4 shadow-sm border border-purple-100 text-gray-800 font-semibold text-sm md:text-base group"
         >
           <span>{item.title}</span>
         </a>
       ))}
+
+      {!loading && links.length === 0 && (
+        <div className="text-center text-gray-500 py-4 text-lg">
+          Տվյալներ դեռևս չկան:
+        </div>
+      )}
     </div>
   );
 }
