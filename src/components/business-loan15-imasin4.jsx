@@ -1,6 +1,10 @@
 import React from 'react';
-import BusinessLoan15iMasin3 from './business-loan15-imasin3';
 
+const tabs = [
+  'Վարկի մասին',
+  'Պայմաններ և սակագներ',
+  'Պահանջվող փաստաթղթեր'
+];
 function BusinessLoan15iMasin4() {
   const linksData = [
     {
@@ -19,6 +23,26 @@ function BusinessLoan15iMasin4() {
 
   return (
     <div className="max-w-4xl mx-auto p-4 space-y-4 font-sans">
+      <div className="border-b border-gray-200 mb-8 overflow-x-auto">
+        <nav className="flex space-x-10 min-w-max">
+          {tabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-4 px-1 text-base sm:text-lg font-bold transition-colors relative ${
+                activeTab === tab
+                  ? 'text-[#6b11cb]'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-0 w-full h-[4px] bg-[#6b11cb] rounded-t-md" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
       {linksData.map((item, index) => (
         <a
           key={index}
