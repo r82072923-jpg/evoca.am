@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { collection, addDoc } from 'firebase/firestore'; 
+import { db } from './firebaseConfog';
 const safetyDepositBoxesData = {
   descriptionParagraphs: [
     "Պահատուփերի պարունակությունը միայն ձեր գաղտնիքն է: Դրանում կարող եք պահել ձեզ համար արժեք ներկայացնող ցանկացած իր՝ դրամ, արժեթղթեր, թանկարժեք մետաղներ և քարեր, ոսկերչական իրեր, արվեստի գործեր, փաստաթղթեր, մագնիսական կրիչներ և այլն:",
@@ -49,12 +50,30 @@ const safetyDepositBoxesData = {
 
 function AyliMasin2() {
   const { descriptionParagraphs, residentTariffs, nonResidentTariffs, note } = safetyDepositBoxesData;
-  
   const tablesData = [residentTariffs, nonResidentTariffs];
+
+  const uploadDataToFirebase = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "ayliMasin"), safetyDepositBoxesData);
+      alert("Տվյալները հաջողությամբ պահպանվեցին Firebase-ում: Document ID: " + docRef.id);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Սխալ տվյալների պահպանման ժամանակ: ", e);
+      alert("Տվյալների պահպանումը ձախողվեց: Ստուգեք կոնսոլը լրացուցիչ ինֆորմացիայի համար:");
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6 text-gray-800 text-sm space-y-6 font-sans">
-      
+      <div className="flex justify-end mb-4">
+        <button 
+          onClick={uploadDataToFirebase}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition-colors shadow-sm"
+        >
+          Ուղարկել տվյալները Firebase
+        </button>
+      </div>
+
       <div className="space-y-4 leading-relaxed text-gray-700">
         {descriptionParagraphs.map((paragraph, index) => {
           let styleClass = "";
@@ -121,11 +140,11 @@ function AyliMasin2() {
           </div>
         </div>
       ))}
-      
       <p className="text-xs text-gray-500 font-medium pt-2">
         {note}
       </p>
     </div>
   );
 }
-export default AyliMasin2
+
+export default AyliMasin2;
