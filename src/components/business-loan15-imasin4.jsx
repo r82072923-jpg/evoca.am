@@ -5,11 +5,11 @@ const tabs = [
   'Պայմաններ և սակագներ',
   'Պահանջվող փաստաթղթեր'
 ];
-function BusinessLoan15iMasin4() {
+function BusinessLoan15iMasin4({activeTab,setActiveTab}) {
   const linksData = [
     {
       title: "Վարկավորման նպատակով հաճախորդներից պահանջվող փաստաթղթերի և տվյալների ցանկ",
-      href: "https://www.evoca.am/files/global_files/1/16148640021543.pdf" // Այստեղ կարող եք գրել ձեր նախընտրած էջի հղումը
+      href: "https://www.evoca.am/files/global_files/1/16148640021543.pdf"
     },
     {
       title: "Գնահատող ընկերությունների ցանկ",
