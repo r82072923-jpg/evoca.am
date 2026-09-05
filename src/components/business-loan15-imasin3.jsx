@@ -1,6 +1,6 @@
 import React from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from './firebase'; // Ձեր ֆայլի ճանապարհը
+import { db } from './firebaseConfog';
 
 export const uploadBusinessLoanData = async () => {
   const loanData = {
