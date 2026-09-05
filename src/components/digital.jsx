@@ -3,6 +3,7 @@ import TopHeader2 from "./topHeader2"
 import DigitaliMasin from "./digital-imasin"
 import DigitaliMasin2 from "./digital-imasin2"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
+import Footer from "./footer"
 function Digital(){
     return(
         <>
@@ -11,6 +12,7 @@ function Digital(){
         <DigitaliMasin></DigitaliMasin>
         <DigitaliMasin2></DigitaliMasin2>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
+        <Footer></Footer>
         </>
     )
 }
