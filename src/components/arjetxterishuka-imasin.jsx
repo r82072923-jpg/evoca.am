@@ -82,7 +82,7 @@ function ArjetxteriShukaiMasin() {
   useEffect(() => {
     const uploadDataToFirebase = async () => {
       try {
-        await setDoc(doc(db, "arjetxterishuka-imasin", "mainContent"), investmentData);
+        await setDoc(doc(db, "arjetxterishukaiMasin", "mainContent"), investmentData);
         console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
       } catch (error) {
         console.error("Սխալ տվյալների ուղարկման ժամանակ՝ ", error);
