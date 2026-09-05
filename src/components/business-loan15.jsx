@@ -15,7 +15,7 @@ function BusinessLoan15(){
           {activeTab === 'Վարկի մասին' && (
             <BusinessLoan15iMasin2 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
-          {activeTab === 'Պայմաններ' && (
+          {activeTab === 'Պայմաններ և սակագներ' && (
             <BusinessLoan15iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
           {activeTab === 'Պահանջվող փաստաթղթեր' && (
