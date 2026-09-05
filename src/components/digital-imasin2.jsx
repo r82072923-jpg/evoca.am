@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebaseConfog';
+import { db } from './firebaseConfog';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const contentData = {
