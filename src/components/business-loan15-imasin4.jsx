@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { db } from './firebaseConfog';
 
 function BusinessLoan15iMasin4({ activeTab, setActiveTab }) {
   const tabs = [
