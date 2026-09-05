@@ -1,6 +1,6 @@
 import React from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { db } from './firebaseConfog';
 
 const loanData = {
   tableData: [
