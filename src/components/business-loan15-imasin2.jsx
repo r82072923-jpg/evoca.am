@@ -6,7 +6,7 @@ const tabs = [
   'Պայմաններ և սակագներ',
   'Պահանջվող փաստաթղթեր'
 ];
-export default function BusinessLoan15iMasin2({activeTab,setActiveTab}) {
+function BusinessLoan15iMasin2({activeTab,setActiveTab}) {
   const [businessLoanData, setBusinessLoanData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -111,3 +111,4 @@ export default function BusinessLoan15iMasin2({activeTab,setActiveTab}) {
     </section>
   );
 }
+export default BusinessLoan15iMasin2
