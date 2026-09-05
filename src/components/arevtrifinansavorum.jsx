@@ -3,6 +3,7 @@ import TopHeader2 from "./topHeader2"
 import ArevtriFinansavorumiMasin from "./arevtrifinansavorum-imasin"
 import VerjinNorutyunner4 from "./verjinnorutyunner4"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function ArevtriFinansavorum(){
     return(
         <>
@@ -11,6 +12,7 @@ function ArevtriFinansavorum(){
         <ArevtriFinansavorumiMasin></ArevtriFinansavorumiMasin>
         <VerjinNorutyunner4></VerjinNorutyunner4>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
