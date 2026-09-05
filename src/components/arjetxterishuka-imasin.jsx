@@ -1,100 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebaseConfog';
 
-const investmentData = {
-  title: "Ներդրումային ծառայություններ",
-  introParagraph: "Բանկն իր հաճախորդներին Ներդրումային ծառայություններ է մատուցում ինչպես տեղական, այնպես էլ միջազգային շուկաներում: Բանկի կողմից առաջարկվող ծառայությունները հասանելի են իրավաբանական և ֆիզիկական անձ հանդիսացող հաճախորդներին:",
-  howToBecomeClient: {
-    sectionTitle: "Ինչպե՞ս դառնալ հաճախորդ:",
-    text1: "Ներդրումային ծառայություններից օգտվելու համար անհրաժեշտ է Բանկում ունենալ ընթացիկ բանկային հաշիվ, որի բացման համար պահանջվող փաստաթղթերին կարող եք ծանոթանալ",
-    linkText: "այստեղ",
-    linkUrl: "#",
-    text2: "Բրոքերային հաշվի բացման համար անհրաժեշտ է այցելել Բանկի գլխամասային գրասենյակ:"
-  },
-  contactInfo: {
-    addressTitle: "Հասցե՝",
-    addressValue: "Երևան, Հանրապետության 44/2",
-    phoneTitle: "Հետադարձ կապ՝",
-    phoneValue: "Հեռ.՝ 374 10 205555",
-    emailLabel: "Էլ. հասցե՝",
-    email: "invest@evoca.am"
-  },
-  warningText: "Ֆինանսական շուկաներում գործարքների իրականացման հետ կապված ՌԻՍԿԸ ԿՐՈՒՄ Է ՀԱՃԱԽՈՐԴԸ: Բանկը ՉԻ ՓՈԽՀԱՏՈՒՑԵԼՈՒ հաճախորդի վնասները, եթե դրանք չեն պատճառվել Բանկի կողմից անբարեխիղճ վարքագծի արդյունքում:",
-  
-  accordionSectionTitle: "Անհրաժեշտ տեղեկատվություն",
-  accordions: [
-    {
-      title: "Ներդրումային ծառայություններ մատուցման կանոններ",
-      rules: [
-        {
-          linkTitle: "Արժեթղթերի շուկայում բրոքերային ծառայությունների մատուցման կանոններ",
-          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRD22-0001-45%20Brokerage%20Services%20in%20the%20Securities%20Market%20Procedure.pdf",
-          description: "Այս կանոնները սահմանում են մեր հաճախորդների կողմից մեզ ներկայացված արժեթղթերով գործարքների կնքման պայմանների ընդունման/հաղորդման, հաճախորդների հետ կապի իրականացման, հաճախորդների հաշվին արժեթղթերով գործարքների կատարման կարգն ու պայմանները, ինչպես նաև տրամադրող գործառնությունների իրականացման հետ կապված հնարավոր ռիսկերի վերաբերյալ ընդհանրական տեղեկություններ։ Կանոնները մշակված են Հայաստանի քաղաքացիական օրենսգրքին, «Արժեթղթերի շուկայի մասին» ՀՀ օրենքին, ՀՀ Կենտրոնական բանկի նորմատիվ և այլ իրավական ակտերին համապատասխան։"
-        },
-        {
-          linkTitle: "Արժեթղթերի պահառության գործունեության կանոններ",
-          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/RUL17-0002-45%20Depositing%20of%20securities%20Rules.pdf",
-          description: "Այս կանոնները սահմանում են արժեթղթերի հաշիվների հետ կատարվող գործառնությունների ցանկը, ծառայությունների մատուցման/կատարման կարգն ու պայմանները, պահառության հետ կապված հարաբերությունները, ինչպես նաև պահառուի աշխատանքների կանոնները։ Կանոնները մշակված են Հայաստանի քաղաքացիական օրենսգրքին, «Արժեթղթերի շուկայի մասին» ՀՀ օրենքին և պահառության գործունեությունը կանոնակարգող իրավական այլ ակտերին և այդ թվում՝ Հայաստանի Կենտրոնական դեպոզիտարիայի կանոնների պահանջներին համապատասխան։"
-        }
-      ]
-    },
-    {
-      title: "Ծառայությունների մատուցման սակագներ",
-      tariffs: [
-        {
-          linkTitle: "Տեղական և Ռուսական շուկաներում ծառայությունների մատուցման սակագներ",
-          linkUrl: "https://www.evoca.am/files/global_files/1/16786910064566.pdf"
-        },
-        {
-          linkTitle: "Միջազգային շուկաներում ծառայությունների մատուցման սակագներ",
-          linkUrl: "https://www.evoca.am/files/global_files/1/16786910064566.pdf"
-        }
-      ]
-    },
-    {
-      title: "Լրացուցիչ տեղեկատվություն",
-      additionalInfo: [
-        {
-          linkTitle: "«Արժեթղթերով գործարքներ կնքելու նպատակով պատվերների ընդունման և կատարման» ընթացակարգ",
-          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRI17-0001-45%20Receipt%20and%20execution%20of%20orders%20for%20securities%20transactions.pdf"
-        },
-        {
-          linkTitle: "«Շահերի բախման սահմանափակման» ընթացակարգ",
-          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRI15-0020-45%20shaheri%20baxman%20sahmanapakman%20kanon.pdf"
-        },
-        {
-          linkTitle: "Ֆոնդային բորսաներ",
-          linkUrl: "https://www.evoca.am/file_manager/stock-list.pdf"
-        },
-        {
-          linkTitle: "Տեղեկացումներ հնարավոր ռիսկերի վերաբերյալ",
-          linkUrl: "https://www.evoca.am/files/global_files/1/16161384961689.pdf"
-        }
-      ]
-    }
-  ]
-};
-
 function ArjetxteriShukaiMasin() {
+  const [investmentData, setInvestmentData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [openAccordion, setOpenAccordion] = useState(0);
 
   useEffect(() => {
-    const uploadDataToFirebase = async () => {
+    const fetchInvestmentData = async () => {
       try {
-        await setDoc(doc(db, "arjetxterishukaiMasin", "mainContent"), investmentData);
-        console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase!");
+        const docRef = doc(db, "arjetxterishukaMasin", "mainContent");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setInvestmentData(docSnap.data());
+        } else {
+          console.log("Այդպիսի փաստաթուղթ գոյություն չունի բազայում:");
+        }
       } catch (error) {
-        console.error("Սխալ տվյալների ուղարկման ժամանակ՝ ", error);
+        console.error("Սխալ տվյալների ստացման ժամանակ՝ ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    uploadDataToFirebase();
+    fetchInvestmentData();
   }, []);
 
   const toggleAccordion = (index) => {
     setOpenAccordion(openAccordion === index ? null : index);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64 text-gray-600 font-sans">
+        Բեռնվում է տվյալները Firebase-ից...
+      </div>
+    );
+  }
+
+  if (!investmentData) {
+    return (
+      <div className="flex justify-center items-center h-64 text-red-500 font-sans">
+        Տվյալները չհաջողվեց գտնել կամ բեռնել:
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-6 md:p-10 font-sans text-gray-800">
@@ -104,29 +56,29 @@ function ArjetxteriShukaiMasin() {
         <p>{investmentData.introParagraph}</p>
 
         <div>
-          <h3 className="text-purple-800 font-bold mb-2">{investmentData.howToBecomeClient.sectionTitle}</h3>
+          <h3 className="text-purple-800 font-bold mb-2">{investmentData.howToBecomeClient?.sectionTitle}</h3>
           <p>
-            {investmentData.howToBecomeClient.text1}{' '}
-            <a href={investmentData.howToBecomeClient.linkUrl} className="text-purple-700 underline font-medium">
-              {investmentData.howToBecomeClient.linkText}
+            {investmentData.howToBecomeClient?.text1}{' '}
+            <a href={investmentData.howToBecomeClient?.linkUrl} className="text-purple-700 underline font-medium">
+              {investmentData.howToBecomeClient?.linkText}
             </a>:
           </p>
-          <p className="mt-2">{investmentData.howToBecomeClient.text2}</p>
+          <p className="mt-2">{investmentData.howToBecomeClient?.text2}</p>
         </div>
 
         <div className="space-y-4">
           <div>
-            <h4 className="font-bold text-gray-900">{investmentData.contactInfo.addressTitle}</h4>
-            <p>{investmentData.contactInfo.addressValue}</p>
+            <h4 className="font-bold text-gray-900">{investmentData.contactInfo?.addressTitle}</h4>
+            <p>{investmentData.contactInfo?.addressValue}</p>
           </div>
 
           <div>
-            <h4 className="font-bold text-gray-900">{investmentData.contactInfo.phoneTitle}</h4>
-            <p>{investmentData.contactInfo.phoneValue}</p>
+            <h4 className="font-bold text-gray-900">{investmentData.contactInfo?.phoneTitle}</h4>
+            <p>{investmentData.contactInfo?.phoneValue}</p>
             <p>
-              {investmentData.contactInfo.emailLabel}{' '}
-              <a href={`mailto:${investmentData.contactInfo.email}`} className="text-purple-700 underline font-medium">
-                {investmentData.contactInfo.email}
+              {investmentData.contactInfo?.emailLabel}{' '}
+              <a href={`mailto:${investmentData.contactInfo?.email}`} className="text-purple-700 underline font-medium">
+                {investmentData.contactInfo?.email}
               </a>
             </p>
           </div>
@@ -143,7 +95,7 @@ function ArjetxteriShukaiMasin() {
         {investmentData.accordionSectionTitle}
       </h2>
       <div className="space-y-4">
-        {investmentData.accordions.map((acc, index) => {
+        {investmentData.accordions?.map((acc, index) => {
           const isOpen = openAccordion === index;
           
           return (
