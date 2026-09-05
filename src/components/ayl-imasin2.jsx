@@ -1,79 +1,48 @@
-import React from 'react';
-import { collection, addDoc } from 'firebase/firestore'; 
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore'; 
 import { db } from './firebaseConfog';
-const safetyDepositBoxesData = {
-  descriptionParagraphs: [
-    "Պահատուփերի պարունակությունը միայն ձեր գաղտնիքն է: Դրանում կարող եք պահել ձեզ համար արժեք ներկայացնող ցանկացած իր՝ դրամ, արժեթղթեր, թանկարժեք մետաղներ և քարեր, ոսկերչական իրեր, արվեստի գործեր, փաստաթղթեր, մագնիսական կրիչներ և այլն:",
-    "Պահատուփերը գտնվում են առանձնացված տարածքում՝ շուրջօրյա հսկողության ներքո: Դրանք զինված են միջազգային չափանիշներին համապատասխան անվտանգության միջոցներով և պաշտպանված են մեխանիկական ու քիմիական գործոնների ազդեցությունից: Յուրաքանչյուր գործարքի ժամանակ պահատուփի առանձնացված տարածքում կարող եք գտնվել մինչև 15 րոպե:",
-    "Առաջարկում ենք 3 չափսի պահատուփեր՝ փոքր, միջին, մեծ:",
-    "Պահատուփերը փակվում են 2 բանալիով, որոնցից մեկը տրամադրվում է ձեզ, իսկ մյուսը պահվում է ձեզ մոտ: Պահատուփը հնարավոր է բացել երկու բանալիների միաժամանակյա կիրառմամբ: Ձեզ տրամադրված բանալիի օրինակը պարտավոր եք վերադարձնել պահատուփի վարձակալության պայմանագրի գործողության ժամկետի վերջում:",
-    "Պահատուփերի վարձակալությունը ձևակերպվում է անհատական պայմանագրի հիման վրա, ձեր նախընտրած վարձակալության ժամկետով: Վարձակալման գինը կախված է պահատուփի չափսից և ժամկետից՝ ըստ ձեր սակագների:",
-    "12 ամսից երկար ժամկետով վարձակալելու դեպքում պահատուփերի սակագները սահմանվում են պայմանագրային կարգով:",
-    "Անհատական պահատուփից կարելի է օգտվել միայն ձեր սպասարկման օրերին և ժամերին:"
-  ],
-  residentTariffs: {
-    title: "Գերխնայվող անհատական պահատուփերի վարձակալման սակագներ",
-    rates: [
-      { duration: "15 օր", small: "5,000 ՀՀ դրամ", medium: "7,000 ՀՀ դրամ", large: "10,000 ՀՀ դրամ" },
-      { duration: "1 ամիս", small: "7,000 ՀՀ դրամ", medium: "12,000 ՀՀ դրամ", large: "17,000 ՀՀ դրամ" },
-      { duration: "3 ամիս", small: "12,000 ՀՀ դրամ", medium: "17,000 ՀՀ դրամ", large: "22,000 ՀՀ դրամ" },
-      { duration: "6 ամիս", small: "18,000 ՀՀ դրամ", medium: "27,000 ՀՀ դրամ", large: "37,000 ՀՀ դրամ" },
-      { duration: "12 ամիս", small: "32,000 ՀՀ դրամ", medium: "47,000 ՀՀ դրամ", large: "62,000 ՀՀ դրամ" },
-      { duration: "Երկարաժամկետ", small: "պայմանագրային", medium: "պայմանագրային", large: "պայմանագրային" }
-    ],
-    additionalFees: [
-      { name: "Պահատուփի բանալու կորուստ կամ վնասում", fee: "70,000 ՀՀ դրամ" },
-      { name: "Պահատուփի վնասում", fee: "Նյութական վնասի հատուցում" },
-      { name: "Պահատուփի ժամկետի ավարտին բանալին չհանձնում", fee: "Յուրաքանչյուր ուշացած օրվա համար 1000 ՀՀ դրամ" },
-      { name: "Խցիկը (բանալին) այլ տարածքում պահպանելու վճար", fee: "1-ին պահի ընդունման յուրաքանչյուր օրվա համար 1000 ՀՀ դրամ" }
-    ]
-  },
-  nonResidentTariffs: {
-    title: "Գերխնայվող անհատական պահատուփերի վարձակալում օտարերկրյա քաղաքացիների համար",
-    rates: [
-      { duration: "15 օր", small: "25,000 ՀՀ դրամ", medium: "35,000 ՀՀ դրամ", large: "40,000 ՀՀ դրամ" },
-      { duration: "1 ամիս", small: "35,000 ՀՀ դրամ", medium: "45,000 ՀՀ դրամ", large: "60,000 ՀՀ դրամ" },
-      { duration: "3 ամիս", small: "45,000 ՀՀ դրամ", medium: "75,000 ՀՀ դրամ", large: "100,000 ՀՀ դրամ" },
-      { duration: "6 ամիս", small: "75,000 ՀՀ դրամ", medium: "100,000 ՀՀ դրամ", large: "125,000 ՀՀ դրամ" },
-      { duration: "12 ամիս", small: "100,000 ՀՀ դրամ", medium: "125,000 ՀՀ դրամ", large: "150,000 ՀՀ դրամ" },
-      { duration: "Երկարաժամկետ", small: "պայմանագրային", medium: "պայմանագրային", large: "պայմանագրային" }
-    ],
-    additionalFees: [
-      { name: "Պահատուփի բանալու կորուստ կամ վնասում", fee: "70,000 ՀՀ դրամ" },
-      { name: "Պահատուփի վնասում", fee: "Նյութական վնասի հատուցում" },
-      { name: "Պահատուփի ժամկետի ավարտին բանալին չհանձնում", fee: "Յուրաքանչյուր ուշացած օրվա համար 1000 ՀՀ դրամ" },
-      { name: "Խցիկը (բանալին) այլ տարածքում պահպանելու վճար", fee: "1-ին պահի ընդունման յուրաքանչյուր օրվա համար 1000 ՀՀ դրամ" }
-    ]
-  },
-  note: "Նշում` Սակագները ներառում են ԱԱՀ:"
-};
 
 function AyliMasin2() {
-  const { descriptionParagraphs, residentTariffs, nonResidentTariffs, note } = safetyDepositBoxesData;
-  const tablesData = [residentTariffs, nonResidentTariffs];
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const uploadDataToFirebase = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "ayliMasin"), safetyDepositBoxesData);
-      alert("Տվյալները հաջողությամբ պահպանվեցին Firebase-ում: Document ID: " + docRef.id);
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Սխալ տվյալների պահպանման ժամանակ: ", e);
-      alert("Տվյալների պահպանումը ձախողվեց: Ստուգեք կոնսոլը լրացուցիչ ինֆորմացիայի համար:");
-    }
-  };
+  useEffect(() => {
+    const fetchDataFromFirebase = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "ayliMasin"));
+        if (!querySnapshot.empty) {
+          const docData = querySnapshot.docs[0].data();
+          setData(docData);
+        } else {
+          setError("Տվյալներ չեն գտնվել Firebase-ում:");
+        }
+      } catch (err) {
+        console.error("Սխալ տվյալները ստանալիս: ", err);
+        setError("Տվյալների բեռնման սխալ:");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDataFromFirebase();
+  }, []);
+
+  if (loading) {
+    return <div className="p-6 text-center text-purple-600 font-semibold">Բեռնվում է...</div>;
+  }
+
+  if (error) {
+    return <div className="p-6 text-center text-red-500 font-semibold">{error}</div>;
+  }
+
+  if (!data) return null;
+
+  const { descriptionParagraphs = [], residentTariffs, nonResidentTariffs, note } = data;
+  const tablesData = [residentTariffs, nonResidentTariffs].filter(Boolean);
 
   return (
     <div className="max-w-4xl mx-auto p-6 text-gray-800 text-sm space-y-6 font-sans">
-      <div className="flex justify-end mb-4">
-        <button 
-          onClick={uploadDataToFirebase}
-          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition-colors shadow-sm"
-        >
-          Ուղարկել տվյալները Firebase
-        </button>
-      </div>
-
       <div className="space-y-4 leading-relaxed text-gray-700">
         {descriptionParagraphs.map((paragraph, index) => {
           let styleClass = "";
@@ -111,7 +80,7 @@ function AyliMasin2() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-purple-100 text-gray-800">
-                {tariffData.rates.map((row, idx) => (
+                {tariffData.rates?.map((row, idx) => (
                   <tr key={idx}>
                     <td className="p-2.5 font-medium border-r border-purple-100">{row.duration}</td>
                     {row.small === row.medium && row.medium === row.large ? (
@@ -127,7 +96,7 @@ function AyliMasin2() {
                     )}
                   </tr>
                 ))}
-                {tariffData.additionalFees.map((feeRow, idx) => (
+                {tariffData.additionalFees?.map((feeRow, idx) => (
                   <tr key={idx} className={idx % 2 === 0 ? "bg-purple-50/20" : ""}>
                     <td className="p-2.5 font-medium border-r border-purple-100">{feeRow.name}</td>
                     <td colSpan={3} className="p-2.5 text-center">
@@ -140,6 +109,7 @@ function AyliMasin2() {
           </div>
         </div>
       ))}
+
       <p className="text-xs text-gray-500 font-medium pt-2">
         {note}
       </p>
