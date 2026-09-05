@@ -4,6 +4,7 @@ import AyliMasin from "./ayl-imasin"
 import AyliMasin2 from "./ayl-imasin2"
 import OnlineEvMobileBanking from "./onlineevmobilebanking"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Ayl(){
     return(
         <>
@@ -13,6 +14,7 @@ function Ayl(){
         <AyliMasin2></AyliMasin2>
         <OnlineEvMobileBanking></OnlineEvMobileBanking>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
