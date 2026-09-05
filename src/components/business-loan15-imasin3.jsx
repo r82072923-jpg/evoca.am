@@ -350,4 +350,4 @@ function BusinessLoan15iMasin3({activeTab, setActiveTab}) {
   );
 }
 
-export default BusinessLoan15iMasin3;
+export default BusinessLoan15iMasin3;   
