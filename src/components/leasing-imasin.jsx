@@ -33,6 +33,7 @@ const uploadDataToFirebase = async () => {
       title: "Evoca Leasing",
       content: (
         <div className="text-sm text-gray-700 space-y-5 mt-4 border-t border-purple-100 pt-4 cursor-auto">
+            <button onClick={uploadDataToFirebase}>Ուղարկել firebase</button>
           <p>
             Լիզինգի առարկան կարող է ձեռք բերվել ինչպես ՀՀ-ից, այնպես էլ արտերկրից՝ առաջնային և երկրորդային շուկաներից: Լիզինգի առարկա կարող են հանդիսանալ՝
           </p>
