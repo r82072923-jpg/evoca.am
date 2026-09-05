@@ -27,23 +27,49 @@ const investmentData = {
       rules: [
         {
           linkTitle: "Արժեթղթերի շուկայում բրոքերային ծառայությունների մատուցման կանոններ",
-          linkUrl: "#",
+          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRD22-0001-45%20Brokerage%20Services%20in%20the%20Securities%20Market%20Procedure.pdf",
           description: "Այս կանոնները սահմանում են մեր հաճախորդների կողմից մեզ ներկայացված արժեթղթերով գործարքների կնքման պայմանների ընդունման/հաղորդման, հաճախորդների հետ կապի իրականացման, հաճախորդների հաշվին արժեթղթերով գործարքների կատարման կարգն ու պայմանները, ինչպես նաև տրամադրող գործառնությունների իրականացման հետ կապված հնարավոր ռիսկերի վերաբերյալ ընդհանրական տեղեկություններ։ Կանոնները մշակված են Հայաստանի քաղաքացիական օրենսգրքին, «Արժեթղթերի շուկայի մասին» ՀՀ օրենքին, ՀՀ Կենտրոնական բանկի նորմատիվ և այլ իրավական ակտերին համապատասխան։"
         },
         {
           linkTitle: "Արժեթղթերի պահառության գործունեության կանոններ",
-          linkUrl: "#",
+          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/RUL17-0002-45%20Depositing%20of%20securities%20Rules.pdf",
           description: "Այս կանոնները սահմանում են արժեթղթերի հաշիվների հետ կատարվող գործառնությունների ցանկը, ծառայությունների մատուցման/կատարման կարգն ու պայմանները, պահառության հետ կապված հարաբերությունները, ինչպես նաև պահառուի աշխատանքների կանոնները։ Կանոնները մշակված են Հայաստանի քաղաքացիական օրենսգրքին, «Արժեթղթերի շուկայի մասին» ՀՀ օրենքին և պահառության գործունեությունը կանոնակարգող իրավական այլ ակտերին և այդ թվում՝ Հայաստանի Կենտրոնական դեպոզիտարիայի կանոնների պահանջներին համապատասխան։"
         }
       ]
     },
     {
       title: "Ծառայությունների մատուցման սակագներ",
-      content: "Սակագների վերաբերյալ ինֆորմացիան այստեղ..."
+      tariffs: [
+        {
+          linkTitle: "Տեղական և Ռուսական շուկաներում ծառայությունների մատուցման սակագներ",
+          linkUrl: "https://www.evoca.am/files/global_files/1/16786910064566.pdf"
+        },
+        {
+          linkTitle: "Միջազգային շուկաներում ծառայությունների մատուցման սակագներ",
+          linkUrl: "https://www.evoca.am/files/global_files/1/16786910064566.pdf"
+        }
+      ]
     },
     {
       title: "Լրացուցիչ տեղեկատվություն",
-      content: "Լրացուցիչ տեղեկատվությունը այստեղ..."
+      additionalInfo: [
+        {
+          linkTitle: "«Արժեթղթերով գործարքներ կնքելու նպատակով պատվերների ընդունման և կատարման» ընթացակարգ",
+          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRI17-0001-45%20Receipt%20and%20execution%20of%20orders%20for%20securities%20transactions.pdf"
+        },
+        {
+          linkTitle: "«Շահերի բախման սահմանափակման» ընթացակարգ",
+          linkUrl: "https://www.evoca.am/file_manager/Bonds%202026/PRI15-0020-45%20shaheri%20baxman%20sahmanapakman%20kanon.pdf"
+        },
+        {
+          linkTitle: "Ֆոնդային բորսաներ",
+          linkUrl: "https://www.evoca.am/file_manager/stock-list.pdf"
+        },
+        {
+          linkTitle: "Տեղեկացումներ հնարավոր ռիսկերի վերաբերյալ",
+          linkUrl: "https://www.evoca.am/files/global_files/1/16161384961689.pdf"
+        }
+      ]
     }
   ]
 };
@@ -57,7 +83,6 @@ function ArjetxteriShukaiMasin() {
 
   return (
     <div className="max-w-5xl mx-auto p-6 md:p-10 font-sans text-gray-800">
-      
       <div className="space-y-6 mb-12 text-sm leading-relaxed">
         <h1 className="text-2xl font-bold mb-4">{investmentData.title}</h1>
         
@@ -102,7 +127,6 @@ function ArjetxteriShukaiMasin() {
       <h2 className="text-xl font-bold uppercase mb-6 tracking-wide text-gray-900">
         {investmentData.accordionSectionTitle}
       </h2>
-      
       <div className="space-y-4">
         {investmentData.accordions.map((acc, index) => {
           const isOpen = openAccordion === index;
@@ -142,6 +166,26 @@ function ArjetxteriShukaiMasin() {
                         <p className="leading-relaxed">{rule.description}</p>
                       </div>
                     ))
+                  ) : acc.tariffs ? (
+                    <div className="space-y-4 mt-4">
+                      {acc.tariffs.map((tariff, tIdx) => (
+                        <div key={tIdx}>
+                          <a href={tariff.linkUrl} className="text-purple-800 underline font-bold block">
+                            {tariff.linkTitle}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  ) : acc.additionalInfo ? (
+                    <div className="space-y-4 mt-4">
+                      {acc.additionalInfo.map((info, iIdx) => (
+                        <div key={iIdx}>
+                          <a href={info.linkUrl} className="text-purple-800 underline font-bold block">
+                            {info.linkTitle}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
                   ) : (
                     <p className="mt-4">{acc.content}</p>
                   )}
