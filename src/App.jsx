@@ -88,6 +88,7 @@ import Leasing from "./components/leasing.jsx"
 import Digital from "./components/digital.jsx"
 import Ayl from "./components/ayl.jsx"
 import ArjetxteriShuka from "./components/arjetxterishuka.jsx"
+import ArevtriFinansavorum from "./components/arevtrifinansavorum.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -203,6 +204,7 @@ function App() {
         <Route path="/digital" element={<Digital/>}></Route>
         <Route path="/other" element={<Ayl/>}></Route>
         <Route path="/securities" element={<ArjetxteriShuka/>}></Route>
+        <Route path="/trade-finance" element={<ArevtriFinansavorum/>}></Route>
       </Routes>
     </>
   )
