@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import KensakerpNewsiMasin from "./kensakerpnews-imasin"
+import KensakerpNewsiMasin2 from "./kensakerpnews-imasin2"
 function KensakerpNews(){
     return(
         <>
@@ -9,6 +10,7 @@ function KensakerpNews(){
         <TopHeader4></TopHeader4>
         <NewsiBajinner></NewsiBajinner>
         <KensakerpNewsiMasin></KensakerpNewsiMasin>
+        <KensakerpNewsiMasin2></KensakerpNewsiMasin2>
         </>
     )
 }
