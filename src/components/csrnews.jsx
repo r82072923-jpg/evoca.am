@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import CsrNewsiMasin from "./csrnews-imasin"
 import CsrNewsiMasin2 from "./csrnews-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function CsrNews(){
     return(
         <>
@@ -13,6 +14,7 @@ function CsrNews(){
         <CsrNewsiMasin></CsrNewsiMasin>
         <CsrNewsiMasin2></CsrNewsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
