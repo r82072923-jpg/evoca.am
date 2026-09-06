@@ -4,6 +4,7 @@ import BlogiBajinner from "./blog-iBajinner"
 import BusinessBlogsiMasin from "./businessblogs-imasin"
 import BusinessBlogsiMasin2 from "./businessblogs-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function BusinessBlogs(){
     return(
         <>
@@ -13,6 +14,7 @@ function BusinessBlogs(){
         <BusinessBlogsiMasin></BusinessBlogsiMasin>
         <BusinessBlogsiMasin2></BusinessBlogsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
