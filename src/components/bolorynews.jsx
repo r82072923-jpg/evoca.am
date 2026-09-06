@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import BoloryNewsiMasin from "./bolorynews-imasin"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function BoloryNews(){
     return(
         <>
@@ -11,6 +12,7 @@ function BoloryNews(){
         <NewsiBajinner></NewsiBajinner>
         <BoloryNewsiMasin></BoloryNewsiMasin>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
