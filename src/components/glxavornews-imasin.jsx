@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const GlxavorNewsiMasin = () => {
   const articleData = {
-    category: "Կենսակերպ",
+    category: "Գլխավոր",
     categoryPath: "/news/lifestyle",
-    title: "Evocabank-ը՝ Retro Fest-ի ֆինանսական գործընկեր",
-    description: "Սեպտեմբերի 20, Retro Fest 2026։ 4 լեգենդ մեկ բեմում։ Իսկ փառատոնի տոմսը գնիր Evoca քարտով և ստացիր 15% զեղչ։",
-    url: "https://www.evoca.am/images-cache/news/1/17884237814941/780x585.png" 
+    title: "Evocabank-ը և Norakaruyc.am-ը համագործակցության հուշագիր են ստորագրել",
+    description: "Նոր թվային լուծումը հնարավորություն կտա բնակարան ընտրել և հիփոթեքի հայտ ներկայացնել մեկ հարթակից։",
+    url: "https://www.evoca.am/images-cache/news/1/1782137837549/780x585.jpg" 
   };
 
   return (
@@ -20,7 +20,7 @@ const GlxavorNewsiMasin = () => {
             to={articleData.categoryPath} 
             className="inline-flex items-center gap-3 mb-6 group"
           >
-            <span className="w-5 h-5 bg-[#97FF00] shrink-0 group-hover:bg-[#4a00a3] transition-colors"></span>
+            <span className="w-5 h-5 bg-[#6400DC] shrink-0 group-hover:bg-[#4a00a3] transition-colors"></span>
             <span className="text-[17px] font-bold text-gray-900 group-hover:text-[#5b00c9] transition-colors">
               {articleData.category}
             </span>
@@ -37,7 +37,7 @@ const GlxavorNewsiMasin = () => {
 
         <div className="flex-1 w-full relative pl-4 pt-4">
           
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-[6px] border-l-[6px] border-[#97FF00]"></div>
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-[6px] border-l-[6px] border-[#6400DC]"></div>
           
           <div className="relative overflow-hidden shadow-sm">
             <img 
