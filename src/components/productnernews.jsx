@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import ProductnerNewsiMasin from "./productnernews-imasin"
+import ProductnerNewsiMasin2 from "./productnernews-imasin2"
 function ProductnerNews(){
     return(
         <>
@@ -9,6 +10,7 @@ function ProductnerNews(){
         <TopHeader4></TopHeader4>
         <NewsiBajinner></NewsiBajinner>
         <ProductnerNewsiMasin></ProductnerNewsiMasin>
+        <ProductnerNewsiMasin2></ProductnerNewsiMasin2>
         </>
     )
 }
