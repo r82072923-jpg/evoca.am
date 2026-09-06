@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import MrcanaknerNewsiMasin from "./mrcanaknernews-imasin"
 import MrcanaknerNewsiMasin2 from "./mrcanaknernews-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function MrcaanaknerNews(){
     return(
         <>
@@ -13,6 +14,7 @@ function MrcaanaknerNews(){
         <MrcanaknerNewsiMasin></MrcanaknerNewsiMasin>
         <MrcanaknerNewsiMasin2></MrcanaknerNewsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
