@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import NorararutyunnerNewsiMasin from "./norararutyunnernews-imasin"
 import NorararutyunnerNewsiMasin2 from "./norararutyunnernews-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function NorararutyunnerNews(){
     return(
         <>
@@ -13,6 +14,7 @@ function NorararutyunnerNews(){
         <NorararutyunnerNewsiMasin></NorararutyunnerNewsiMasin>
         <NorararutyunnerNewsiMasin2></NorararutyunnerNewsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
