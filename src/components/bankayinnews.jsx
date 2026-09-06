@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import BankayinNewsiMasin from "./bankayinnews-imasin"
 import BankayinNewsiMasin2 from "./bankayinnews-imasin2"
+import Footer from "./footer"
 function BankayinNews(){
     return(
         <>
@@ -11,6 +12,7 @@ function BankayinNews(){
         <NewsiBajinner></NewsiBajinner>
         <BankayinNewsiMasin></BankayinNewsiMasin>
         <BankayinNewsiMasin2></BankayinNewsiMasin2>
+        <Footer></Footer>
         </>
     )
 }
