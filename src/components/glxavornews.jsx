@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import GlxavorNewsiMasin from "./glxavornews-imasin"
 import GlxavorNewsiMasin2 from "./glxavornews-imasin2"
+import Footer from "./footer"
 function GlxavorNews(){
     return(
         <>
@@ -11,6 +12,7 @@ function GlxavorNews(){
         <NewsiBajinner></NewsiBajinner>
         <GlxavorNewsiMasin></GlxavorNewsiMasin>
         <GlxavorNewsiMasin2></GlxavorNewsiMasin2>
+        <Footer></Footer>
         </>
     )
 }
