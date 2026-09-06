@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import KensakerpNewsiMasin from "./kensakerpnews-imasin"
 import KensakerpNewsiMasin2 from "./kensakerpnews-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function KensakerpNews(){
     return(
         <>
@@ -13,6 +14,7 @@ function KensakerpNews(){
         <KensakerpNewsiMasin></KensakerpNewsiMasin>
         <KensakerpNewsiMasin2></KensakerpNewsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
