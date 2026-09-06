@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import BlogiBajinner from "./blog-iBajinner"
 import BoloryBlogsiMasin from "./boloryBlogs-imasin"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function BoloryBlogs(){
     return(
         <>
@@ -11,6 +12,7 @@ function BoloryBlogs(){
         <BlogiBajinner></BlogiBajinner>
         <BoloryBlogsiMasin></BoloryBlogsiMasin>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
