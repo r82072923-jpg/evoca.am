@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import NorararutyunnerNewsiMasin from "./norararutyunnernews-imasin"
+import NorararutyunnerNewsiMasin2 from "./norararutyunnernews-imasin2"
 function NorararutyunnerNews(){
     return(
         <>
@@ -9,6 +10,7 @@ function NorararutyunnerNews(){
         <TopHeader4></TopHeader4>
         <NewsiBajinner></NewsiBajinner>
         <NorararutyunnerNewsiMasin></NorararutyunnerNewsiMasin>
+        <NorararutyunnerNewsiMasin2></NorararutyunnerNewsiMasin2>
         </>
     )
 }
