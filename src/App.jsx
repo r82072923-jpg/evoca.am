@@ -91,6 +91,7 @@ import ArjetxteriShuka from "./components/arjetxterishuka.jsx"
 import Haytararutyunner from "./components/haytararutyunner.jsx"
 import ArevtriFinansavorum from "./components/arevtrifinansavorum.jsx"
 import Hashvetvutyunner from "./components/hashvetvutyunner.jsx"
+import Sakagner from "./components/sakagner.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -209,6 +210,7 @@ function App() {
         <Route path="/trade-finance" element={<ArevtriFinansavorum/>}></Route>
         <Route path="/announcements" element={<Haytararutyunner/>}></Route>
         <Route path="/reports" element={<Hashvetvutyunner/>}></Route>
+        <Route path="/tariffs" element={<Sakagner/>}></Route>
       </Routes>
     </>
   )
