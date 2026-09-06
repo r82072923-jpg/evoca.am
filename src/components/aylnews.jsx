@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import NewsiBajinner from "./news-ibajinner"
 import AylNewsiMasin from "./aylnews-imasin"
 import AylNewsiMasin2 from "./aylnews-imasin2"
+import Footer from "./footer"
 function AylNews(){
     return(
         <>
@@ -11,6 +12,7 @@ function AylNews(){
         <NewsiBajinner></NewsiBajinner>
         <AylNewsiMasin></AylNewsiMasin>
         <AylNewsiMasin2></AylNewsiMasin2>
+        <Footer></Footer>
         </>
     )
 }
