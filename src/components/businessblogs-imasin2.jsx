@@ -1,56 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from './firebaseConfog';
 import { Link } from 'react-router-dom';
 
-const bankingNewsData = [
-  {
-    id: 1,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16679076091685/510x383.jpg",
-    title: "Ամեն ինչ բանկոմատների մասին",
-    date: "31.01.2024",
-  },
-  {
-    id: 2,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16691870758279/510x383.jpg",
-    title: "Ինչպե՞ս սկսել բիզնես։ Guide from A to Z",
-    date: "05.01.2024",
-  },
-  {
-    id: 3,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16329967423394/510x383.png",
-    title: "Ֆինանսական ճգնաժամեր",
-    date: "06.07.2020",
-  },
-  {
-    id: 4,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16336139236001/510x383.png",
-    title: "Հաջողակ բանակցությունների 10 պատվիրանները",
-    date: "18.06.2020",
-  },
-  {
-    id: 5,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16336898810327/510x383.png",
-    title: "15 համաշխարհային բիզնեսներ, որոնք ծնվել են ավտոտնակներում և…",
-    date: "18.06.2020",
-  },
-  {
-    id: 6,
-    imageSrc: "https://www.evoca.am/images-cache/blogs/1/16339589553963/510x383.png",
-    title: "Բիզնես էթիկա",
-    date: "16.06.2020",
-  },
-];
-
 const BusinessBlogsiMasin2 = () => {
+  const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [uploadLoading, setUploadLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
   
   const itemsPerPage = 1;
 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "businessblogsiMasin"));
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push({ id: doc.id, ...doc.data() });
+        });
+
+        data.sort((a, b) => Number(a.id) - Number(b.id));
+
+        setNewsList(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Սխալ տվյալները բեռնելիս: ", error);
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   const pages = [];
-  for (let i = 0; i < bankingNewsData.length; i += itemsPerPage) {
-    pages.push(bankingNewsData.slice(i, i + itemsPerPage));
+  for (let i = 0; i < newsList.length; i += itemsPerPage) {
+    pages.push(newsList.slice(i, i + itemsPerPage));
   }
   const totalPages = pages.length;
 
@@ -66,9 +50,16 @@ const BusinessBlogsiMasin2 = () => {
     setCurrentIndex(index);
   };
 
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center py-16">
+        <p className="text-[#5b00c9] font-bold text-lg">Բեռնվում են տվյալները Firebase-ից...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full max-w-[1200px] mx-auto px-4 py-8 font-sans">
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 min-h-[360px]">
         {pages[currentIndex]?.map((bankingNews) => (
           <div key={bankingNews.id} className="bg-white flex flex-col justify-between">
