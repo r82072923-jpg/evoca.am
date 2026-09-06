@@ -94,6 +94,7 @@ import Hashvetvutyunner from "./components/hashvetvutyunner.jsx"
 import Sakagner from "./components/sakagner.jsx"
 import GlxavorNews from "./components/glxavornews.jsx"
 import BankayinNews from "./components/bankayinnews.jsx"
+import HarcazruycnerNews from "./components/harcazruycnernews.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -215,6 +216,7 @@ function App() {
         <Route path="/tariffs" element={<Sakagner/>}></Route>
         <Route path="/news/main" element={<GlxavorNews/>}></Route>
         <Route path="/news/banking" element={<BankayinNews/>}></Route>
+        <Route path="/news/interviews" element={<HarcazruycnerNews/>}></Route>
       </Routes>
     </>
   )
