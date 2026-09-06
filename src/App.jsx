@@ -97,6 +97,7 @@ import BankayinNews from "./components/bankayinnews.jsx"
 import HarcazruycnerNews from "./components/harcazruycnernews.jsx"
 import ProductnerNews from "./components/productnernews.jsx"
 import NorararutyunnerNews from "./components/norararutyunnernews.jsx"
+import KensakerpNews from "./components/kensakerpnews.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -221,6 +222,7 @@ function App() {
         <Route path="/news/interviews" element={<HarcazruycnerNews/>}></Route>
         <Route path="/news/products" element={<ProductnerNews/>}></Route>
         <Route path="/news/innovations" element={<NorararutyunnerNews/>}></Route>
+        <Route path="/news/lifestyle" element={<KensakerpNews/>}></Route>
       </Routes>
     </>
   )
