@@ -4,6 +4,7 @@ import NewsiBajinner from "./news-ibajinner"
 import HarcazruycnerNewsiMasin from "./harcazruycnernews-imasin"
 import HarcazruycnerNewsiMasin2 from "./harcazruycnernews-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function HarcazruycnerNews(){
     return(
         <>
@@ -13,6 +14,7 @@ function HarcazruycnerNews(){
         <HarcazruycnerNewsiMasin></HarcazruycnerNewsiMasin>
         <HarcazruycnerNewsiMasin2></HarcazruycnerNewsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
