@@ -105,6 +105,7 @@ import BoloryNews from "./components/bolorynews.jsx"
 import BusinessBlogs from "./components/businessblogs.jsx"
 import KensakerpBlogs from "./components/kensakerpBlogs.jsx"
 import NerdrumnerBlogs from "./components/nerdrumnerBlogs.jsx"
+import BoloryBlogs from "./components/boloryBlogs.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -237,6 +238,7 @@ function App() {
         <Route path="/blog/business-blogs" element={<BusinessBlogs/>}></Route>
         <Route path="/blog/lifestyle-blogs" element={<KensakerpBlogs/>}></Route>
         <Route path="/blog/investments-blogs" element={<NerdrumnerBlogs/>}></Route>
+        <Route path="/archive" element={<BoloryBlogs/>}></Route>
       </Routes>
     </>
   )
