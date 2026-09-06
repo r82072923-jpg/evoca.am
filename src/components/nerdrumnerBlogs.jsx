@@ -4,6 +4,7 @@ import BlogiBajinner from "./blog-iBajinner"
 import NerdrumnerBlogsiMasin from "./nerdrumnerBlogs-imasin"
 import NerdrumnerBlogsiMasin2 from "./nerdrumnerBlogs-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function NerdrumnerBlogs(){
     return(
         <>
@@ -13,6 +14,7 @@ function NerdrumnerBlogs(){
         <NerdrumnerBlogsiMasin></NerdrumnerBlogsiMasin>
         <NerdrumnerBlogsiMasin2></NerdrumnerBlogsiMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
