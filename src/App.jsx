@@ -111,6 +111,7 @@ import EvocaOnline from "./components/evocaonline.jsx"
 import EvocaTouch2 from "./components/evocatouch2.jsx"
 import EvocaDigital from "./components/evocadigital.jsx"
 import Partners from "./components/partners.jsx"
+import Services1 from "./components/services1.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -249,6 +250,7 @@ function App() {
         <Route path="/page-touch2" element={<EvocaTouch2/>}></Route>
         <Route path="/page-digital" element={<EvocaDigital/>}></Route>
         <Route path="/partners" element={<Partners/>}></Route>
+        <Route path="/services/credit" element={<Services1/>}></Route>
       </Routes>
     </>
   )
