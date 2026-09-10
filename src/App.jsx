@@ -135,6 +135,7 @@ import MijazgayinOperatorneriMasin5 from "./components/mijazgayinoperatorner-ima
 import MijazgayinOperatorneriMasin6 from "./components/mijazgayinoperatorner-imasin6.jsx"
 import MijazgayinOperatorneriMasin7 from "./components/mijazgayinoperatorner-imasin7.jsx"
 import MijazgayinOperatorneriMasin8 from "./components/mijazgayinoperatorner-imasin8.jsx"
+import MijazgayinOperatorneriMasin9 from "./components/mijazgayinoperatorner-imasin9.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -298,6 +299,7 @@ function App() {
         <Route path="/services/international-mobile/3.2" element={<MijazgayinOperatorneriMasin6/>}></Route>
         <Route path="/services/international-mobile/3.3" element={<MijazgayinOperatorneriMasin7/>}></Route>
         <Route path="/services/international-mobile/4" element={<MijazgayinOperatorneriMasin8/>}></Route>
+        <Route path="/services/international-mobile/4.1" element={<MijazgayinOperatorneriMasin9/>}></Route>
       </Routes>
     </>
   )
