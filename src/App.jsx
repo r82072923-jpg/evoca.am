@@ -117,6 +117,7 @@ import Services1iMasinSharunakutyun2 from "./components/services1-imasinsharunak
 import Services1iMasinSharunakutyun3 from "./components/services1-imasinsharunakutyun3.jsx"
 import Services1iMasinSharunakutyun5 from "./components/services1-imasinsharunakutyun5.jsx"
 import Services1iMasinSharunakutyun6 from "./components/services1-imasinsharunakutyun6.jsx"
+import Services1iMasinSharunakutyun8 from "./components/services1-imasinsharunakutyun8.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -265,6 +266,9 @@ function App() {
         <Route path="/services/credit/3" element={<Services1iMasinSharunakutyun6/>}></Route>
         <Route path="/services/credit/3.1" element={<Services1iMasinSharunakutyun2/>}></Route>
         <Route path="/services/credit/3.2" element={<Services1iMasinSharunakutyun3/>}></Route>
+        <Route path="/services/credit/4" element={<Services1iMasinSharunakutyun8/>}></Route>
+        <Route path="/services/credit/4.1" element={<Services1iMasinSharunakutyun2/>}></Route>
+        <Route path="/services/credit/4.2" element={<Services1iMasinSharunakutyun3/>}></Route>
       </Routes>
     </>
   )
