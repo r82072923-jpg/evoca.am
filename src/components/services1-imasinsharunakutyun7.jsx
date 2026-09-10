@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Header2 from './header2';
 import { Link } from 'react-router-dom';
 import { db } from './firebaseConfog';
 import { collection, getDocs } from 'firebase/firestore';
 
-const Services1iMasinSharunakutyun4 = () => {
+const Services1iMasinSharunakutyun7 = () => {
   const [organizations, setOrganizations] = useState([]);
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
     const fetchOrganizations = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "services1iMasinSharunakutyun2"));
+        const querySnapshot = await getDocs(collection(db, "services1iMasinSharunakutyun3"));
         const data = [];
         querySnapshot.forEach((docSnap) => {
           data.push({ id: docSnap.id, ...docSnap.data() });
@@ -40,11 +41,11 @@ const Services1iMasinSharunakutyun4 = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-3xl font-bold text-slate-800 text-center w-full">
-          Պրեմիում Կրեդիտ ՈՒՎԿ
-        </h2>
-      </div>
+      <Header2 />
+
+      <h2 className="text-center text-3xl font-bold text-slate-800 mb-10">
+        ՖԻՆՔԱ ՈՒՎԿ
+      </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {organizations.map((org) => (
@@ -78,4 +79,4 @@ const Services1iMasinSharunakutyun4 = () => {
   );
 };
 
-export default Services1iMasinSharunakutyun4;
+export default Services1iMasinSharunakutyun7;
