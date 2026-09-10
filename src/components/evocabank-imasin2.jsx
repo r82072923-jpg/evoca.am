@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { db } from './firebaseConfog';
 import { collection, getDocs } from 'firebase/firestore';
 
-const EvocaBankiMasin = () => {
+const EvocaBankiMasin2 = () => {
   const [organizations, setOrganizations] = useState([]);
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
     const fetchOrganizations = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "evocaBankiMasin"));
+        const querySnapshot = await getDocs(collection(db, "evocaBankiMasin2"));
         const data = [];
         querySnapshot.forEach((docSnap) => {
           data.push({ id: docSnap.id, ...docSnap.data() });
@@ -40,9 +40,11 @@ const EvocaBankiMasin = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">
-      <h2 className="text-center text-3xl font-bold text-slate-800 mb-10">
-        EVOCABANK
-      </h2>
+      <div className="flex justify-between items-center mb-10">
+        <h2 className="text-3xl font-bold text-slate-800 text-center w-full">
+          Վարկի մարում
+        </h2>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {organizations.map((org) => (
@@ -76,4 +78,4 @@ const EvocaBankiMasin = () => {
   );
 };
 
-export default EvocaBankiMasin;
+export default EvocaBankiMasin2;
