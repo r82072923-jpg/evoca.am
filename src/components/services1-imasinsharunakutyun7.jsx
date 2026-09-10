@@ -41,8 +41,6 @@ const Services1iMasinSharunakutyun7 = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">
-      <Header2 />
-
       <h2 className="text-center text-3xl font-bold text-slate-800 mb-10">
         ՖԻՆՔԱ ՈՒՎԿ
       </h2>

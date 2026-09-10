@@ -263,6 +263,8 @@ function App() {
         <Route path="/services/credit/2.1" element={<Services1iMasinSharunakutyun2/>}></Route>
         <Route path="/services/credit/2.2" element={<Services1iMasinSharunakutyun3/>}></Route>
         <Route path="/services/credit/3" element={<Services1iMasinSharunakutyun6/>}></Route>
+        <Route path="/services/credit/3.1" element={<Services1iMasinSharunakutyun2/>}></Route>
+        <Route path="/services/credit/3.2" element={<Services1iMasinSharunakutyun3/>}></Route>
       </Routes>
     </>
   )
