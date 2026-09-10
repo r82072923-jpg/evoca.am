@@ -137,6 +137,7 @@ import MijazgayinOperatorneriMasin7 from "./components/mijazgayinoperatorner-ima
 import MijazgayinOperatorneriMasin8 from "./components/mijazgayinoperatorner-imasin8.jsx"
 import MijazgayinOperatorneriMasin9 from "./components/mijazgayinoperatorner-imasin9.jsx"
 import InternetEvTv from "./components/internetevtv.jsx"
+import InternetEvTviMasin2 from "./components/internetevtv-imasin2.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -302,6 +303,7 @@ function App() {
         <Route path="/services/international-mobile/4" element={<MijazgayinOperatorneriMasin8/>}></Route>
         <Route path="/services/international-mobile/4.1" element={<MijazgayinOperatorneriMasin9/>}></Route>
         <Route path="/services/internet-tv" element={<InternetEvTv/>}></Route>
+        <Route path="/services/internet-tv/1" element={<InternetEvTviMasin2/>}></Route>
       </Routes>
     </>
   )
