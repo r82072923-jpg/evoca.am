@@ -1,53 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { db } from './firebaseConfog';
-import { collection, getDocs } from 'firebase/firestore';
+
+const staticOrganizations = [
+  {
+    id: "1",
+    name: "Բիլայն Ռուսաստան",
+    logo: "https://resource.evoca.am/images/webPayment/beelinenew.png",
+    link: "/services/international-mobile/4",
+    isActive: true,
+  },
+];
 
 const MijazgayinOperatorneriMasin4 = () => {
-  const [organizations, setOrganizations] = useState([]);
-  const [fetching, setFetching] = useState(true);
-
-  useEffect(() => {
-    const fetchOrganizations = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "mijazgayinoperatorneriMasin2"));
-        const data = [];
-        querySnapshot.forEach((docSnap) => {
-          data.push({ id: docSnap.id, ...docSnap.data() });
-        });
-
-        if (data.length > 0) {
-          data.sort((a, b) => Number(a.id) - Number(b.id));
-          setOrganizations(data);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setFetching(false);
-      }
-    };
-
-    fetchOrganizations();
-  }, []);
-
-  if (fetching) {
-    return (
-      <div className="w-full max-w-5xl mx-auto px-5 py-20 text-center font-sans">
-        <p className="text-lg text-violet-700 font-semibold">Բեռնվում են տվյալները Firebase-ից...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-3xl font-bold text-slate-800 text-center w-full">
-          Վրացական
+          Ռուսական
         </h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {organizations.map((org) => (
+        {staticOrganizations.map((org) => (
           <Link
             key={org.id}
             to={org.link}
