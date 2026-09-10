@@ -107,6 +107,7 @@ import KensakerpBlogs from "./components/kensakerpBlogs.jsx"
 import NerdrumnerBlogs from "./components/nerdrumnerBlogs.jsx"
 import BoloryBlogs from "./components/boloryBlogs.jsx"
 import Careers from "./components/careers.jsx"
+import EvocaOnline from "./components/evocaonline.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 
@@ -241,6 +242,7 @@ function App() {
         <Route path="/blog/investments-blogs" element={<NerdrumnerBlogs/>}></Route>
         <Route path="/archive" element={<BoloryBlogs/>}></Route>
         <Route path="/careers" element={<Careers/>}></Route>
+        <Route path="/evoca-online" element={<EvocaOnline/>}></Route>
       </Routes>
     </>
   )
