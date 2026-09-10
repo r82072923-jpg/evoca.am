@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader4 from "./topHeader4"
 import EvocaTouch2iMasin from "./evocatouch2-imasin"
 import EvocaTouch2iMasin2 from "./evocatouch2-imasin2"
+import VerjinNorutyunner4 from "./verjinnorutyunner4"
 function EvocaTouch2(){
     return(
         <>
@@ -9,6 +10,7 @@ function EvocaTouch2(){
         <TopHeader4></TopHeader4>
         <EvocaTouch2iMasin></EvocaTouch2iMasin>
         <EvocaTouch2iMasin2></EvocaTouch2iMasin2>
+        <VerjinNorutyunner4></VerjinNorutyunner4>
         </>
     )
 }
