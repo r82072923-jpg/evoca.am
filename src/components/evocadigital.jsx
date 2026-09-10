@@ -4,6 +4,7 @@ import EvocaDigitaliMasin from "./evocadigital-imasin"
 import EvocaDigitaliMasin2 from "./evocadigital-imasin2"
 import VerjinNorutyunner4 from "./verjinnorutyunner4"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function EvocaDigital(){
     return(
         <>
@@ -13,6 +14,7 @@ function EvocaDigital(){
         <EvocaDigitaliMasin2></EvocaDigitaliMasin2>
         <VerjinNorutyunner4></VerjinNorutyunner4>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
