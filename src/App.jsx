@@ -123,7 +123,7 @@ import EvocaBank from "./components/evocabank.jsx"
 import { useState } from "react"
 import { Routes, Route } from "react-router-dom";
 import EvocaBankiMasin2 from "./components/evocabank-imasin2.jsx"
-
+import EvocaBankiMasin3 from "./components/evocabank-imasin3.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -275,6 +275,7 @@ function App() {
         <Route path="/services/events" element={<Events/>}></Route>
         <Route path="/services/evocabank" element={<EvocaBank/>}></Route>
         <Route path="/services/evocabank/1" element={<EvocaBankiMasin2/>}></Route>
+        <Route path="/services/evocabank/1.1" element={<EvocaBankiMasin3/>}></Route>
       </Routes>
     </>
   )
