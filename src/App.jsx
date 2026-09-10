@@ -128,6 +128,7 @@ import EvocaBankiMasin4 from "./components/evocabank-imasin4.jsx"
 import EvocaBankiMasin5 from "./components/evocabank-imasin5.jsx"
 import EvocaBankiMasin6 from "./components/evocabank-imasin6.jsx"
 import MijazgayinOperatorner from "./components/mijazgayinoperatorner.jsx"
+import MijazgayinOperatorneriMasin2 from "./components/mijazgayinoperatorner-imasin2.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -284,6 +285,7 @@ function App() {
         <Route path="/services/evocabank/2" element={<EvocaBankiMasin5/>}></Route>
         <Route path="/services/evocabank/3" element={<EvocaBankiMasin6/>}></Route>
         <Route path="/services/international-mobile" element={<MijazgayinOperatorner/>}></Route>
+        <Route path="/services/international-mobile/1" element={<MijazgayinOperatorneriMasin2/>}></Route>
       </Routes>
     </>
   )
