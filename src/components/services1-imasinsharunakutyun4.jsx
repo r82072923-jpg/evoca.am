@@ -2,25 +2,24 @@ import React from 'react';
 import Header2 from './header2';
 import { Link } from 'react-router-dom';
 
-// Տվյալների օբյեկտների զանգված
 const staticOrganizations = [
   {
     id: "1",
     name: "Հերթական մարում",
     logo: "https://resource.evoca.am/images/WebPayment/premiumcredit.png",
-    link: "/services/credit/2",
+    link: "/services/credit/2.1",
     isActive: true,
   },
   {
     id: "2",
     name: "Մայր գումարի մարում",
     logo: "https://resource.evoca.am/images/WebPayment/premiumcredit.png",
-    link: "/services/credit/2",
+    link: "/services/credit/2.2",
     isActive: false,
   },
 ];
 
-const Services2iMasin = () => {
+const Services1iMasinSharunakutyun4 = () => {
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">
       <h2 className="text-center text-3xl font-bold text-slate-800 mb-10">
@@ -59,4 +58,4 @@ const Services2iMasin = () => {
   );
 };
 
-export default Services2iMasin
+export default Services1iMasinSharunakutyun4
