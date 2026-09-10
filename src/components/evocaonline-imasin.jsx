@@ -77,7 +77,7 @@ function EvocaOnlineiMasin() {
         >
           <div 
             className="bg-white rounded-md max-w-[420px] w-full p-8 relative flex flex-col items-center text-center shadow-2xl"
-            onClick={(e) => e.stopPropagation()} // Կանխում է modal-ի փակվելը ներսում սեղմելիս
+            onClick={(e) => e.stopPropagation()}
           >
             <button 
               onClick={() => setIsQrModalOpen(false)}
