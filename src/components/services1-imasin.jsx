@@ -1,37 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { db } from './firebaseConfog';
+import { collection, getDocs } from 'firebase/firestore';
 
 const Services1iMasin = () => {
-  const organizations = [
-    {
-      id: 1,
-      name: "ԲԼԵՍՍ ՈՒՎԿ",
-      logo: "https://resource.evoca.am/images/WebPayment/bless.png",
-      link: "/services/credit/1",
-      isActive: false, 
-    },
-    {
-      id: 2,
-      name: "Պրեմիում Կրեդիտ\nՈՒՎԿ",
-      logo: "https://resource.evoca.am/images/WebPayment/premiumcredit.png",
-      link: "/services/credit/2",
-      isActive: false,
-    },
-    {
-      id: 3,
-      name: "ՖԻՆՔԱ ՈՒՎԿ",
-      logo: "https://resource.evoca.am/images/Payment/finca-logo.png",
-      link: "/services/credit/3",
-      isActive: false,
-    },
-    {
-      id: 4,
-      name: "Միկրո Կապիտալ\nՈՒՎԿ",
-      logo: "https://resource.evoca.am/images/Payment/MikroKapital-Logo.png",
-      link: "/services/credit/4",
-      isActive: false,
-    },
-  ];
+  const [organizations, setOrganizations] = useState([]);
+  const [fetching, setFetching] = useState(true);
+
+  useEffect(() => {
+    const fetchOrganizations = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "services1iMasin"));
+        const data = [];
+        querySnapshot.forEach((docSnap) => {
+          data.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        if (data.length > 0) {
+          data.sort((a, b) => Number(a.id) - Number(b.id));
+          setOrganizations(data);
+        }
+      } catch (error) {
+        console.error("Սխալ տվյալները կարդալիս Firebase-ից: ", error);
+      } finally {
+        setFetching(false);
+      }
+    };
+
+    fetchOrganizations();
+  }, []);
+
+  if (fetching) {
+    return (
+      <div className="w-full max-w-5xl mx-auto px-5 py-20 text-center font-sans">
+        <p className="text-lg text-violet-700 font-semibold">Բեռնվում են տվյալները Firebase-ից...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-5 bg-slate-50 min-h-screen font-sans">

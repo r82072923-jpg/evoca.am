@@ -1,5 +1,4 @@
 import React from "react";
-
 const Services1iMasinSharunakutyun2 = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 md:p-10 bg-[#f8f9fb] font-sans rounded-2xl">

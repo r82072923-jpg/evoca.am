@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Header2 from "./header2";
+import Footer2 from './footer2';
+import FooterBottom from './footerBottom';
 import { Link } from "react-router-dom";
+import { db } from './firebaseConfog';
+import { collection, getDocs } from 'firebase/firestore';
 
 const Services1iMasinSharunakutyun = () => {
-  const organizations = [
-    {
-      id: 1,
-      name: "Հերթական մարում",
-      logo: "https://resource.evoca.am/images/WebPayment/bless.png",
-      link: "/services/credit/1.1",
-      isActive: false, 
-    },
-    {
-      id: 2,
-      name: "Վարկի մայր գումարի վաղաժամկետ մարում",
-      logo: "https://resource.evoca.am/images/WebPayment/bless.png",
-      link: "/services/credit/1.2",
-      isActive: false,
-    },
-  ];
+  const [organizations, setOrganizations] = useState([]);
+  const [fetching, setFetching] = useState(true);
+
+  useEffect(() => {
+    const fetchOrganizations = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "services1iMasinSharunakutyun"));
+        const data = [];
+        querySnapshot.forEach((docSnap) => {
+          data.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        if (data.length > 0) {
+          data.sort((a, b) => Number(a.id) - Number(b.id));
+          setOrganizations(data);
+        }
+      } catch (error) {
+        console.error("Սխալ տվյալները կարդալիս Firebase-ից: ", error);
+      } finally {
+        setFetching(false);
+      }
+    };
+
+    fetchOrganizations();
+  }, []);
+
+  if (fetching) {
+    return (
+      <div className="w-full max-w-5xl mx-auto px-5 py-20 text-center font-sans">
+        <Header2 />
+        <p className="text-lg text-violet-700 font-semibold mt-10">Բեռնվում են տվյալները Firebase-ից...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-10xl mx-auto py-10 px-5  min-h-screen font-sans">
-    <Header2></Header2>
-      <h2 className="text-center text-3xl font-bold text-slate-800 mb-10">
+    <div className="max-w-10xl mx-auto py-10 px-5 min-h-screen font-sans">
+      <Header2 />
+      <h2 className="text-center text-3xl font-bold text-slate-800 mb-10 mt-6">
         ԲԼԵՍՍ ՈՒՎԿ
       </h2>
 
@@ -55,6 +77,8 @@ const Services1iMasinSharunakutyun = () => {
           </Link>
         ))}
       </div>
+      <Footer2></Footer2>
+      <FooterBottom></FooterBottom>
     </div>
   );
 };
