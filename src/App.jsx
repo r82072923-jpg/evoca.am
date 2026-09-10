@@ -148,6 +148,7 @@ import InternetEvTviMasin9 from "./components/internetevtv-imasin9.jsx"
 import InternetEvTviMasin10 from "./components/internetevtv-imasin10.jsx"
 import InternetEvTviMasin11 from "./components/internetevtv-imasin11.jsx"
 import InternetEvTviMasin12 from "./components/internetevtv-imasin12.jsx"
+import JoVjarumner from "./components/jovjarumner.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -324,6 +325,7 @@ function App() {
         <Route path="/services/internet-tv/9" element={<InternetEvTviMasin10/>}></Route>
         <Route path="/services/internet-tv/10" element={<InternetEvTviMasin11/>}></Route>
         <Route path="/services/internet-tv/11" element={<InternetEvTviMasin12/>}></Route>
+        <Route path="/services/traffic-police" element={<JoVjarumner/>}></Route>
       </Routes>
     </>
   )
