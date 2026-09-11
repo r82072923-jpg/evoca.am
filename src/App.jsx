@@ -170,6 +170,7 @@ import HajaxordiChapanishner from "./components/hajaxordichapanishner.jsx"
 import Kargavorumner from "./components/kargavorumner.jsx"
 import Qaxaqakanutyun from "./components/qaxaqakanutyun.jsx"
 import FinansakanHashtarar from "./components/finansakanhashtarar.jsx"
+import Dibrary from "./components/dibrary.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -368,6 +369,7 @@ function App() {
         <Route path="/regulation" element={<Kargavorumner/>}></Route>
         <Route path="/privacy-policy" element={<Qaxaqakanutyun/>}></Route>
         <Route path="/financial-ombudsman" element={<FinansakanHashtarar/>}></Route>
+        <Route path="/dibrary" element={<Dibrary/>}></Route>
       </Routes>
     </>
   )

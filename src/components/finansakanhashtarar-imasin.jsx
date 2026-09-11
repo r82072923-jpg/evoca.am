@@ -1,15 +1,11 @@
 import React from "react";
-import FinansakanHashtarar from "./finansakanhashtarar";
 
 function FinansakanHashtarariMasin() {
   return (
     <div style={{ maxWidth: "850px", margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif", color: "#222", lineHeight: "1.6" }}>
-      {/* Գլխավոր վերնագիր */}
       <h1 style={{ fontSize: "26px", fontWeight: "bold", marginBottom: "20px", color: "#1a1a1a" }}>
         Ֆին. հաշտարար
       </h1>
-
-      {/* Նկարագրական տեքստ */}
       <p style={{ fontStyle: "italic", marginBottom: "15px" }}>
         <strong>Ֆինանսական համակարգի հաշտարարի</strong> գրասենյակն անկախ կառավարման համակարգով կառույց է, որի հիմնադիրն է ՀՀ Կենտրոնական բանկը: <em>Հաշտարարի գրասենյակը կոչված է լուծելու ֆիզիկական անձ սպառողների և ֆինանսական կազմակերպությունների միջև ծագած գույքային վեճերը:</em>
       </p>
@@ -17,8 +13,6 @@ function FinansakanHashtarariMasin() {
       <p style={{ fontStyle: "italic", fontWeight: "bold", marginBottom: "25px" }}>
         Հաշտարարի ծառայություններն անվճար են:
       </p>
-
-      {/* Նպատակներ */}
       <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "15px" }}>
         Ֆինանսական համակարգի հաշտարարի գործունեության նպատակներն են՝
       </h3>
@@ -41,7 +35,6 @@ function FinansakanHashtarariMasin() {
         </li>
       </ul>
 
-      {/* Գրասենյակ և Կոնտակտներ */}
       <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "15px" }}>
         Ֆինանսական համակարգի հաշտարարի գրասենյակ՝
       </h3>
@@ -81,8 +74,6 @@ function FinansakanHashtarariMasin() {
           </a>
         </p>
       </div>
-
-      {/* Աշխատանքային ժամեր */}
       <h3 style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "10px" }}>
         Աշխատանքային ժամեր՝
       </h3>
