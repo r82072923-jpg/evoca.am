@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import IrakanAkteriMasin from "./irakanakter-imasin"
 import IrakanAkteriMasin2 from "./irakanakter-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function IrakanAkter(){
     return(
         <>
@@ -11,6 +12,7 @@ function IrakanAkter(){
         <IrakanAkteriMasin></IrakanAkteriMasin>
         <IrakanAkteriMasin2></IrakanAkteriMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
