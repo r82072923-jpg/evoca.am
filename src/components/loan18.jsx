@@ -4,6 +4,7 @@ import TopHeader from "./topHeader"
 import Loan18iMasin from "./loan18-imasin"
 import Loan18iMasin2 from "./loan18-imasin2"
 import Loan18iMasin3 from "./loan18-imasin3"
+import Loan18iMasin4 from "./loan18-imasin4"
 function Loan18(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -17,6 +18,9 @@ function Loan18(){
           )}
           {activeTab === 'Պայմաններ' && (
             <Loan18iMasin3 activeTab={activeTab} setActiveTab={setActiveTab} />
+          )}
+          {activeTab === 'Պահանջվող փաստաթղթերի ցանկ' && (
+            <Loan18iMasin4 activeTab={activeTab} setActiveTab={setActiveTab} />
           )}
         </div>
         </>
