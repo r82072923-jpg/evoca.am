@@ -4,6 +4,7 @@ import DibraryiMasin from "./dibrary-imasin"
 import DibraryiMasin2 from "./dibrary-imasin2"
 import DibraryiMasin3 from "./dibrary-imasin3"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Dibrary(){
     return(
         <>
@@ -13,6 +14,7 @@ function Dibrary(){
         <DibraryiMasin2></DibraryiMasin2>
         <DibraryiMasin3></DibraryiMasin3>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
