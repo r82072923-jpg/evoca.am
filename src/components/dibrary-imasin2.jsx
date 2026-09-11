@@ -1,5 +1,4 @@
 import React from "react";
-import DibraryiMasin from "./dibrary-imasin";
 
 function DibraryiMasin2() {
   const highlightStyle = {
