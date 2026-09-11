@@ -100,9 +100,6 @@ function Header() {
           <Link to="/qartez" className="hover:text-purple-700 transition-colors">
             <i className="fa-solid fa-location-dot text-lg"></i>
           </Link>
-          <Link to="/faq" className="hover:text-purple-700 transition-colors hidden sm:block">
-            <i className="fa-regular fa-circle-question text-lg"></i>
-          </Link>
           <button className="hover:text-purple-700 transition-colors hidden sm:block">
             <i className="fa-solid fa-globe text-lg"></i>
           </button>
