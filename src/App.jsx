@@ -154,6 +154,7 @@ import KomunalVjarumneriMasin from "./components/komunalvjarumner-imasin.jsx"
 import KomunalVjarumneriMasin2 from "./components/komunalvjarumner-imasin2.jsx"
 import KomunalVjarumneriMasin3 from "./components/komunalvjarumner-imasin3.jsx"
 import KomunalVjarumneriMasin4 from "./components/komunalvjarumner-imasin4.jsx"
+import KomunalVjarumneriMasin5 from "./components/komunalvjarumner-imasin5.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -336,6 +337,7 @@ function App() {
         <Route path="/services/utility/1" element={<KomunalVjarumneriMasin2/>}></Route>
         <Route path="/services/utility/1.1" element={<KomunalVjarumneriMasin3/>}></Route>
         <Route path="/services/utility/1.2" element={<KomunalVjarumneriMasin4/>}></Route>
+        <Route path="/services/utility/2" element={<KomunalVjarumneriMasin5/>}></Route>
       </Routes>
     </>
   )
