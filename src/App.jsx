@@ -69,6 +69,7 @@ import Loan16 from "./components/loan16.jsx"
 import Loan17 from "./components/loan17.jsx"
 import Loan18 from "./components/loan18.jsx"
 import Loan19 from "./components/loan19.jsx"
+import Loan20 from "./components/loan20.jsx"
 import Cards2 from "./components/cards2.jsx"
 import Avandner from "./components/avandner.jsx"
 import DasakanAvand from "./components/dasakanavand.jsx"
@@ -350,6 +351,7 @@ function App() {
         <Route path="/loan17" element={<Loan17/>}></Route>
         <Route path="/loan18" element={<Loan18/>}></Route>
         <Route path="/loan19" element={<Loan19/>}></Route>
+        <Route path="/loan20" element={<Loan20/>}></Route>
       </Routes>
     </>
   )
