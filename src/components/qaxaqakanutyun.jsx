@@ -2,6 +2,7 @@ import Header from "./header"
 import TopHeader4 from "./topHeader4"
 import QaxaqakanutyuniMasin from "./qaxaqakanutyun-imasin"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Qaxaqakanutyun(){
     return(
         <>
@@ -9,6 +10,7 @@ function Qaxaqakanutyun(){
         <TopHeader4></TopHeader4>
         <QaxaqakanutyuniMasin></QaxaqakanutyuniMasin>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
