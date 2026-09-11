@@ -7,7 +7,7 @@ import Chat from "./chat";
 function Header() {
   const [navItems, setNavItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isChatOpen, setIsChatOpen] = useState(false);     
+  const [isChatOpen, setIsChatOpen] = useState(false);    
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fetchHeaderData = async () => {
@@ -51,28 +51,31 @@ function Header() {
           ) : (
             navItems.map((item) => (
               <div key={item.id || item.path} className="relative group h-full flex items-center">
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `relative flex items-center gap-1.5 h-full text-sm font-bold transition-all ${
-                      isActive
-                        ? "text-purple-700 before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-purple-700"
-                        : "text-slate-800 hover:text-purple-700"
-                    }`
-                  }
-                >
-                  {item.title}
-                  {item.subItems && (
+                {item.subItems && item.subItems.length > 0 ? (
+                  <span className="relative flex items-center gap-1.5 h-full text-sm font-bold text-slate-800 hover:text-purple-700 cursor-pointer select-none">
+                    {item.title}
                     <i className="fa-solid fa-chevron-down text-[10px] mt-0.5 group-hover:rotate-180 transition-transform duration-200"></i>
-                  )}
-                </NavLink>
+                  </span>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `relative flex items-center gap-1.5 h-full text-sm font-bold transition-all ${
+                        isActive
+                          ? "text-purple-700 before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-purple-700"
+                          : "text-slate-800 hover:text-purple-700"
+                      }`
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
+                )}
 
-                {/* Dropdown configured with z-[110] to render over all page layers */}
-                {item.subItems && (
+                {item.subItems && item.subItems.length > 0 && (
                   <div className="absolute top-full right-0 mt-0 w-48 bg-white shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top group-hover:translate-y-0 translate-y-2 z-[110]">
                     <div className="py-3 flex flex-col">
                       {item.subItems.map((subItem, index) => {
-                        const isPhoneLink = subItem.path.startsWith("tel:");
+                        const isPhoneLink = subItem.path?.startsWith("tel:");
                         const linkClasses = "px-5 py-2.5 text-sm font-bold text-slate-800 hover:text-purple-700 hover:bg-purple-50 text-right transition-colors block";
 
                         return isPhoneLink ? (
@@ -116,18 +119,25 @@ function Header() {
           ) : (
             navItems.map((item) => (
               <div key={item.id || item.path} className="flex flex-col">
-                <NavLink
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `text-base font-bold py-2 ${
-                      isActive ? "text-purple-700" : "text-slate-800"
-                    }`
-                  }
-                >
-                  {item.title}
-                </NavLink>
-                {item.subItems && (
+                {item.subItems && item.subItems.length > 0 ? (
+                  <span className="text-base font-bold py-2 text-slate-800 cursor-pointer select-none">
+                    {item.title}
+                  </span>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `text-base font-bold py-2 ${
+                        isActive ? "text-purple-700" : "text-slate-800"
+                      }`
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
+                )}
+
+                {item.subItems && item.subItems.length > 0 && (
                   <div className="pl-4 flex flex-col gap-2 border-l-2 border-purple-100 my-1">
                     {item.subItems.map((subItem, index) => (
                       <NavLink
