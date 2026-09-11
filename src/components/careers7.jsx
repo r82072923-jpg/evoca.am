@@ -82,12 +82,6 @@ function Careers7() {
                   {job.location}
                 </div>
               </div>
-
-              <div className="flex justify-end mt-2">
-                <button className="bg-[#6c11d0] hover:bg-[#580cb0] text-white text-xs md:text-sm font-semibold py-3 px-6 rounded-2xl transition-colors">
-                  Տեսնել մանրամասն և դիմել
-                </button>
-              </div>
             </div>
           ))}
           
