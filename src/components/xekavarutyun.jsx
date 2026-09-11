@@ -3,6 +3,7 @@ import TopHeader from "./topHeader"
 import XekavarutyuniMasin from "./xekavarutyun-imasin"
 import XekavarutyuniMasin2 from "./xekavarutyun-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Xekavarutyun(){
     return(
         <>
@@ -11,6 +12,7 @@ function Xekavarutyun(){
         <XekavarutyuniMasin></XekavarutyuniMasin>
         <XekavarutyuniMasin2></XekavarutyuniMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
