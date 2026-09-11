@@ -3,6 +3,7 @@ import TopHeader4 from "./topHeader4"
 import KargavorumneriMasin from "./kargavorumner-imasin"
 import KargavorumneriMasin2 from "./kargavorumner-imasin2"
 import Footer from "./footer"
+import FooterBottom from "./footerBottom"
 function Kargavorumner(){
     return(
         <>
@@ -11,6 +12,7 @@ function Kargavorumner(){
         <KargavorumneriMasin></KargavorumneriMasin>
         <KargavorumneriMasin2></KargavorumneriMasin2>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
