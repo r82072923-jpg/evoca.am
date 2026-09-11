@@ -107,13 +107,7 @@ function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4 text-[14px]">
-              <Link to="/branches" className="text-[#8b5cf6] hover:underline font-medium whitespace-pre-line">
-                {contacts?.branches?.label || 'Բանկի հասցեները և\nաշխատաժամերը'}
-              </Link>
-              <Link to="/contact" className="text-[#8b5cf6] hover:underline font-medium">
-                {contacts?.support?.label || 'Կապ մեզ հետ'}
-              </Link>
-              
+            
               <div className="mt-2 text-[#8b5cf6] flex flex-col space-y-2">
                 <a href="tel:+37410605555" className="hover:underline">+374 10 605555</a>
                 <a href="tel:8444" className="hover:underline">8444</a>
