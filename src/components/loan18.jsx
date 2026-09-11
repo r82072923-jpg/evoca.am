@@ -8,6 +8,7 @@ import Loan18iMasin4 from "./loan18-imasin4"
 import Loan18iMasin5 from "./loan18-imasin5"
 import Slayder6 from "./slayder6";
 import Footer from "./footer";
+import FooterBottom from "./footerBottom";
 function Loan18(){
     const [activeTab, setActiveTab] = useState('Վարկի մասին');
     return(
@@ -29,6 +30,7 @@ function Loan18(){
         <Loan18iMasin5></Loan18iMasin5>
         <Slayder6></Slayder6>
         <Footer></Footer>
+        <FooterBottom></FooterBottom>
         </>
     )
 }
