@@ -66,6 +66,7 @@ import Loan13 from "./components/loan13.jsx"
 import Loan14 from "./components/loan14.jsx"
 import Loan15 from "./components/loan15.jsx"
 import Loan16 from "./components/loan16.jsx"
+import Loan17 from "./components/loan17.jsx"
 import Cards2 from "./components/cards2.jsx"
 import Avandner from "./components/avandner.jsx"
 import DasakanAvand from "./components/dasakanavand.jsx"
@@ -344,6 +345,7 @@ function App() {
         <Route path="/services/utility/3" element={<KomunalVjarumneriMasin6/>}></Route>
         <Route path="/services/utility/4" element={<KomunalVjarumneriMasin7/>}></Route>
         <Route path="/services/utility/5" element={<KomunalVjarumneriMasin8/>}></Route>
+        <Route path="/loan17" element={<Loan17/>}></Route>
       </Routes>
     </>
   )
