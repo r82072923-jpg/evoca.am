@@ -167,6 +167,7 @@ import Bajneterer from "./components/bajneterer.jsx"
 import IrakanAkter from "./components/irakanakter.jsx"
 import HajaxordiIravunqner from "./components/hajaxordiiravunqner.jsx"
 import HajaxordiChapanishner from "./components/hajaxordichapanishner.jsx"
+import Kargavorumner from "./components/kargavorumner.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -362,6 +363,7 @@ function App() {
         <Route path="/legal-acts" element={<IrakanAkter/>}></Route>
         <Route path="/customer-rights" element={<HajaxordiIravunqner/>}></Route>
         <Route path="/residency-criteria" element={<HajaxordiChapanishner/>}></Route>
+        <Route path="/regulation" element={<Kargavorumner/>}></Route>
       </Routes>
     </>
   )
