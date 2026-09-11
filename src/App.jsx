@@ -164,6 +164,7 @@ import KomunalVjarumneriMasin7 from "./components/komunalvjarumner-imasin7.jsx"
 import KomunalVjarumneriMasin8 from "./components/komunalvjarumner-imasin8.jsx"
 import Xekavarutyun from "./components/xekavarutyun.jsx"
 import Bajneterer from "./components/bajneterer.jsx"
+import IrakanAkter from "./components/irakanakter.jsx"
 function Home(){
   const [activeTab, setActiveTab] = useState('Կանխիկ');
   return(
@@ -356,6 +357,7 @@ function App() {
         <Route path="/loan20" element={<Loan20/>}></Route>
         <Route path="/leadership" element={<Xekavarutyun/>}></Route>
         <Route path="/shareholders" element={<Bajneterer/>}></Route>
+        <Route path="/legal-acts" element={<IrakanAkter/>}></Route>
       </Routes>
     </>
   )
